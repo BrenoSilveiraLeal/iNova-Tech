@@ -339,13 +339,13 @@ html.lock,html.lock body{overflow:hidden}
   .giant > span:first-of-type,.giant > span:last-of-type{grid-column:auto;justify-self:center}
   .giant small,.readout,.wash,.hint{display:none}
   .sec,.sec[data-side="right"]{align-items:flex-end;justify-content:center;padding-inline:0;padding-block:54vh 6vh;min-height:115vh}
-  .card,.sec.wide .card,.hero .card{background:var(--veil);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--hair);border-radius:16px;padding:20px;max-width:40rem;width:100%}
+  .card,.sec.wide .card,.hero .card{background:rgba(12,12,13,.97);-webkit-backdrop-filter:none;backdrop-filter:none;border:1px solid var(--hair);border-radius:16px;padding:20px;max-width:40rem;width:100%}
   .hero{min-height:100vh;padding-block:60vh 8vh}
   .hero .card{background:transparent;border:0;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0}
   .sec.wide{padding-block:14vh}
   .spec-grid{grid-template-columns:minmax(0,1fr)}
   .chips,.chips.n3{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .clabel,#leaders{display:none}
+  .clabel,#leaders,.callouts{display:none}
   .cdot{width:20px;height:20px;margin:-10px 0 0 -10px}
   .cdot::after{display:none}
   .cdot span{display:block;text-align:center;font:500 11px/20px var(--mono);color:#fff}

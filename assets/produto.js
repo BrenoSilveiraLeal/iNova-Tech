@@ -396,7 +396,7 @@ function heroExtent(k){
 function resolveKey(i){
   const k = Object.assign({ x: 0, y: 0, rx: 0, ry: 0, rz: 0, s: 1, e: 0, f: -1, a: 1, g: 0, tint: 1 }, KEYS[sections[i].dataset.key]);
   if (k.e) k.tint = 0;
-  if (mobile){ k.x = 0; k.y += 1.9; k.s *= k.f >= 0 ? .78 : .74; if (k.ma != null) k.a = k.ma; }
+  if (mobile){ k.x = 0; k.y += 2.5; k.s *= k.f >= 0 ? .62 : .60; if (k.ma != null) k.a = k.ma; }
   else if (sections[i].dataset.key === "hero"){
     const halfW = Math.tan(THREE.MathUtils.degToRad(15)) * camera.position.z * camera.aspect;
     // where the card's words actually end (its box is wider than its lines of text)
@@ -433,6 +433,7 @@ function layout(){
   const w = innerWidth, h = innerHeight;
   short = h <= 560 && w >= h;
   mobile = !short && (w <= 900 || w < h);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.15 : 1.75));
   renderer.setSize(w, h, false);
   camera.aspect = w / h;
   camera.position.set(0, 0, Math.max(17, 6.6 / (2 * Math.tan(THREE.MathUtils.degToRad(15)) * camera.aspect)));
@@ -533,10 +534,10 @@ let last = performance.now(), lastNear = -1, lastRead = "";
 function frame(now){
   const dt = Math.min(.05, (now - last) / 1000); last = now;
   const tg = target();
-  const k = reduced ? 1 : 1 - Math.exp(-dt * 5);
+  const k = reduced ? 1 : 1 - Math.exp(-dt * (mobile ? 10 : 5));
   NUM.forEach(key => state[key] += (tg[key] - state[key]) * k);
   ARR.forEach(key => state[key] = state[key].map((v, j) => v + (tg[key][j] - v) * k));
-  if (!reduced){ mouse.sx += (mouse.x - mouse.sx) * .05; mouse.sy += (mouse.y - mouse.sy) * .05; }
+  if (!reduced && !mobile){ mouse.sx += (mouse.x - mouse.sx) * .05; mouse.sy += (mouse.y - mouse.sy) * .05; }
   const t = now / 1000;
   spin.v += (spin.to - spin.x) * 38 * dt; spin.v *= Math.exp(-7.5 * dt); spin.x += spin.v * dt;
   root.position.set(state.x, state.y + (reduced ? 0 : Math.sin(t * .8) * .04), 0);
@@ -552,7 +553,7 @@ function frame(now){
     const focusNow = tg.p[j] > .5;
     if (focusNow && !p.wasFocus) p.draw = 0;
     p.wasFocus = focusNow;
-    p.draw = Math.min(1, p.draw + dt * (reduced ? 9 : .6));
+    p.draw = Math.min(1, p.draw + dt * (reduced ? 9 : mobile ? 1.2 : .6));
     if (p.draw !== p.lastDraw){ const d = ease(clamp01(p.draw)); p.lines.forEach(l => l.geometry.setDrawRange(0, Math.ceil(l.userData.n * d))); p.lastDraw = p.draw; }
     const a = state.a * procVis;
     if (A3.realParts){
@@ -593,7 +594,9 @@ function frame(now){
 
   let best = -1, bp = 0;
   state.p.forEach((v, j) => { if (v > bp){ bp = v; best = j; } });
-  placeCallouts(best, bp);
+  if (mobile){
+    if (shownPart !== -1) showCallouts(-1);
+  } else placeCallouts(best, bp);
 
   const deg = v => ((v * 180 / Math.PI) % 360 + 360) % 360;
   const read = `ROT ${deg(state.ry).toFixed(1).padStart(5, "0")}° · INCL ${deg(state.rx).toFixed(1).padStart(4, "0")}° · ZOOM ${state.s.toFixed(2)}× · ABERTURA ${Math.round(state.e * 100)}%`;
