@@ -1,0 +1,48 @@
+Prisma Tech — revenda Apple
+===========================
+
+PÁGINAS
+- index.html ................ página inicial: busca, categorias, filtros, ordenação e todos os produtos
+- produto.html?id=... ....... página de cada produto (Mac, iPad, AirPods, AirPods Max, Watch, Vision Pro)
+- iphone-17.html, iphone-air.html, iphone-17-pro.html, iphone-17-pro-max.html
+Todos os produtos têm a página "por dentro", com a desmontagem em 3D peça por peça.
+Busca (lupa no menu ou tecla /), sacola e checkout funcionam em todas as páginas.
+
+COMO ABRIR
+- Dê dois cliques em index.html. Precisa de internet (bibliotecas e fontes vêm de CDNs).
+
+COMO PUBLICAR
+- Suba a pasta inteira (com assets e fotos) para qualquer hospedagem de site estático:
+  Netlify, Vercel, GitHub Pages, Hostinger, etc.
+
+FOTOS REAIS (recomendado)
+- Os produtos aparecem em 3D até você colocar fotos na pasta "fotos".
+- A lista exata de nomes de arquivo está em fotos/LEIA-ME.txt.
+- Use fotos suas, do seu fornecedor ou que você tenha permissão de usar.
+
+O QUE EDITAR — quase tudo fica em assets/catalogo.js
+- Nome da loja: procure por  name: "Prisma Tech"  se quiser trocar.
+  O menu, o checkout, o título das abas e o ícone (favicon com as iniciais) mudam sozinhos.
+  Não use "Apple Store" nem a maçã: são marcas da Apple.
+- Produtos, preços, cores e textos: listas PRODUCTS (iPhones) e OTHERS (demais produtos).
+- Para adicionar um produto, copie um bloco parecido em OTHERS e troque id, nome, preço e cores.
+- Categorias e palavras da busca (ex.: "fone" encontra AirPods, "óculos" encontra o Vision Pro): "categories".
+
+CUPONS E FRETE — em assets/carrinho.js, logo no começo do checkout
+- COUPONS: cupons de teste BEMVINDO10 (10%, até R$ 500), ESTUDANTE (R$ 300 acima de R$ 5.000)
+  e FRETEGRATIS (entrega expressa grátis). Crie, apague ou mude à vontade.
+- REGIONS: prazo e preço da entrega expressa por região, pelo 1º dígito do CEP.
+  A entrega normal é grátis. Numa loja de verdade, troque pela tabela dos Correios ou da transportadora.
+
+CHECKOUT
+- É uma SIMULAÇÃO: nada é enviado nem cobrado.
+- Para vender de verdade, ligue o pagamento a Mercado Pago, PagSeguro, Stripe, Shopify, etc.
+  O código está em assets/carrinho.js.
+- Cartão de teste para a simulação: 4111 1111 1111 1111.
+
+AVISOS
+- Preços de referência no Brasil (lançamentos e reajustes de 2025–2026). Confira antes de publicar.
+- O Apple Vision Pro não é vendido oficialmente no Brasil: o preço é de referência para importado.
+- iPhone 17 Pro Max: até 37 h de vídeo (modelos com chip físico, como os vendidos no Brasil).
+- Apple, iPhone, Mac, iPad, AirPods, Apple Watch e Apple Vision Pro são marcas da Apple Inc.
+  Use como revenda; não se apresente como a Apple.

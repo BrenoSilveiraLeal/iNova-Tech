@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Prisma Tech</title>
+<meta name="description" content="iPhone, Mac, iPad, AirPods e Apple Watch novos e lacrados, com nota fiscal, garantia e 12× sem juros.">
+<meta name="theme-color" content="#0c0c0d">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/loja.css">
+<style>
+/* storefront: hero with a lit 3D family shot, category rail, then the shop (filters left, grid right) */
+.shop{position:relative;z-index:4;max-width:1360px;margin:0 auto;padding-inline:3vw}
+.hero-home{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px;align-items:center;min-height:min(92vh,880px);
+  padding-top:calc(90px + env(safe-area-inset-top,0px))}
+.hero-home h1{font-size:clamp(2.6rem,6vw,5.6rem);line-height:.95;font-stretch:118%;letter-spacing:-.045em}
+.hero-home h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding:.08em 0 .06em;margin:-.08em 0 -.06em}
+.hero-home h1 .c{display:inline-block}
+.hero-home h1 em{font-style:normal;color:var(--orange)}
+.hero-home .lead{margin:18px 0 0;color:var(--fg-soft);max-width:42ch;font-size:clamp(1rem,1.3vw,1.15rem)}
+/* search with live suggestions dropping under the field */
+.search-wrap{position:relative;margin-top:26px;max-width:min(520px,100%)}
+.suggest{position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:12;margin:0;padding:6px;list-style:none;display:grid;gap:2px;
+  background:var(--bg-lift);border:1px solid var(--hair);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.55);max-height:min(430px,60vh);overflow:auto;scrollbar-width:none}
+.suggest a{display:flex;align-items:center;gap:12px;padding:8px;border-radius:12px;text-decoration:none;color:var(--fg)}
+.suggest li[aria-selected="true"] a,.suggest a:hover{background:rgba(255,255,255,.07)}
+.suggest small{display:block;color:var(--fg-soft);font-size:12.5px}
+.suggest b mark{background:none;color:var(--orange)}
+.suggest .fthumb{width:46px;height:46px;border-radius:10px}
+.suggest .all a{justify-content:center;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-soft);padding:12px}
+.suggest .none{padding:14px 10px;color:var(--fg-soft);font-size:14px}
+.bigsearch{display:flex;align-items:center;gap:12px;max-width:100%;padding:6px 6px 6px 18px;border-radius:999px;background:var(--bg-lift);box-shadow:inset 0 0 0 1px var(--hair);color:var(--fg-soft)}
+.bigsearch:focus-within{box-shadow:inset 0 0 0 1px var(--fg)}
+.bigsearch input{flex:1;min-width:0;background:transparent;border:0;color:var(--fg);font:500 16px/1.2 var(--body);outline:none;padding:10px 0}
+.bigsearch input::-webkit-search-cancel-button{display:none}
+.showcase{position:relative;aspect-ratio:1.15/1;max-width:100%}
+.showcase canvas{position:absolute;inset:0;width:100%;height:100%}
+.showcase::before{content:"";position:absolute;inset:8%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,106,26,.22),rgba(255,106,26,0))}
+.cats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:10px 0 64px}
+.cat{display:flex;flex-direction:column;gap:6px;padding:16px;border-radius:16px;text-decoration:none;color:var(--fg);background:var(--bg-lift);box-shadow:inset 0 0 0 1px var(--hair);transition:box-shadow .2s}
+.cat:hover,.cat[aria-current="true"]{box-shadow:inset 0 0 0 1px var(--fg)}
+.cat b{font-family:var(--display);font-weight:500;font-size:1.2rem}
+.cat small{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-soft)}
+.cat:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.store-grid{display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px;padding-bottom:12vh}
+.filters{position:sticky;top:calc(84px + env(safe-area-inset-top,0px));align-self:start;display:flex;flex-direction:column;gap:22px}
+.filters h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft);font-weight:500;margin:0 0 10px}
+.filters fieldset{border:0;margin:0;padding:0}
+.filters legend{padding:0;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft);margin-bottom:10px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:14px;cursor:pointer}
+.opt input{appearance:none;width:18px;height:18px;margin:0;border-radius:5px;box-shadow:inset 0 0 0 1px var(--hair);background:var(--bg);cursor:pointer;display:grid;place-items:center;flex:none}
+.opt input[type="radio"]{border-radius:50%}
+.opt input:checked{background:var(--orange);box-shadow:none}
+.opt input:checked::after{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+.opt input:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+.opt small{margin-left:auto;color:var(--fg-soft);font-family:var(--mono);font-size:11px}
+.fam{display:flex;flex-wrap:wrap;gap:8px}
+.fam button{width:28px;height:28px;border-radius:50%;border:0;cursor:pointer;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2),0 0 0 2px var(--bg),0 0 0 3px transparent}
+.fam button[aria-pressed="true"]{box-shadow:inset 0 0 0 1px rgba(255,255,255,.2),0 0 0 2px var(--bg),0 0 0 3px var(--fg)}
+.fam button:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.clear{align-self:stretch;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:11px 16px;cursor:pointer;
+  background:rgba(255,106,26,.1);color:var(--fg);font:600 13.5px var(--body);box-shadow:inset 0 0 0 1px rgba(255,106,26,.55);transition:background .2s,box-shadow .2s,opacity .2s,transform .2s}
+.clear svg{width:16px;height:16px;fill:none;stroke:var(--orange);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.clear b{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--orange);color:#0c0c0d;font:600 11px/20px var(--mono)}
+.clear b:empty{display:none}
+.clear:hover:not(:disabled){background:rgba(255,106,26,.18);box-shadow:inset 0 0 0 1.5px var(--orange)}
+.clear:hover:not(:disabled) svg{transform:rotate(-200deg)}
+.clear:active:not(:disabled){transform:scale(.97)}
+.clear:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.clear:disabled{opacity:.35;cursor:default;background:transparent;box-shadow:inset 0 0 0 1px var(--hair)}
+.clear:disabled svg{stroke:var(--fg-soft)}
+.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.toolbar .count{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-soft);margin-right:auto}
+.toolbar select{background:var(--bg-lift);color:var(--fg);border:0;box-shadow:inset 0 0 0 1px var(--hair);border-radius:999px;padding:10px 14px;font:500 14px var(--body)}
+.toolbar select:focus-visible{outline:2px solid var(--orange)}
+.filtbtn{display:none}
+.chips-active{display:flex;flex-wrap:wrap;gap:8px;width:100%}
+.chips-active button{border:0;cursor:pointer;border-radius:999px;padding:6px 12px;background:rgba(255,255,255,.07);color:var(--fg);font:500 13px var(--body)}
+.chips-active button::after{content:" ×";color:var(--fg-soft)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.card-p{position:relative;display:flex;flex-direction:column;gap:10px;min-width:0;padding:12px 12px 16px;border-radius:20px;background:var(--bg-lift);box-shadow:inset 0 0 0 1px var(--hair);transition:box-shadow .25s}
+.card-p:hover{box-shadow:inset 0 0 0 1px rgba(242,239,233,.4)}
+.card-p .pic{position:relative;display:block;aspect-ratio:1/1;border-radius:14px;background:radial-gradient(60% 55% at 50% 55%,rgba(var(--glow),.2),rgba(var(--glow),0) 70%),var(--bg);overflow:hidden}
+.card-p .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .5s,transform .6s cubic-bezier(.2,.7,.2,1)}
+.card-p .pic img.on{opacity:1}
+.card-p:hover .pic img{transform:scale(1.04) translateY(-2px)}
+.card-p .badge{position:absolute;left:10px;top:10px;z-index:1;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:var(--orange);color:#fff}
+.card-p .cat-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft)}
+.card-p h3{font-size:1.2rem;letter-spacing:-.02em}
+.card-p h3 a{color:inherit;text-decoration:none}
+.card-p h3 a::before{content:"";position:absolute;inset:0;border-radius:20px}
+.card-p p{margin:0;color:var(--fg-soft);font-size:13.5px;line-height:1.45}
+.card-p .dotsel{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap}
+.card-p .dotsel button{width:16px;height:16px;border-radius:50%;border:0;padding:0;cursor:pointer;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2),0 0 0 2px var(--bg-lift),0 0 0 3px transparent}
+.card-p .dotsel button[aria-pressed="true"]{box-shadow:inset 0 0 0 1px rgba(255,255,255,.2),0 0 0 2px var(--bg-lift),0 0 0 3px var(--fg)}
+.card-p .dotsel button:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.card-p .row-b{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto}
+.card-p .price-s{font-family:var(--mono);font-size:11px;color:var(--fg-soft);letter-spacing:.04em}
+.card-p .price-s b{display:block;font-family:var(--display);font-size:1.15rem;font-weight:500;color:var(--fg);letter-spacing:0}
+.addq{width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;background:var(--fg);color:var(--bg);font-size:22px;line-height:1;flex:none;transition:background .2s}
+.addq:hover{background:var(--orange)}
+.addq:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.empty-g{grid-column:1/-1;padding:40px 0;display:flex;flex-direction:column;gap:12px;align-items:flex-start;color:var(--fg-soft)}
+.spot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;margin:0 0 64px;padding:28px;border-radius:24px;background:linear-gradient(120deg,rgba(255,106,26,.16),rgba(255,106,26,0) 60%),var(--bg-lift);box-shadow:inset 0 0 0 1px var(--hair)}
+.spot h2{font-size:clamp(1.5rem,2.6vw,2.2rem)}
+.spot p{margin:8px 0 0;color:var(--fg-soft);max-width:52ch}
+.spot .go{display:flex;flex-wrap:wrap;gap:10px}
+.compare{padding-bottom:14vh}
+.compare h2{margin-bottom:22px}
+/* compare: one quiet column per iPhone — picture, who it's for, three numbers, price */
+.pick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.pick a{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:20px 14px 22px;border-radius:20px;text-decoration:none;color:var(--fg);transition:background .25s}
+.pick a:hover{background:var(--bg-lift)}
+.pick img{width:min(180px,100%);aspect-ratio:1/1;object-fit:contain;opacity:0;transition:opacity .5s}
+.pick img.on{opacity:1}
+.pick h3{font-size:1.25rem;letter-spacing:-.02em}
+.pick .who{color:var(--fg-soft);font-size:14px;margin:0 0 6px}
+.pick .big{font-family:var(--display);font-size:1.6rem;font-weight:500;line-height:1}
+.pick .big small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft);margin-top:6px;font-weight:400}
+.pick .from{margin-top:8px;font-size:14px;color:var(--fg-soft)}
+.pick .from b{color:var(--fg);font-weight:600}
+@media (max-width:900px){ .pick{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:1000px){
+  .store-grid{grid-template-columns:minmax(0,1fr)}
+  .filters{position:fixed;inset:0 0 0 auto;z-index:45;width:min(340px,100%);top:0;padding:calc(24px + env(safe-area-inset-top,0px)) 20px 24px;background:var(--bg-lift);border-left:1px solid var(--hair);overflow:auto;transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+  .filters.open{transform:none}
+  .filtbtn{display:inline-flex}
+  .cats{grid-template-columns:repeat(6,minmax(120px,1fr));overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+}
+@media (max-width:900px) and (min-height:561px), (max-aspect-ratio:1/1){
+  .hero-home{grid-template-columns:minmax(0,1fr);min-height:auto;padding-top:calc(84px + env(safe-area-inset-top,0px))}
+  .showcase{order:-1;aspect-ratio:1.3/1}
+  .spot{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px} .card-p{padding:8px 8px 12px;border-radius:16px} .card-p p{display:none} .card-p h3{font-size:1rem} }
+</style>
+</head>
+<body data-cat="">
+<div class="sheet" aria-hidden="true"></div>
+<div class="dots" id="dots" aria-hidden="true"></div>
+
+<div class="shop">
+  <section class="hero-home">
+    <div>
+      <p class="eyebrow">Revenda Apple · Novos e lacrados</p>
+      <h1 id="title">Tudo <em>Apple</em> com nota e garantia.</h1>
+      <p class="lead">iPhone, Mac, iPad, AirPods e Apple Watch com frete grátis e 12× sem juros. Busque, filtre e compare num lugar só.</p>
+      <div class="search-wrap">
+        <label class="bigsearch" for="q">
+          <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input id="q" type="search" placeholder="O que você procura?" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="suggest">
+          <a class="btn small" href="#loja">Ver tudo</a>
+        </label>
+        <ul class="suggest" id="suggest" role="listbox" aria-label="Sugestões" hidden></ul>
+      </div>
+    </div>
+    <div class="showcase" id="showcase" aria-label="iPhone, MacBook, Apple Watch e AirPods"><canvas aria-hidden="true"></canvas></div>
+  </section>
+
+  <nav class="cats" id="cats" aria-label="Categorias"></nav>
+
+  <section class="spot" aria-label="Destaque">
+    <div>
+      <p class="eyebrow">Por dentro</p>
+      <h2>Abra qualquer produto peça por peça.</h2>
+      <p>Todo produto da loja tem uma página que desmonta o aparelho em 3D enquanto você rola, mostrando chip, bateria, telas e câmeras.</p>
+    </div>
+    <div class="go" id="spotLinks"></div>
+  </section>
+
+  <section class="store-grid" id="loja" aria-label="Produtos">
+    <aside class="filters" id="filters" aria-label="Filtros">
+      <div style="display:flex;justify-content:space-between;align-items:center"><h3>Filtrar</h3><button type="button" class="ck-close filtbtn" id="filtClose" aria-label="Fechar filtros">×</button></div>
+      <fieldset><legend>Categoria</legend><div id="fCat"></div></fieldset>
+      <fieldset><legend>Preço</legend><div id="fPrice"></div></fieldset>
+      <fieldset><legend>Cor</legend><div class="fam" id="fColor"></div></fieldset>
+      <fieldset><legend>Mostrar</legend>
+        <label class="opt"><input type="checkbox" id="fNew"> Só lançamentos</label>
+      </fieldset>
+      <button type="button" class="clear" id="fClear" disabled>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10a6 6 0 1 0 1.8-4.3M4 3.5v3.2h3.2"/></svg>
+        <span>Limpar filtros</span><b id="fClearN"></b>
+      </button>
+    </aside>
+    <div>
+      <div class="toolbar">
+        <span class="count" id="count"></span>
+        <button type="button" class="btn ghost small filtbtn" id="filtOpen">Filtros</button>
+        <label for="sort" class="count" style="margin:0;position:absolute;left:-9999px">Ordenar</label>
+        <select id="sort" aria-label="Ordenar">
+          <option value="rel">Mais relevantes</option>
+          <option value="new">Lançamentos primeiro</option>
+          <option value="asc">Menor preço</option>
+          <option value="desc">Maior preço</option>
+          <option value="az">Nome (A–Z)</option>
+        </select>
+        <div class="chips-active" id="active"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="compare" aria-labelledby="cmpTitle">
+    <p class="eyebrow">Comparar</p>
+    <h2 id="cmpTitle">Qual iPhone 17 é para você?</h2>
+    <div class="pick" id="cmp"></div>
+  </section>
+</div>
+
+<footer>
+  <span>Revenda independente. Apple, iPhone, Mac, iPad, AirPods e Apple Watch são marcas da Apple Inc.</span>
+  <span>Ilustrações 3D. Preços de referência: confira antes da compra.</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="assets/catalogo.js"></script>
+<script src="assets/fone3d.js"></script>
+<script src="assets/aparelhos3d.js"></script>
+<script src="assets/carrinho.js"></script>
+<script>
+(() => {
+"use strict";
+const S = window.STORE, brl = S.brl, A = window.anime;
+const motion = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = id => document.getElementById(id);
+const mmTxt = v => v.toLocaleString("pt-BR");
+const rgbOf = hex => hex.slice(1).match(/../g).map(h => parseInt(h, 16));
+const catName = id => S.categories.find(c => c.id === id).name;
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+
+/* colour families for the colour filter, worked out from each swatch */
+const FAMILIES = [
+  { id: "escuro", name: "Preto e cinza", c: "#2b2c2f" }, { id: "claro", name: "Branco, prata e estelar", c: "#e6e4df" },
+  { id: "azul", name: "Azul", c: "#8fb0d6" }, { id: "rosa", name: "Rosa e roxo", c: "#d4b0d6" },
+  { id: "quente", name: "Laranja e dourado", c: "#e8873e" }, { id: "verde", name: "Verde e amarelo", c: "#b9c48c" }
+];
+function family(hex){
+  const [r, g, b] = rgbOf(hex).map(v => v / 255), mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn;
+  const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
+  if (s < .14 || d < .06) return l < .45 ? "escuro" : "claro";
+  let h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h = (h * 60 + 360) % 360;
+  if (l > .82 && s < .35) return "claro";
+  if (h < 45 || h >= 345) return h >= 345 || h < 15 ? "rosa" : "quente";
+  if (h < 70) return "quente";
+  if (h < 160) return "verde";
+  if (h < 250) return "azul";
+  return "rosa";
+}
+S.products.forEach(p => p.fams = [...new Set(p.colors.map(c => family(c.swatch)))]);
+
+/* filter state; the category also lives in the address (#mac) so menu links land filtered */
+const PRICES = [{ id: "a", name: "Até R$ 3.000", min: 0, max: 3000 }, { id: "b", name: "R$ 3.000 a 8.000", min: 3000, max: 8000 },
+  { id: "c", name: "R$ 8.000 a 15.000", min: 8000, max: 15000 }, { id: "d", name: "Acima de R$ 15.000", min: 15000, max: 1e9 }];
+const st = { q: "", cats: new Set(), price: "", fams: new Set(), onlyNew: false, sort: "rel" };
+const fromHash = () => { const h = location.hash.slice(1); if (S.categories.some(c => c.id === h)){ st.cats = new Set([h]); return true; } return false; };
+fromHash();
+
+$("fCat").innerHTML = S.categories.map(c => `<label class="opt"><input type="checkbox" value="${c.id}" id="fc-${c.id}"> ${c.name}<small>${S.products.filter(p => p.cat === c.id).length}</small></label>`).join("");
+$("fPrice").innerHTML = `<label class="opt"><input type="radio" name="price" value="" id="fp-all" checked> Qualquer preço</label>` + PRICES.map(r => `<label class="opt"><input type="radio" name="price" value="${r.id}" id="fp-${r.id}"> ${r.name}</label>`).join("");
+$("fColor").innerHTML = FAMILIES.map(f => `<button type="button" style="--c:${f.c}" aria-label="${f.name}" title="${f.name}" aria-pressed="false" data-f="${f.id}"></button>`).join("");
+$("cats").innerHTML = S.categories.map(c => {
+  const list = S.products.filter(p => p.cat === c.id);
+  return `<a class="cat" href="#${c.id}" data-c="${c.id}"><b>${c.name}</b><small>${list.length} modelos · a partir de ${brl(Math.min(...list.map(p => p.from)))}</small></a>`;
+}).join("");
+$("spotLinks").innerHTML = ["iphone-17-pro-max", "vision-pro", "airpods-max", "macbook-pro-14", "watch-ultra-3"].map(S.get)
+  .map((p, i) => `<a class="btn ${i ? "ghost " : ""}small" href="${p.url}">${p.name}</a>`).join("");
+
+function syncControls(){
+  S.categories.forEach(c => { $("fc-" + c.id).checked = st.cats.has(c.id); });
+  document.querySelectorAll(".cat").forEach(a => a.setAttribute("aria-current", String(st.cats.size === 1 && st.cats.has(a.dataset.c))));
+  $(st.price ? "fp-" + st.price : "fp-all").checked = true;
+  document.querySelectorAll("#fColor button").forEach(b => b.setAttribute("aria-pressed", String(st.fams.has(b.dataset.f))));
+  $("fNew").checked = st.onlyNew; $("sort").value = st.sort;
+  if ($("q").value !== st.q) $("q").value = st.q;
+}
+function results(){
+  const words = norm(st.q).split(/\s+/).filter(Boolean), pr = PRICES.find(r => r.id === st.price);
+  let list = S.products.filter(p => {
+    if (st.cats.size && !st.cats.has(p.cat)) return false;
+    if (pr && (p.from < pr.min || p.from >= pr.max)) return false;
+    if (st.fams.size && !p.fams.some(f => st.fams.has(f))) return false;
+    if (st.onlyNew && !p.isNew) return false;
+    if (words.length){ const h = norm([p.name, catName(p.cat), S.categories.find(c => c.id === p.cat).kw, p.tagline, p.colors.map(c => c.name).join(" "), (p.highlights || []).flat().join(" ")].join(" ")).split(/[^a-z0-9]+/); if (!words.every(w => h.some(t => t.startsWith(w)))) return false; }
+    return true;
+  });
+  const order = { rel: () => 0, new: (a, b) => b.isNew - a.isNew, asc: (a, b) => a.from - b.from, desc: (a, b) => b.from - a.from, az: (a, b) => a.name.localeCompare(b.name, "pt-BR") };
+  return list.sort(order[st.sort]);
+}
+const thumbObs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ thumbObs.unobserve(e.target); loadThumb(e.target); } }), { rootMargin: "200px" });
+function loadThumb(card, ci = 0){
+  const p = S.get(card.dataset.id), img = card.querySelector("img");
+  Loja.pic(p, ci).then(r => { if (!r.url) return; img.classList.remove("on"); img.classList.toggle("real", r.photo); img.onload = () => img.classList.add("on"); img.src = r.url; });
+}
+function render(animate = true){
+  syncControls();
+  const list = results(), grid = $("grid");
+  $("count").textContent = `${list.length} produto${list.length === 1 ? "" : "s"}`;
+  const chips = [...[...st.cats].map(c => [`cat:${c}`, catName(c)]), ...(st.price ? [["price", PRICES.find(r => r.id === st.price).name]] : []),
+    ...[...st.fams].map(f => [`fam:${f}`, FAMILIES.find(x => x.id === f).name]), ...(st.onlyNew ? [["new", "Lançamentos"]] : []), ...(st.q ? [["q", `“${st.q}”`]] : [])];
+  $("active").innerHTML = chips.map(([k, t]) => `<button type="button" data-k="${k}" aria-label="Remover filtro ${t}">${t}</button>`).join("");
+  const fc = $("fClear"); fc.disabled = !chips.length; $("fClearN").textContent = chips.length || "";
+  fc.setAttribute("aria-label", chips.length ? `Limpar ${chips.length} filtro${chips.length > 1 ? "s" : ""}` : "Nenhum filtro ativo");
+  if (!list.length){
+    grid.innerHTML = `<div class="empty-g"><p>Nenhum produto com esses filtros.</p><button type="button" class="btn ghost small" id="emptyClear">Limpar filtros</button></div>`;
+    $("emptyClear").onclick = clearAll; return;
+  }
+  grid.innerHTML = list.map(p => `
+    <article class="card-p" data-id="${p.id}" style="--glow:${rgbOf(p.colors[0].swatch).join(",")}">
+      <div class="pic">${p.isNew ? '<span class="badge">Novo</span>' : ""}<img alt="${p.name}" decoding="async"></div>
+      <span class="cat-l">${catName(p.cat)}</span>
+      <h3><a href="${p.url}">${p.name}</a></h3>
+      <p>${p.tagline}</p>
+      <div class="dotsel" role="group" aria-label="Cores">${p.colors.map((c, i) => `<button type="button" style="--c:${c.swatch}" aria-label="${c.name}" aria-pressed="${i === 0}" data-i="${i}"></button>`).join("")}</div>
+      <div class="row-b"><span class="price-s">A partir de<b>${brl(p.from)}</b></span><button type="button" class="addq" aria-label="Adicionar ${p.name} à sacola" data-add="${p.id}">+</button></div>
+    </article>`).join("");
+  grid.querySelectorAll(".card-p").forEach(card => thumbObs.observe(card));
+  if (A && motion && animate) A({ targets: grid.children, opacity: [0, 1], translateY: [24, 0], duration: 700, delay: A.stagger(45), easing: "easeOutExpo" });
+}
+function clearAll(){
+  st.q = ""; st.cats.clear(); st.price = ""; st.fams.clear(); st.onlyNew = false; history.replaceState(null, "", location.pathname); render();
+  if (A && motion) A({ targets: "#fClear svg", rotate: [0, -360], duration: 700, easing: "easeOutExpo" });
+}
+
+/* wiring */
+/* live suggestions: up to 6 matches under the field, arrows to move, Enter to open */
+const sug = $("suggest"), qIn = $("q");
+let sugItems = [], sugSel = -1;
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const mark = (name, q) => {
+  const w = norm(q).split(/\s+/).filter(Boolean)[0];
+  if (!w) return esc(name);
+  const i = norm(name).indexOf(w);
+  return i < 0 ? esc(name) : esc(name.slice(0, i)) + "<mark>" + esc(name.slice(i, i + w.length)) + "</mark>" + esc(name.slice(i + w.length));
+};
+function showSuggest(){
+  const q = qIn.value.trim();
+  if (!q){ hideSuggest(); return; }
+  const res = Loja.search(q);
+  sugItems = res.slice(0, 6); sugSel = -1;
+  sug.innerHTML = res.length
+    ? sugItems.map((p, i) => `<li role="option" id="sg-${i}" aria-selected="false"><a href="${p.url}"><span class="fthumb" data-id="${p.id}"></span><span><b>${mark(p.name, q)}</b><small>${catName(p.cat)} · a partir de ${brl(p.from)}</small></span></a></li>`).join("")
+      + `<li class="all"><a href="#loja" id="sgAll">Ver ${res.length === 1 ? "o resultado" : `todos os ${res.length} resultados`} na loja</a></li>`
+    : `<li class="none">Nada encontrado para “${esc(q)}”. Tente “iPhone”, “Mac”, “fone” ou “relógio”.</li>`;
+  sug.hidden = false; qIn.setAttribute("aria-expanded", "true");
+  sug.querySelectorAll(".fthumb").forEach(s => Loja.pic(S.get(s.dataset.id), 0).then(r => { if (r.url) s.style.backgroundImage = `url(${r.url})`; }));
+  const all = $("sgAll"); if (all) all.addEventListener("click", e => { e.preventDefault(); hideSuggest(); goShop(); });
+  if (A && motion) A({ targets: sug.children, opacity: [0, 1], translateY: [8, 0], duration: 420, delay: A.stagger(30), easing: "easeOutExpo" });
+}
+function hideSuggest(){ sug.hidden = true; qIn.setAttribute("aria-expanded", "false"); qIn.removeAttribute("aria-activedescendant"); sugSel = -1; }
+function moveSel(d){
+  const n = sugItems.length;
+  if (sug.hidden || !n) return;
+  sugSel += d; // -1 means "back in the field"
+  if (sugSel >= n) sugSel = -1; else if (sugSel < -1) sugSel = n - 1;
+  sug.querySelectorAll('[role="option"]').forEach((li, i) => li.setAttribute("aria-selected", String(i === sugSel)));
+  if (sugSel >= 0){ qIn.setAttribute("aria-activedescendant", "sg-" + sugSel); $("sg-" + sugSel).scrollIntoView({ block: "nearest" }); } else qIn.removeAttribute("aria-activedescendant");
+}
+const goShop = () => document.getElementById("loja").scrollIntoView({ behavior: motion ? "smooth" : "auto" });
+let qt;
+qIn.addEventListener("input", e => { showSuggest(); clearTimeout(qt); qt = setTimeout(() => { st.q = e.target.value.trim(); render(); }, 160); });
+qIn.addEventListener("focus", () => { if (qIn.value.trim()) showSuggest(); });
+qIn.addEventListener("keydown", e => {
+  if (e.key === "ArrowDown"){ e.preventDefault(); moveSel(1); }
+  else if (e.key === "ArrowUp"){ e.preventDefault(); moveSel(-1); }
+  else if (e.key === "Escape"){ hideSuggest(); }
+  else if (e.key === "Enter"){
+    e.preventDefault();
+    if (sugSel >= 0) location.href = sugItems[sugSel].url;
+    else { hideSuggest(); goShop(); }
+  }
+});
+document.addEventListener("pointerdown", e => { if (!e.target.closest(".search-wrap")) hideSuggest(); });
+$("fCat").addEventListener("change", e => { const v = e.target.value; e.target.checked ? st.cats.add(v) : st.cats.delete(v); history.replaceState(null, "", st.cats.size === 1 ? "#" + [...st.cats][0] : location.pathname); render(); });
+$("fPrice").addEventListener("change", e => { st.price = e.target.value; render(); });
+$("fColor").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; const f = b.dataset.f; st.fams.has(f) ? st.fams.delete(f) : st.fams.add(f); render(); });
+$("fNew").addEventListener("change", e => { st.onlyNew = e.target.checked; render(); });
+$("sort").addEventListener("change", e => { st.sort = e.target.value; render(); });
+$("fClear").addEventListener("click", clearAll);
+$("active").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return; const [k, v] = b.dataset.k.split(":");
+  if (k === "cat") st.cats.delete(v); else if (k === "fam") st.fams.delete(v); else if (k === "price") st.price = ""; else if (k === "new") st.onlyNew = false; else if (k === "q") st.q = "";
+  render();
+});
+$("grid").addEventListener("click", e => {
+  const add = e.target.closest("[data-add]");
+  if (add){
+    const p = S.get(add.dataset.add), card = add.closest(".card-p"), ci = +(card.querySelector('.dotsel [aria-pressed="true"]') || { dataset: { i: 0 } }).dataset.i;
+    Loja.add(p.id, p.colors[ci].id, 0, true);
+    if (A && motion) A({ targets: add, scale: [1.35, 1], rotate: [90, 0], duration: 700, easing: "easeOutElastic(1, .5)" });
+    return;
+  }
+  const dot = e.target.closest(".dotsel button");
+  if (dot){
+    const card = dot.closest(".card-p"), p = S.get(card.dataset.id), i = +dot.dataset.i;
+    card.querySelectorAll(".dotsel button").forEach(x => x.setAttribute("aria-pressed", String(x === dot)));
+    card.style.setProperty("--glow", rgbOf(p.colors[i].swatch).join(",")); loadThumb(card, i);
+  }
+});
+const fl = $("filters");
+$("filtOpen").addEventListener("click", () => { fl.classList.add("open"); $("filtClose").focus(); });
+$("filtClose").addEventListener("click", () => { fl.classList.remove("open"); $("filtOpen").focus(); });
+addEventListener("hashchange", () => { if (fromHash()){ render(); document.getElementById("loja").scrollIntoView({ behavior: motion ? "smooth" : "auto" }); } });
+document.querySelectorAll(".cat").forEach(a => a.addEventListener("click", e => {
+  e.preventDefault(); const c = a.dataset.c;
+  st.cats = st.cats.size === 1 && st.cats.has(c) ? new Set() : new Set([c]);
+  history.replaceState(null, "", st.cats.size ? "#" + c : location.pathname); render();
+  document.getElementById("loja").scrollIntoView({ behavior: motion ? "smooth" : "auto" });
+}));
+render(false);
+if (location.hash && S.categories.some(c => "#" + c.id === location.hash)) setTimeout(() => document.getElementById("loja").scrollIntoView(), 50);
+
+/* compare: the few numbers that actually separate the four */
+const WHO = { "iphone-17": "O essencial, em cinco cores", "iphone-air": "O mais fino e leve", "iphone-17-pro": "Câmeras Pro num tamanho compacto", "iphone-17-pro-max": "Tela e bateria maiores" };
+$("cmp").innerHTML = S.phones.map(p => `
+  <a href="${p.url}">
+    <img alt="${p.name}" data-id="${p.id}">
+    <h3>${p.name}</h3>
+    <p class="who">${WHO[p.id]}</p>
+    <span class="big">${p.screen}"<small>Tela</small></span>
+    <span class="big">${p.kind === "pro" ? 3 : p.kind === "air" ? 1 : 2}<small>${p.kind === "air" ? "Câmera" : "Câmeras"} 48 MP</small></span>
+    <span class="big">${p.hours} h<small>Bateria</small></span>
+    <span class="from">a partir de <b>${brl(p.from)}</b></span>
+  </a>`).join("");
+$("cmp").querySelectorAll("img").forEach(img => Loja.pic(S.get(img.dataset.id), 0).then(r => { if (r.url){ img.onload = () => img.classList.add("on"); img.src = r.url; } }));
+
+/* anime.js layer */
+if (A && motion){
+  const dotsEl = $("dots"); let dots = [], cols = 0, rws = 0;
+  const buildDots = () => { const gap = innerWidth < 760 ? 32 : 44; cols = Math.ceil(innerWidth / gap); rws = Math.ceil(innerHeight / gap);
+    dotsEl.style.gridTemplateColumns = `repeat(${cols},1fr)`; dotsEl.style.gridTemplateRows = `repeat(${rws},1fr)`; dotsEl.innerHTML = "<i></i>".repeat(cols * rws); dots = [...dotsEl.children]; };
+  buildDots();
+  A({ targets: dots, scale: [0, 1], opacity: [0, 1], delay: A.stagger(12, { grid: [cols, rws], from: "center" }), duration: 500, easing: "easeOutQuad" });
+  const ripple = from => { A.remove(dots); A({ targets: dots, keyframes: [{ scale: 2.8, backgroundColor: "#ff6a1a", duration: 240 }, { scale: 1, backgroundColor: "rgba(242,239,233,.2)", duration: 1000 }], delay: A.stagger(28, { grid: [cols, rws], from }), easing: "easeOutSine" }); };
+  setTimeout(() => ripple("center"), 1500);
+  setInterval(() => { if (scrollY < innerHeight && !document.hidden && !document.documentElement.classList.contains("lock")) ripple(Math.floor(Math.random() * dots.length)); }, 6400);
+  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { A.remove(dots); buildDots(); }, 250); });
+  addEventListener("scroll", () => { dotsEl.style.opacity = scrollY > innerHeight ? .4 : 1; }, { passive: true });
+  const t = $("title");
+  t.innerHTML = t.innerHTML.split(/(<em>.*?<\/em>|\s+)/).filter(Boolean).map(part => {
+    if (/^\s+$/.test(part)) return " ";
+    const em = part.startsWith("<em>"), txt = em ? part.replace(/<\/?em>/g, "") : part, inner = [...txt].map(ch => `<span class="c">${ch}</span>`).join("");
+    return `<span class="w">${em ? `<em>${inner}</em>` : inner}</span>`;
+  }).join("");
+  A.timeline({ easing: "easeOutExpo" })
+    .add({ targets: "#title .c", translateY: ["110%", "0%"], rotate: [10, 0], duration: 1400, delay: A.stagger(24), easing: "easeOutElastic(1, .7)" })
+    .add({ targets: ".hero-home .eyebrow, .hero-home .lead, .bigsearch", opacity: [0, 1], translateY: [20, 0], duration: 900, delay: A.stagger(80) }, "-=1200")
+    .add({ targets: ".cat", opacity: [0, 1], translateY: [30, 0], duration: 900, delay: A.stagger(70) }, "-=800");
+  new IntersectionObserver((es, ob) => es.forEach(e => { if (!e.isIntersecting) return; ob.disconnect();
+    A({ targets: "#cmp a", opacity: [0, 1], translateY: [30, 0], duration: 900, delay: A.stagger(90), easing: "easeOutExpo" }); }), { threshold: .2 }).observe($("cmp"));
+  document.querySelectorAll(".btn, .bag").forEach(b => {
+    b.addEventListener("pointermove", e => { const r = b.getBoundingClientRect(); A.remove(b); A({ targets: b, translateX: (e.clientX - r.left - r.width / 2) * .3, translateY: (e.clientY - r.top - r.height / 2) * .4, duration: 300, easing: "easeOutQuad" }); });
+    b.addEventListener("pointerleave", () => { A.remove(b); A({ targets: b, translateX: 0, translateY: 0, duration: 1000, easing: "spring(1, 90, 8, 0)" }); });
+  });
+}
+
+/* hero showcase: MacBook, iPhone, Watch and AirPods together */
+if (!window.THREE || !window.Aparelhos3D) return;
+Promise.race([document.fonts.load('600 40px "Archivo"'), new Promise(r => setTimeout(r, 1500))]).then(() => {
+  const box = $("showcase"), canvas = box.querySelector("canvas");
+  let r; try { r = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); } catch (e) { return; }
+  r.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75)); r.outputEncoding = THREE.sRGBEncoding; r.toneMapping = THREE.ACESFilmicToneMapping;
+  const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(28, 1, .1, 200);
+  scene.environment = Fone3D.environment(r);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x2a2724, .5));
+  const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(-5, 7, 9); scene.add(key);
+  const fam = new THREE.Group(); scene.add(fam);
+  const put = (id, ci, pos, rot, sc = 1) => {
+    const p = S.get(id), b = Aparelhos3D.build(r, p, p.colors[ci].body), g = new THREE.Group();
+    g.add(b.group); b.group.rotation.set(...rot); g.position.set(...pos); g.scale.setScalar(sc); fam.add(g); return g;
+  };
+  const items = [
+    put("macbook-air-13", 0, [0, -1.2, -2.2], [.3, -.25, 0]),
+    put("iphone-17-pro-max", 0, [3.4, .2, .6], [.08, Math.PI - .55, -.06], .78),
+    put("watch-series-11", 2, [-3.3, .1, .8], [.12, -.35, .05], .9),
+    put("airpods-pro-3", 0, [-.6, -2.8, 1.6], [.4, -.3, 0], .8)
+  ];
+  // one floor under the whole group; each product drops a soft shadow, fainter the higher it floats
+  const floorY = -3.75;
+  items.forEach(g => {
+    const bb = new THREE.Box3().setFromObject(g), sz = bb.getSize(new THREE.Vector3()), c = bb.getCenter(new THREE.Vector3());
+    const gap = Math.max(0, bb.min.y - floorY), sh = Aparelhos3D.contactShadow(sz.x * (1.1 + gap * .12), Math.max(sz.z, sz.x * .5) * (1.2 + gap * .12), Math.max(.18, .6 - gap * .12));
+    sh.position.set(c.x, floorY, c.z); fam.add(sh);
+  });
+  const size = () => { const w = box.clientWidth, h = box.clientHeight; if (!w || !h) return; r.setSize(w, h, false); cam.aspect = w / h; cam.position.set(0, 1.2, 24 / Math.min(1.15, cam.aspect) * .9); cam.lookAt(0, -.4, 0); cam.updateProjectionMatrix(); };
+  size(); new ResizeObserver(size).observe(box);
+  let visible = true, last = performance.now(), mx = 0, my = 0;
+  new IntersectionObserver(es => es.forEach(e => visible = e.isIntersecting)).observe(box);
+  addEventListener("pointermove", e => { mx = e.clientX / innerWidth * 2 - 1; my = e.clientY / innerHeight * 2 - 1; });
+  if (A && motion) items.forEach((g, i) => { const y = g.position.y; g.position.y -= 3; A({ targets: g.position, y, duration: 1600, delay: 300 + i * 140, easing: "easeOutElastic(1, .75)" }); });
+  const tick = now => {
+    const dt = Math.min(.05, (now - last) / 1000), t = now / 1000; last = now;
+    if (visible){
+      fam.rotation.y += ((motion ? Math.sin(t * .3) * .18 : 0) + mx * .15 - fam.rotation.y) * (1 - Math.exp(-dt * 3));
+      fam.rotation.x += (my * .06 - fam.rotation.x) * (1 - Math.exp(-dt * 3));
+      if (motion) items.forEach((g, i) => { g.children[0].position.y = Math.sin(t * .9 + i * 1.3) * .08; });
+      r.render(scene, cam);
+    }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+});
+})();
+</script>
+</body>
+</html>
