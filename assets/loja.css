@@ -288,6 +288,22 @@ html.lock,html.lock body{overflow:hidden}
   .pix > div{align-items:center}
   .row{grid-template-columns:minmax(0,1fr)}
 }
+@media (max-width:380px){
+  .nav{gap:8px}
+  .store .word{font-size:17px}
+  .nav .bag{padding:9px 11px}
+  .sec,.sec[data-side="right"]{padding-inline:0}
+  .card,.sec.wide .card,.hero .card{padding:16px}
+  .hero .card{padding:0}
+  .stats div{padding-right:7px}
+  .stats div+div{padding-left:7px}
+  .stats dt{font-size:9px;letter-spacing:.06em}
+  .stats dd{font-size:clamp(1rem,5vw,1.25rem)}
+  .ck-head,.ck-body,.ck-foot{padding-left:12px;padding-right:12px}
+  .ck-steps{padding-left:12px;padding-right:12px;gap:4px}
+  .ck-steps li{font-size:9px;letter-spacing:.06em}
+  .ck-total strong{font-size:1.45rem}
+}
 .toast{position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);z-index:60;
   background:var(--fg);color:var(--bg);padding:12px 18px;border-radius:12px;font-size:14px;font-weight:600;opacity:0;transition:all .35s ease;pointer-events:none;max-width:calc(100% - 32px)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -338,4 +354,12 @@ html.lock,html.lock body{overflow:hidden}
   .mlist li::before{content:counter(m);display:inline-block;width:18px;height:18px;margin-right:8px;border-radius:50%;background:var(--orange);color:#fff;text-align:center;font:500 10px/18px var(--mono)}
   .mlist b{color:var(--fg);font-weight:600}
   .rail{right:16px;bottom:auto;top:calc(64px + env(safe-area-inset-top,0px))}
+}
+
+/* Stable viewport sizing on phones with expanding browser chrome. */
+@supports (height: 100svh){
+  @media (max-width:900px) and (min-height:561px), (max-aspect-ratio:1/1){
+    .hero{min-height:100svh;padding-block:60svh 8svh}
+    .sec,.sec[data-side="right"]{min-height:115svh;padding-block:54svh 6svh}
+  }
 }
