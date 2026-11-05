@@ -81,7 +81,7 @@ mobileDetails.className = "mobile-details";
 mobileDetails.setAttribute("aria-label", "Detalhes das peças");
 mobileDetails.innerHTML = `<h2>Conheça cada detalhe.</h2><p>Explore as peças que você acabou de ver.</p>${teardownSections.filter(s => !["open", "assemble"].includes(s.dataset.key)).map(s => {
   const card = s.querySelector(".card"), heading = card.querySelector("h2");
-  return `<details data-part="${s.dataset.key}"><summary>${heading.textContent}</summary><div class="detail-copy">${[...card.children].filter(el => !el.matches("h2,.eyebrow")).map(el => el.outerHTML).join("")}</div></details>`;
+  return `<details data-part="${s.dataset.key}"><summary><span>${heading.textContent}</span><svg class="detail-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14"/><path class="detail-toggle-vertical" d="M12 5v14"/></svg></summary><div class="detail-copy">${[...card.children].filter(el => !el.matches("h2,.eyebrow")).map(el => el.outerHTML).join("")}</div></details>`;
 }).join("")}`;
 document.getElementById("ficha").before(mobileDetails);
 const purchaseRow = document.createElement("div");
@@ -113,7 +113,10 @@ function setColor(i, fromUser){
   document.documentElement.style.setProperty("--halo", lum > 200 ? "200,210,230" : `${r},${g},${b}`);
   document.documentElement.style.setProperty("--accent", lum > 225 || lum < 60 ? "255,106,26" : `${r},${g},${b}`);
   if (window.__phoneColor) window.__phoneColor(P.colors[i].body);
-  if (fromUser && changed && !matchMedia("(max-width:900px), (max-aspect-ratio:1/1)").matches){ if (window.__burst) window.__burst(sw.children[i], P.colors[i].swatch); if (window.__phoneSpin) window.__phoneSpin(); }
+  if (fromUser && changed && !matchMedia("(prefers-reduced-motion: reduce)").matches){
+    if (window.__phoneSpin) window.__phoneSpin();
+    if (window.__burst && matchMedia("(hover: hover) and (pointer: fine)").matches) window.__burst(sw.children[i], P.colors[i].swatch);
+  }
 }
 function setStorage(i){
   storageIdx = i;
@@ -267,7 +270,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(30, 1, .1, 120);
+const camera = new THREE.PerspectiveCamera(30, 1, 1, 80);
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 Promise.race([
@@ -422,6 +425,12 @@ function resolveKey(i){
   if (k.e) k.tint = 0;
   if (mobile){
     k.x = 0; k.y += mobileStageY(sections[i].dataset.key === "buy"); k.s *= k.f >= 0 ? .62 : .60; if (k.ma != null) k.a = k.ma;
+    if (sections[i].dataset.key === "buy"){
+      const navBottom = document.querySelector(".nav").getBoundingClientRect().bottom;
+      const available = Math.max(80, innerHeight * .38 - navBottom - 24);
+      const [, , top, bottom] = heroExtent(k);
+      k.s *= Math.min(1, available / Math.max(1, bottom - top));
+    }
     if (P.cat === "iphone" && sections[i].dataset.key === "hero"){
       // Align the visible phone with the dial's centre, including its rotation.
       const halfH = Math.tan(THREE.MathUtils.degToRad(15)) * camera.position.z;
@@ -469,8 +478,9 @@ function layout(){
   const w = innerWidth, h = innerHeight;
   short = h <= 560 && w >= h;
   mobile = !short && (w <= 900 || w < h);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.15 : 1.75));
-  renderer.setSize(w, h, false);
+  const pixelRatio = Math.min(window.devicePixelRatio || 1, mobile ? 1.15 : 1.75);
+  if (renderer.getPixelRatio() !== pixelRatio) renderer.setPixelRatio(pixelRatio);
+  if (canvas.clientWidth !== w || canvas.clientHeight !== h || canvas.width !== Math.floor(w * pixelRatio) || canvas.height !== Math.floor(h * pixelRatio)) renderer.setSize(w, h, false);
   camera.aspect = w / h;
   camera.position.set(0, 0, Math.max(17, 6.6 / (2 * Math.tan(THREE.MathUtils.degToRad(15)) * camera.aspect)));
   camera.updateProjectionMatrix();
@@ -571,7 +581,7 @@ railSegs.innerHTML = "<i></i>".repeat(N);
 const segEls = [...railSegs.children];
 const wc = new THREE.Vector3(), tmp = new THREE.Vector3();
 const spin = { x: 0, v: 0, to: 0 };
-window.__phoneSpin = () => { spin.to += TAU; };
+window.__phoneSpin = () => { if (!reduced) spin.to += TAU; };
 let last = performance.now(), lastNear = -1, lastRead = "";
 
 function frame(now){

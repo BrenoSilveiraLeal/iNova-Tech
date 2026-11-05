@@ -170,7 +170,7 @@ function buildReal(renderer, p, color){
   }
   // front
   add(shapeMesh(rr(W - .14*s, H - .14*s, R - .07*s), .02, 0, P.black, .124));
-  add(flat(new THREE.PlaneGeometry(o.SW, o.SH), new THREE.MeshBasicMaterial({ map: lockScreen(renderer, o, ACCENTS[p.kind]), toneMapped: false }), 0, 0, .1346));
+  add(flat(new THREE.PlaneGeometry(o.SW, o.SH), new THREE.MeshBasicMaterial({ map: lockScreen(renderer, o, ACCENTS[p.kind]), toneMapped: false }), 0, 0, .137));
   add(shapeMesh(rr(W - .05*s, H - .05*s, R - .03*s), .012, .009, P.glass, .164));
   // sides and bottom
   const sx = W / 2 + .004;
@@ -261,7 +261,7 @@ function buildParts(renderer, p){
       build: g => {
         g.add(shapeMesh(rr(W - .14*s, H - .14*s, R - .07*s), .02, 0, FILL));
         const scr = new THREE.MeshBasicMaterial({ map: lockScreen(renderer, o, ACCENTS[p.kind]), toneMapped: false }); scr.userData.role = "flat";
-        g.add(flat(new THREE.PlaneGeometry(o.SW, o.SH), scr, 0, 0, .0106));
+        g.add(flat(new THREE.PlaneGeometry(o.SW, o.SH), scr, 0, 0, .013));
         g.add(box(.9*s, .2*s, .06, FILL, 0, TOP - .36*s, -.045));
         g.add(cyl(.07*s, .05, FILL, .32*s, TOP - .36*s, -.04, 32));
         g.add(box(.8*s, .5*s, .006, FILL, 0, -TOP + .38*s, -.016));
@@ -430,7 +430,7 @@ function realParts(renderer, p, color){
     glass: g => g.add(shapeMesh(rr(W - .05*s, H - .05*s, R - .03*s), .012, .009, M.glass)),
     display: g => {
       g.add(shapeMesh(rr(W - .14*s, H - .14*s, R - .07*s), .02, 0, M.panel));
-      g.add(flat(new THREE.PlaneGeometry(o.SW, o.SH), new THREE.MeshBasicMaterial({ map: lockScreen(renderer, o, ACCENTS[p.kind]), toneMapped: false }), 0, 0, .0106));
+      g.add(flat(new THREE.PlaneGeometry(o.SW, o.SH), new THREE.MeshBasicMaterial({ map: lockScreen(renderer, o, ACCENTS[p.kind]), toneMapped: false }), 0, 0, .013));
       g.add(box(.9*s, .2*s, .06, M.black, 0, TOP - .36*s, -.045));
       g.add(cyl(.07*s, .05, M.sapphire, .32*s, TOP - .36*s, -.04, 32));
       g.add(box(.8*s, .5*s, .006, M.flex, 0, -TOP + .38*s, -.016));
