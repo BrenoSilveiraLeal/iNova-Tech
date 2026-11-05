@@ -18,9 +18,12 @@
 [hidden]{display:none !important}
 html,body,.ck-body{scrollbar-width:none;-ms-overflow-style:none}
 html::-webkit-scrollbar,body::-webkit-scrollbar,.ck-body::-webkit-scrollbar{width:0;height:0;display:none}
-html{background:var(--bg)}
+/* Paint the pattern on the root canvas, never on a fixed overlay.
+   The browser can tile it across the whole scroll surface without resizing a layer. */
+html{background-color:var(--bg);background-image:radial-gradient(circle,rgba(242,239,233,.2) 1px,transparent 1.25px);background-size:44px 44px;background-position:22px 22px;background-repeat:repeat}
+@media(max-width:759px){html{background-size:32px 32px;background-position:16px 16px}}
 body{
-  margin:0;background:var(--bg);color:var(--fg);
+  margin:0;background:transparent;color:var(--fg);
   font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
 }
@@ -28,9 +31,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 a{color:inherit}
 
 /* stage */
-.sheet{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(80% 80% at 50% 45%,var(--bg-lift) 0%,var(--bg) 55%,var(--bg-deep) 100%)}
-.dots{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,rgba(242,239,233,.2) 1px,transparent 1.25px);background-size:44px 44px;background-position:22px 22px}
-@media(max-width:759px){.dots{background-size:32px 32px;background-position:16px 16px}}
 .halo{position:fixed;left:0;top:0;width:80vmin;height:80vmin;margin:-40vmin 0 0 -40vmin;z-index:1;pointer-events:none;border-radius:50%;
   background:radial-gradient(closest-side,rgba(var(--halo),.34),rgba(var(--halo),.12) 45%,rgba(var(--halo),0) 100%);will-change:transform,opacity}
 .burst{position:fixed;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;z-index:1;pointer-events:none}

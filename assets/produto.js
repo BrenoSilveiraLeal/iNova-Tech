@@ -9,8 +9,6 @@ document.title = `${P.name} · ${S.name}`;
 
 /* ---------- stage + story markup ---------- */
 document.body.insertAdjacentHTML("afterbegin", `
-<div class="sheet" aria-hidden="true"></div>
-<div class="dots" id="dots" aria-hidden="true"></div>
 <div class="halo" id="halo" aria-hidden="true"></div>
 <svg class="dial" id="dial" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
 <div class="giant" id="giant" aria-hidden="true"><small>${P.name}</small><span>${P.giant[0]}</span><span>${P.giant[1]}</span></div>
@@ -247,7 +245,7 @@ addEventListener("resize", fitGiant);
     document.body.appendChild(d);
     A({ targets: d, scale: [0, Math.hypot(innerWidth, innerHeight) / 9], opacity: [.4, 0], duration: 1300, easing: "easeOutExpo", complete: () => d.remove() });
   };
-  // The dot field is painted in CSS so it stays stable while browser chrome resizes.
+  // The background pattern belongs to the root scroll surface.
   document.querySelectorAll("#giant > span").forEach(s => { s.innerHTML = [...s.textContent].map(c => `<b class="l">${c}</b>`).join(""); });
   A.timeline({ easing: "easeOutExpo" })
     .add({ targets: "#giant .l", translateY: ["110%", "0%"], rotate: [12, 0], duration: 1500, delay: A.stagger(70), easing: "easeOutElastic(1, .65)" })
@@ -294,7 +292,7 @@ const camera = new THREE.PerspectiveCamera(30, 1, 1, 80);
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // Let the loader paint before building the scene; fonts must not delay the first frame.
-requestAnimationFrame(() => requestAnimationFrame(build));
+Promise.resolve(window.inovaLoaderIntro).then(() => requestAnimationFrame(build));
 
 function build(){
 const TAU = Math.PI * 2, { C } = Fone3D;
