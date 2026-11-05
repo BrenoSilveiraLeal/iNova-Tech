@@ -390,7 +390,7 @@ function build(renderer, item, color){
 
 /* ---------- thumbnails: one hidden renderer draws every product once per colour ---------- */
 let tr = null, ts, tc;
-const cache = new Map(), queue = [];
+const cache = new Map(), pending = new Map(), queue = [];
 let busy = false, ready = false;
 // start drawing thumbnails a moment after load, so the opening animation gets the main thread first
 setTimeout(() => { ready = true; pump(); }, 1200);
@@ -398,7 +398,7 @@ function thumbRenderer(){
   if (tr) return tr;
   const canvas = document.createElement("canvas");
   tr = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, preserveDrawingBuffer: true });
-  tr.setPixelRatio(1); tr.setSize(560, 560, false);
+  tr.setPixelRatio(1); tr.setSize(420, 420, false);
   tr.outputEncoding = THREE.sRGBEncoding; tr.toneMapping = THREE.ACESFilmicToneMapping;
   ts = new THREE.Scene(); ts.environment = F.environment(tr);
   ts.add(new THREE.HemisphereLight(0xffffff, 0x2a2724, .55));
@@ -438,27 +438,41 @@ function dispose(obj){
     (Array.isArray(o.material) ? o.material : o.material ? [o.material] : []).forEach(m => { if (m.map){ m.map._dead = true; m.map.dispose(); } m.dispose(); });
   });
 }
-function pump(){
+let lastInteraction = 0;
+addEventListener("scroll", () => { lastInteraction = performance.now(); }, { passive: true });
+function schedulePump(){
+  if ("requestIdleCallback" in window) requestIdleCallback(pump, { timeout: 1000 });
+  else setTimeout(pump, 80);
+}
+async function pump(){
   if (!ready || busy || !queue.length) return;
+  if (document.hidden || performance.now() - lastInteraction < 120){ setTimeout(schedulePump, 150); return; }
   busy = true;
   const { item, ci, resolve } = queue.shift(), key = item.id + ":" + ci;
   try {
     const r = thumbRenderer(), b = build(r, item, item.colors[ci].body);
+    F.batch(b.group);
     const wrap = new THREE.Group(); wrap.add(b.group); b.group.rotation.set(...b.pose);
     const holder = new THREE.Group(); holder.add(wrap); ts.add(holder);
     tc.aspect = 1; tc.updateProjectionMatrix(); frame(wrap, tc, 1.18, holder);
     r.render(ts, tc);
-    const url = r.domElement.toDataURL("image/png");
+    const blob = await new Promise(resolve => r.domElement.toBlob(resolve, "image/webp", .9));
+    const url = blob ? URL.createObjectURL(blob) : "";
     ts.remove(holder); dispose(holder);
     cache.set(key, url); resolve(url);
   } catch (e) { resolve(""); }
+  pending.delete(key);
   busy = false;
-  setTimeout(pump, 16);
+  schedulePump();
 }
 function thumb(item, ci = 0){
   const key = item.id + ":" + ci;
   if (cache.has(key)) return Promise.resolve(cache.get(key));
-  return new Promise(resolve => { queue.push({ item, ci, resolve }); pump(); });
+  if (pending.has(key)) return pending.get(key);
+  const task = new Promise(resolve => { queue.push({ item, ci, resolve }); });
+  pending.set(key, task);
+  schedulePump();
+  return task;
 }
 
 /* ---------- "por dentro" adapters: each device as a stack of layers along +z (front), drawn in chalk lines ----------

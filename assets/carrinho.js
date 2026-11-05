@@ -36,7 +36,7 @@ document.body.prepend(nav);
     arrival = Number(sessionStorage.getItem(transitionKey));
     sessionStorage.removeItem(transitionKey);
   } catch (_) {}
-  if (arrival && Date.now() - arrival < 10000 && !motion.matches){
+  if (arrival && Date.now() - arrival < 10000 && !motion.matches && !document.documentElement.classList.contains("is-loading")){
     const layer = veil();
     layer.animate({ opacity: [1, 0] }, { duration: 300, easing: "ease-out", fill: "forwards" })
       .finished.finally(() => layer.remove());

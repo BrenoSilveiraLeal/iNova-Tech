@@ -506,5 +506,42 @@ function realParts(renderer, p, color){
   return { builds, tinted: [M.metal, M.matte, M.backGlass] };
 }
 
-window.Fone3D = { layout, environment, buildReal, buildParts, realParts, rr, C, MM, shapeMesh, box, cyl, flat, circles, hole, kit, rrPath };
+/* Merge static opaque meshes sharing a material into one draw call.
+   Transparent glass stays separate to preserve its depth sorting. */
+function batch(group){
+  group.updateWorldMatrix(true, true);
+  const inverse = group.matrixWorld.clone().invert(), buckets = new Map();
+  group.traverse(mesh => {
+    if (!mesh.isMesh || mesh.children.length || Array.isArray(mesh.material) || mesh.material.transparent || mesh.isSkinnedMesh || mesh.isInstancedMesh) return;
+    const attributes = Object.keys(mesh.geometry.attributes).sort().join(",");
+    const key = mesh.material.uuid + ":" + mesh.renderOrder + ":" + attributes;
+    if (!buckets.has(key)) buckets.set(key, []);
+    buckets.get(key).push(mesh);
+  });
+  buckets.forEach(meshes => {
+    if (meshes.length < 2) return;
+    const geometries = meshes.map(mesh => {
+      const geometry = mesh.geometry.index ? mesh.geometry.toNonIndexed() : mesh.geometry.clone();
+      return geometry.applyMatrix4(new THREE.Matrix4().multiplyMatrices(inverse, mesh.matrixWorld));
+    });
+    const merged = new THREE.BufferGeometry();
+    for (const name of Object.keys(geometries[0].attributes)){
+      const first = geometries[0].attributes[name];
+      const length = geometries.reduce((total, g) => total + g.attributes[name].array.length, 0);
+      const array = new first.array.constructor(length);
+      let offset = 0;
+      geometries.forEach(g => { array.set(g.attributes[name].array, offset); offset += g.attributes[name].array.length; });
+      merged.setAttribute(name, new THREE.BufferAttribute(array, first.itemSize, first.normalized));
+    }
+    merged.computeBoundingSphere();
+    const combined = new THREE.Mesh(merged, meshes[0].material);
+    combined.renderOrder = meshes[0].renderOrder;
+    meshes.forEach(mesh => mesh.parent.remove(mesh));
+    geometries.forEach(g => g.dispose());
+    group.add(combined);
+  });
+  return group;
+}
+
+window.Fone3D = { batch, layout, environment, buildReal, buildParts, realParts, rr, C, MM, shapeMesh, box, cyl, flat, circles, hole, kit, rrPath };
 })();

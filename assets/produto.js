@@ -247,29 +247,7 @@ addEventListener("resize", fitGiant);
     document.body.appendChild(d);
     A({ targets: d, scale: [0, Math.hypot(innerWidth, innerHeight) / 9], opacity: [.4, 0], duration: 1300, easing: "easeOutExpo", complete: () => d.remove() });
   };
-  const dotsEl = document.getElementById("dots"); let dots = [], cols = 0, rows = 0;
-  function buildDots(){
-    const gap = innerWidth < 760 ? 32 : 44;
-    cols = Math.ceil(innerWidth / gap); rows = Math.ceil(innerHeight / gap);
-    dotsEl.style.gridTemplateColumns = `repeat(${cols},1fr)`; dotsEl.style.gridTemplateRows = `repeat(${rows},1fr)`;
-    dotsEl.innerHTML = "<i></i>".repeat(cols * rows); dots = [...dotsEl.children];
-  }
-  buildDots();
-  A({ targets: dots, scale: [0, 1], opacity: [0, 1], delay: A.stagger(12, { grid: [cols, rows], from: "center" }), duration: 500, easing: "easeOutQuad" });
-  const ripple = from => {
-    A.remove(dots);
-    A({ targets: dots, keyframes: [{ scale: 2.8, backgroundColor: "#ff6a1a", duration: 240 }, { scale: 1, backgroundColor: "rgba(242,239,233,.2)", duration: 1000 }],
-        delay: A.stagger(28, { grid: [cols, rows], from }), easing: "easeOutSine" });
-  };
-  setTimeout(() => ripple("center"), 1700);
-  setInterval(() => { if (scrollY < innerHeight * .6 && !document.hidden && !document.documentElement.classList.contains("lock")) ripple(Math.floor(Math.random() * dots.length)); }, 5600);
-  addEventListener("pointerdown", e => {
-    if (e.target.closest("a,button,input,label,select,.checkout")) return;
-    const c = Math.min(cols - 1, Math.floor(e.clientX / (innerWidth / cols))), r = Math.min(rows - 1, Math.floor(e.clientY / (innerHeight / rows)));
-    ripple(r * cols + c);
-  });
-  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { A.remove(dots); buildDots(); }, 250); });
-  addEventListener("scroll", () => { dotsEl.style.opacity = scrollY > innerHeight * 1.2 ? .45 : 1; }, { passive: true });
+  // The dot field is painted in CSS so it stays stable while browser chrome resizes.
   document.querySelectorAll("#giant > span").forEach(s => { s.innerHTML = [...s.textContent].map(c => `<b class="l">${c}</b>`).join(""); });
   A.timeline({ easing: "easeOutExpo" })
     .add({ targets: "#giant .l", translateY: ["110%", "0%"], rotate: [12, 0], duration: 1500, delay: A.stagger(70), easing: "easeOutElastic(1, .65)" })
@@ -279,6 +257,7 @@ addEventListener("resize", fitGiant);
   window.__count(document.querySelector(".hero .card"));
   document.querySelectorAll(".btn, .swatch, .bag").forEach(b => {
     b.addEventListener("pointermove", e => {
+      if (e.pointerType !== "mouse") return;
       const r = b.getBoundingClientRect(); A.remove(b);
       A({ targets: b, translateX: (e.clientX - r.left - r.width / 2) * .3, translateY: (e.clientY - r.top - r.height / 2) * .4, duration: 300, easing: "easeOutQuad" });
     });
@@ -307,17 +286,15 @@ const MODEL_ROT = [0, 0, 0];
 const canvas = document.getElementById("gl");
 let renderer;
 try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); } catch (e) { return; }
-renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, matchMedia("(pointer:coarse)").matches ? 1 : 1.5));
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(30, 1, 1, 80);
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-Promise.race([
-  Promise.all(['600 40px "Archivo"', '500 40px "Archivo"', '500 20px "IBM Plex Mono"'].map(f => document.fonts.load(f))),
-  new Promise(r => setTimeout(r, 1800))
-]).then(build);
+// Let the loader paint before building the scene; fonts must not delay the first frame.
+requestAnimationFrame(() => requestAnimationFrame(build));
 
 function build(){
 const TAU = Math.PI * 2, { C } = Fone3D;
@@ -357,6 +334,7 @@ const partDefs = A3.parts(renderer), sharedTinted = partDefs.tinted || [], partT
 partDefs.forEach(def => {
   const g = new THREE.Group(), inner = new THREE.Group();
   inner.scale.z = A3.kz; g.add(inner); def.build(inner);
+  if (A3.realParts) Fone3D.batch(inner);
   g.position.z = def.z0 * A3.kz; phone.add(g);
   const center = new THREE.Object3D(); center.position.set(...def.center); inner.add(center);
   const lineMat = new THREE.LineBasicMaterial({ color: INK, transparent: true, opacity: 1, toneMapped: false });
@@ -407,6 +385,7 @@ const bodyColor = C(P.colors[0].body);
 window.__phoneColor = hex => bodyColor.copy(C(hex));
 window.__phoneColor(P.colors[colorIdx].body);
 let built = A3.real(renderer, P.colors[colorIdx].body);
+if (P.cat === "iphone") Fone3D.batch(built.group);
 let real = built.group, realMats = built.mats, realTinted = built.tinted, realOpaque = true;
 real.rotation.set(...A3.realRot);
 phone.add(real);
@@ -437,9 +416,9 @@ KEYS.hero.g = 1;
 parts.forEach((p, j) => { const v = p.view; KEYS[p.id] = { x: 1.5, rx: A3.baseRx + v.rx, ry: (v.side === "B" ? A3.B : A3.F) + v.ry, s: v.s * A3.fit, e: 1, f: j }; });
 const sections = [...document.querySelectorAll("main .sec")];
 let anchors = [], resolved = [], mobile = false, short = false, maxScroll = 1;
+let detailsOffset = 0, buyOffset = 0, buyBottomOffset = 0, footerOffset = 0, navBottom = 72;
 const mobileStageY = (purchase = false) => {
   const halfH = Math.tan(THREE.MathUtils.degToRad(15)) * camera.position.z;
-  const navBottom = document.querySelector(".nav").getBoundingClientRect().bottom;
   return purchase ? (1 - (navBottom + innerHeight * .38) / innerHeight) * halfH : 0;
 };
 const FOCUS = () => mobile ? { x: 0, y: mobileStageY() } : { x: 1.2, y: 0 };
@@ -517,9 +496,14 @@ function resolveKey(i){
 }
 function layout(){
   const w = innerWidth, h = innerHeight;
+  navBottom = document.querySelector(".nav").getBoundingClientRect().bottom;
+  detailsOffset = mobileDetails.getBoundingClientRect().top + scrollY;
+  buyOffset = document.getElementById("comprar").getBoundingClientRect().top + scrollY;
+  buyBottomOffset = buyForm.getBoundingClientRect().bottom + scrollY;
+  footerOffset = document.querySelector("footer").getBoundingClientRect().top + scrollY;
   short = h <= 560 && w >= h;
   mobile = !short && (w <= 900 || w < h);
-  const pixelRatio = Math.min(window.devicePixelRatio || 1, mobile ? 1.15 : 1.75);
+  const pixelRatio = Math.min(window.devicePixelRatio || 1, mobile ? 1 : 1.5);
   if (renderer.getPixelRatio() !== pixelRatio) renderer.setPixelRatio(pixelRatio);
   if (canvas.clientWidth !== w || canvas.clientHeight !== h || canvas.width !== Math.floor(w * pixelRatio) || canvas.height !== Math.floor(h * pixelRatio)) renderer.setSize(w, h, false);
   camera.aspect = w / h;
@@ -535,6 +519,7 @@ function layout(){
   if (window.__fitGiant) window.__fitGiant();
 }
 layout();
+document.fonts.ready.then(layout);
 let lastW = innerWidth;
 addEventListener("resize", () => { if (!mobile || innerWidth !== lastW){ lastW = innerWidth; layout(); } });
 mobileDetails.addEventListener("toggle", layout, true);
@@ -546,7 +531,7 @@ const ease = v => v < .5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2;
 const hold = v => ease(clamp01((v - .1) / .8));
 const NUM = ["x", "y", "rx", "ry", "rz", "s", "e", "a", "g", "tint"], ARR = ["w", "p"];
 function target(){
-  if (mobile && scrollY >= document.getElementById("comprar").offsetTop - innerHeight * .38){
+  if (mobile && scrollY >= buyOffset - innerHeight * .38){
     return { ...resolved[resolved.length - 1], near: resolved.length - 1 };
   }
   const sy = scrollY; let i = 0;
@@ -614,8 +599,8 @@ function placeCallouts(best, strength){
 
 /* loop */
 const mouse = { x: 0, y: 0, sx: 0, sy: 0 };
-addEventListener("pointermove", e => { mouse.x = e.clientX / innerWidth * 2 - 1; mouse.y = e.clientY / innerHeight * 2 - 1; });
-const halo = document.getElementById("halo"), footerEl = document.querySelector("footer");
+addEventListener("pointermove", e => { if (e.pointerType !== "mouse") return; mouse.x = e.clientX / innerWidth * 2 - 1; mouse.y = e.clientY / innerHeight * 2 - 1; });
+const halo = document.getElementById("halo"), rail = document.querySelector(".rail");
 const giant = document.getElementById("giant"), dial = document.getElementById("dial"), readout = document.getElementById("readout");
 const railText = document.getElementById("railText"), railSegs = document.getElementById("railSegs"), progress = document.getElementById("progress");
 railSegs.innerHTML = "<i></i>".repeat(N);
@@ -627,8 +612,24 @@ let last = performance.now(), lastNear = -1, lastRead = "";
 
 function frame(now){
   const dt = Math.min(.05, (now - last) / 1000); last = now;
+  if (document.hidden){ requestAnimationFrame(frame); return; }
+  // Document positions only change on layout; scrolling requires no geometry reads.
+  const footTop = footerOffset - scrollY;
+  const detailsTop = detailsOffset - scrollY;
+  const buyTop = buyOffset - scrollY;
+  const buyBottom = buyBottomOffset - scrollY;
+  const stageOpacity = (!mobile ? 1 : Math.max(clamp01((detailsTop - innerHeight * .55) / (innerHeight * .45)), clamp01((innerHeight * .4 - buyTop) / (innerHeight * .15)))) * clamp01((buyBottom - innerHeight * .4) / (innerHeight * .2));
+  const stageVisible = stageOpacity > .001;
+  canvas.style.opacity = stageOpacity.toFixed(3);
+  progress.style.transform = `scaleX(${clamp01(scrollY / maxScroll)})`;
+  if (!stageVisible){
+    halo.style.opacity = giant.style.opacity = dial.style.opacity = leaders.style.opacity = calloutsEl.style.opacity = "0";
+    rail.style.visibility = "hidden";
+    requestAnimationFrame(frame);
+    return;
+  }
   const tg = target();
-  const k = reduced ? 1 : 1 - Math.exp(-dt * (mobile ? 10 : 5));
+  const k = reduced ? 1 : 1 - Math.exp(-dt * (mobile ? 16 : 12));
   NUM.forEach(key => state[key] += (tg[key] - state[key]) * k);
   ARR.forEach(key => state[key] = state[key].map((v, j) => v + (tg[key][j] - v) * k));
   if (!reduced && !mobile){ mouse.sx += (mouse.x - mouse.sx) * .05; mouse.sy += (mouse.y - mouse.sy) * .05; }
@@ -650,6 +651,7 @@ function frame(now){
     p.draw = mobile ? 1 : Math.min(1, p.draw + dt * (reduced ? 9 : .6));
     if (p.draw !== p.lastDraw){ const d = ease(clamp01(p.draw)); p.lines.forEach(l => l.geometry.setDrawRange(0, Math.ceil(l.userData.n * d))); p.lastDraw = p.draw; }
     const a = state.a * procVis;
+    p.g.visible = a > .004;
     if (A3.realParts){
       // realistic layers: the focused one solid, the rest a faint ghost so you still see where they sit
       const op = lerp(.07, 1, state.w[j]) * a;
@@ -673,17 +675,11 @@ function frame(now){
   let sum = 0; wc.set(0, 0, 0);
   parts.forEach((p, j) => { if (state.p[j] > .001){ p.center.getWorldPosition(tmp); wc.addScaledVector(tmp, state.p[j]); sum += state.p[j]; } });
   if (sum > .001){ wc.multiplyScalar(1 / sum); const f = FOCUS(), wgt = Math.min(1, sum); root.position.x += (f.x - wc.x) * wgt; root.position.y += (f.y - wc.y) * wgt; }
-  const footTop = footerEl.getBoundingClientRect().top;
   if (!mobile && footTop < innerHeight) root.position.y += (innerHeight - footTop) * 2 * Math.tan(THREE.MathUtils.degToRad(15)) * camera.position.z / innerHeight;
 
-  const detailsTop = mobileDetails.getBoundingClientRect().top;
-  const buyTop = document.getElementById("comprar").getBoundingClientRect().top;
-  const stageOpacity = !mobile ? 1 : Math.max(clamp01((detailsTop - innerHeight * .55) / (innerHeight * .45)), clamp01((innerHeight * .4 - buyTop) / (innerHeight * .15)));
-  const stageVisible = stageOpacity > .001;
-  canvas.style.opacity = stageOpacity.toFixed(3);
   if (mobile) canvas.style.clipPath = buyTop < innerHeight * .4 ? "inset(70px 0 62% 0)" : "";
   else canvas.style.clipPath = "";
-  renderer.render(scene, camera);
+  if (stageVisible) renderer.render(scene, camera);
 
   tmp.copy(root.position).project(camera);
   halo.style.transform = `translate(${((tmp.x + 1) / 2 * innerWidth).toFixed(1)}px,${((1 - tmp.y) / 2 * innerHeight).toFixed(1)}px) scale(${(.7 + state.s * .35).toFixed(3)})`;
@@ -700,7 +696,7 @@ function frame(now){
     halo.style.opacity = (Number(halo.style.opacity) * stageOpacity).toFixed(3);
     leaders.style.opacity = calloutsEl.style.opacity = (Number(leaders.style.opacity) * stageOpacity).toFixed(3);
   }
-  document.querySelector(".rail").style.visibility = mobile && (!stageVisible || best < 0 || bp < .35) ? "hidden" : "visible";
+  rail.style.visibility = mobile && (!stageVisible || best < 0 || bp < .35) ? "hidden" : "visible";
 
   const deg = v => ((v * 180 / Math.PI) % 360 + 360) % 360;
   const read = `ROT ${deg(state.ry).toFixed(1).padStart(5, "0")}° · INCL ${deg(state.rx).toFixed(1).padStart(4, "0")}° · ZOOM ${state.s.toFixed(2)}× · ABERTURA ${Math.round(state.e * 100)}%`;
