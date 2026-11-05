@@ -68,9 +68,23 @@ main.innerHTML = `
       <div class="price"><strong id="price"></strong><span id="installments"></span></div>
       <button class="btn" type="submit">Adicionar à sacola</button>
       <ul class="perks"><li>Novo e lacrado</li><li>Nota fiscal</li><li>Garantia de 1 ano</li></ul>
-      <p class="others">Outros modelos: ${S.products.filter(x => x.cat === P.cat && x.id !== P.id).map(x => `<a href="${x.url}">${x.name}</a>`).join("")}</p>
     </form>
   </section>`;
+
+/* Keep model discovery separate from configuring the selected device. */
+const otherModels = S.products.filter(x => x.cat === P.cat && x.id !== P.id);
+if (otherModels.length){
+  const related = document.createElement("section");
+  related.className = "related-models";
+  related.setAttribute("aria-labelledby", "relatedTitle");
+  related.innerHTML = `<h2 id="relatedTitle">Outros modelos</h2><p>Encontre o modelo que combina com voc&ecirc;.</p>
+    <ul class="model-list">${otherModels.map(x => `<li><a class="model-link" href="${x.url}">
+      <span class="model-info"><strong>${x.name}</strong>${x.cat === "iphone" ? `<span class="model-spec">Tela de ${x.screen} pol. <span aria-hidden="true">&middot;</span> ${x.chip}</span>` : ""}</span>
+      <span class="model-price"><small>A partir de</small><span>${brl(x.from)}</span></span>
+      <svg class="model-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+    </a></li>`).join("")}</ul>`;
+  main.after(related);
+}
 
 /* ---------- buy box ---------- */
 // On phones the teardown has its own uninterrupted scroll sequence.
@@ -701,6 +715,6 @@ function frame(now){
   progress.style.transform = `scaleX(${clamp01(scrollY / maxScroll)})`;
   requestAnimationFrame(frame);
 }
-requestAnimationFrame(t => { last = t; frame(t); });
+requestAnimationFrame(t => { last = t; frame(t); dispatchEvent(new Event("inova:scene-ready")); });
 }
 })();

@@ -18,6 +18,49 @@ nav.innerHTML = `<a class="store" href="index.html" aria-label="${S.name}, pági
   <button type="button" class="bag find" id="findBtn" aria-label="Buscar produtos"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Buscar</span></button>
   <button type="button" class="bag" id="bagBtn" aria-label="Abrir sacola">Sacola <b id="bagCount" data-n="0"></b></button>`;
 document.body.prepend(nav);
+
+/* Logo navigation: fade through the store background, then reveal the home page. */
+(() => {
+  const motion = matchMedia("(prefers-reduced-motion: reduce)");
+  const transitionKey = "inova.homeTransition";
+  let leaving = false;
+  const veil = () => {
+    const layer = document.createElement("div");
+    layer.className = "home-transition";
+    layer.setAttribute("aria-hidden", "true");
+    document.body.append(layer);
+    return layer;
+  };
+  let arrival = 0;
+  try {
+    arrival = Number(sessionStorage.getItem(transitionKey));
+    sessionStorage.removeItem(transitionKey);
+  } catch (_) {}
+  if (arrival && Date.now() - arrival < 10000 && !motion.matches){
+    const layer = veil();
+    layer.animate({ opacity: [1, 0] }, { duration: 300, easing: "ease-out", fill: "forwards" })
+      .finished.finally(() => layer.remove());
+  }
+  nav.querySelector(".store").addEventListener("click", event => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || motion.matches) return;
+    event.preventDefault();
+    if (leaving) return;
+    leaving = true;
+    const destination = event.currentTarget.href;
+    const layer = veil();
+    layer.animate({ opacity: [0, 1] }, { duration: 200, easing: "ease-in", fill: "forwards" })
+      .finished.finally(() => {
+        try { sessionStorage.setItem(transitionKey, String(Date.now())); } catch (_) {}
+        location.assign(destination);
+      });
+  });
+  addEventListener("pageshow", event => {
+    if (!event.persisted) return;
+    leaving = false;
+    document.querySelectorAll(".home-transition").forEach(layer => layer.remove());
+  });
+})();
+
 document.body.insertAdjacentHTML("beforeend", `
 <div class="finder" id="finder" role="dialog" aria-modal="true" aria-label="Buscar produtos" hidden>
   <div class="finder-box">
