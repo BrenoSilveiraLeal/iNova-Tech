@@ -5,7 +5,7 @@ const S = window.STORE, brl = S.brl, P = S.get(document.body.dataset.product);
 if (!P) return;
 const N = P.parts.length, words = { 5: "Cinco", 6: "Seis", 7: "Sete", 8: "Oito" };
 const mmTxt = v => v.toLocaleString("pt-BR");
-document.title = P.name;
+document.title = `${P.name} · ${S.name}`;
 
 /* ---------- stage + story markup ---------- */
 document.body.insertAdjacentHTML("afterbegin", `
@@ -516,9 +516,11 @@ function placeCallouts(best, strength){
   if (want < 0) return;
   const W2 = innerWidth, H2 = innerHeight, list = parts[want].callouts;
   const pts = list.map((c, i) => { c.o.getWorldPosition(v3).project(camera); return { i, x: (v3.x + 1) / 2 * W2, y: (1 - v3.y) / 2 * H2 }; });
-  const lw = short ? 180 : 220, top = short ? 64 : 110, bottom = short ? 40 : 96;
-  const colX = W2 - Math.max(20, W2 * .025) - lw;
-  const gap = Math.min(66, (H2 - top - bottom) / Math.max(1, pts.length - 1));
+  const lw = mobile ? Math.min(132, W2 * .34) : short ? 180 : 220;
+  const top = mobile ? 100 : short ? 64 : 110;
+  const bottom = mobile ? H2 * .49 : short ? 40 : 96;
+  const colX = W2 - (mobile ? 12 : Math.max(20, W2 * .025)) - lw;
+  const gap = Math.min(mobile ? 56 : 66, (H2 - top - bottom) / Math.max(1, pts.length - 1));
   const order = [...pts].sort((a, b) => a.y - b.y);
   order.forEach((p, k) => p.ly = Math.max(Math.min(Math.max(p.y, top), H2 - bottom), k ? order[k - 1].ly + gap : 0));
   for (let k = order.length - 2; k >= 0; k--) order[k].ly = Math.min(order[k].ly, order[k + 1].ly - gap);
@@ -530,7 +532,7 @@ function placeCallouts(best, strength){
     const ly = labelY[i];
     dots[i].style.transform = `translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px)`;
     labels[i].style.transform = `translate(${colX.toFixed(1)}px,${ly.toFixed(1)}px) translateY(-50%)`;
-    const ex = Math.max(p.x + 30, colX - 70);
+    const ex = mobile ? colX - 14 : Math.max(p.x + 30, colX - 70);
     paths[i].setAttribute("d", `M${p.x.toFixed(1)} ${p.y.toFixed(1)} L${ex.toFixed(1)} ${ly.toFixed(1)} L${(colX - 10).toFixed(1)} ${ly.toFixed(1)}`);
   }
 }
@@ -597,13 +599,13 @@ function frame(now){
   parts.forEach((p, j) => { if (state.p[j] > .001){ p.center.getWorldPosition(tmp); wc.addScaledVector(tmp, state.p[j]); sum += state.p[j]; } });
   if (sum > .001){ wc.multiplyScalar(1 / sum); const f = FOCUS(), wgt = Math.min(1, sum); root.position.x += (f.x - wc.x) * wgt; root.position.y += (f.y - wc.y) * wgt; }
   const footTop = footerEl.getBoundingClientRect().top;
-  if (footTop < innerHeight) root.position.y += (innerHeight - footTop) * 2 * Math.tan(THREE.MathUtils.degToRad(15)) * camera.position.z / innerHeight;
+  if (!mobile && footTop < innerHeight) root.position.y += (innerHeight - footTop) * 2 * Math.tan(THREE.MathUtils.degToRad(15)) * camera.position.z / innerHeight;
 
   // Text scrolls in the lower reading area; it cannot cover the teardown stage.
   const readingTop = innerHeight * .54;
   sections.forEach(section => {
     const card = section.querySelector(".card");
-    if (mobile){
+    if (mobile && section.dataset.key !== "buy" && section.dataset.key !== "specs"){
       const top = card.getBoundingClientRect().top;
       card.style.clipPath = `inset(${Math.max(0, readingTop - top).toFixed(1)}px 0 0 0)`;
     } else if (card.style.clipPath) card.style.clipPath = "";
@@ -620,9 +622,7 @@ function frame(now){
 
   let best = -1, bp = 0;
   state.p.forEach((v, j) => { if (v > bp){ bp = v; best = j; } });
-  if (mobile){
-    if (shownPart !== -1) showCallouts(-1);
-  } else placeCallouts(best, bp);
+  placeCallouts(best, bp);
 
   const deg = v => ((v * 180 / Math.PI) % 360 + 360) % 360;
   const read = `ROT ${deg(state.ry).toFixed(1).padStart(5, "0")}° · INCL ${deg(state.rx).toFixed(1).padStart(4, "0")}° · ZOOM ${state.s.toFixed(2)}× · ABERTURA ${Math.round(state.e * 100)}%`;

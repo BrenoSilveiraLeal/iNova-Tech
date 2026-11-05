@@ -1,0 +1,6 @@
+[    3016ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8765/iphone-17.glb:0
+[   46077ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8765/iphone-17.glb:0
+[  100348ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8765/fotos/iphone-17-salvia.png:0
+[  100358ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8765/fotos/iphone-17-salvia.jpg:0
+[  100364ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8765/fotos/iphone-17.png:0
+[  100373ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8765/fotos/iphone-17.jpg:0
