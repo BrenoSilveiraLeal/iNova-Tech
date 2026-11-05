@@ -374,7 +374,12 @@ KEYS.hero.g = 1;
 parts.forEach((p, j) => { const v = p.view; KEYS[p.id] = { x: 1.5, rx: A3.baseRx + v.rx, ry: (v.side === "B" ? A3.B : A3.F) + v.ry, s: v.s * A3.fit, e: 1, f: j }; });
 const sections = [...document.querySelectorAll("main .sec")];
 let anchors = [], resolved = [], mobile = false, short = false, maxScroll = 1;
-const FOCUS = () => mobile ? { x: 0, y: 1.9 } : { x: 1.2, y: 0 };
+const mobileStageY = () => {
+  const halfH = Math.tan(THREE.MathUtils.degToRad(15)) * camera.position.z;
+  const navBottom = document.querySelector(".nav").getBoundingClientRect().bottom;
+  return (1 - (navBottom + innerHeight * .52) / innerHeight) * halfH;
+};
+const FOCUS = () => mobile ? { x: 0, y: mobileStageY() } : { x: 1.2, y: 0 };
 
 /* screen edges (px) of the closed product if the stage were posed at key k: [left, right, top, bottom] */
 const _box = new THREE.Box3(), _v = new THREE.Vector3();
@@ -396,7 +401,19 @@ function heroExtent(k){
 function resolveKey(i){
   const k = Object.assign({ x: 0, y: 0, rx: 0, ry: 0, rz: 0, s: 1, e: 0, f: -1, a: 1, g: 0, tint: 1 }, KEYS[sections[i].dataset.key]);
   if (k.e) k.tint = 0;
-  if (mobile){ k.x = 0; k.y += 2.5; k.s *= k.f >= 0 ? .62 : .60; if (k.ma != null) k.a = k.ma; }
+  if (mobile){
+    k.x = 0; k.y += mobileStageY(); k.s *= k.f >= 0 ? .62 : .60; if (k.ma != null) k.a = k.ma;
+    if (P.cat === "iphone" && sections[i].dataset.key === "hero"){
+      // Align the visible phone with the dial's centre, including its rotation.
+      const halfH = Math.tan(THREE.MathUtils.degToRad(15)) * camera.position.z;
+      const dialRect = document.getElementById("dial").getBoundingClientRect();
+      const centreY = dialRect.top + dialRect.height / 2;
+      for (let pass = 0; pass < 2; pass++){
+        const [, , top, bottom] = heroExtent(k);
+        k.y -= (centreY - (top + bottom) / 2) / innerHeight * 2 * halfH;
+      }
+    }
+  }
   else if (sections[i].dataset.key === "hero"){
     const halfW = Math.tan(THREE.MathUtils.degToRad(15)) * camera.position.z * camera.aspect;
     // where the card's words actually end (its box is wider than its lines of text)
@@ -582,6 +599,15 @@ function frame(now){
   const footTop = footerEl.getBoundingClientRect().top;
   if (footTop < innerHeight) root.position.y += (innerHeight - footTop) * 2 * Math.tan(THREE.MathUtils.degToRad(15)) * camera.position.z / innerHeight;
 
+  // Text scrolls in the lower reading area; it cannot cover the teardown stage.
+  const readingTop = innerHeight * .54;
+  sections.forEach(section => {
+    const card = section.querySelector(".card");
+    if (mobile){
+      const top = card.getBoundingClientRect().top;
+      card.style.clipPath = `inset(${Math.max(0, readingTop - top).toFixed(1)}px 0 0 0)`;
+    } else if (card.style.clipPath) card.style.clipPath = "";
+  });
   renderer.render(scene, camera);
 
   tmp.copy(root.position).project(camera);

@@ -1,4 +1,4 @@
-Prisma Tech — revenda Apple
+iNova — revenda Apple
 ===========================
 
 PÁGINAS
@@ -21,8 +21,8 @@ FOTOS REAIS (recomendado)
 - Use fotos suas, do seu fornecedor ou que você tenha permissão de usar.
 
 O QUE EDITAR — quase tudo fica em assets/catalogo.js
-- Nome da loja: procure por  name: "Prisma Tech"  se quiser trocar.
-  O menu, o checkout, o título das abas e o ícone (favicon com as iniciais) mudam sozinhos.
+- Nome da loja: procure por  name: "iNova"  se quiser trocar.
+  O menu e o checkout usam esse nome. A logo e o ícone da aba ficam em assets/favicon.svg.
   Não use "Apple Store" nem a maçã: são marcas da Apple.
 - Produtos, preços, cores e textos: listas PRODUCTS (iPhones) e OTHERS (demais produtos).
 - Para adicionar um produto, copie um bloco parecido em OTHERS e troque id, nome, preço e cores.

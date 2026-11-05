@@ -358,7 +358,7 @@ PRODUCTS.forEach(p => {
 
 const ALL = [...PRODUCTS, ...OTHERS];
 window.STORE = {
-  name: "Prisma Tech",
+  name: "iNova",
   phones: PRODUCTS,
   products: ALL,
   categories: [
