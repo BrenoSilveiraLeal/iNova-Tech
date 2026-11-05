@@ -1,0 +1,3 @@
+[    2397ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8765/iphone-17.glb:0
+[   29273ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8765/iphone-17.glb:0
+[   92404ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8765/iphone-17.glb:0

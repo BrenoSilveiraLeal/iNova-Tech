@@ -73,6 +73,23 @@ main.innerHTML = `
   </section>`;
 
 /* ---------- buy box ---------- */
+// On phones the teardown has its own uninterrupted scroll sequence.
+const teardownSections = [...main.querySelectorAll('.sec')].filter(s => !["hero", "specs", "buy"].includes(s.dataset.key));
+teardownSections.forEach(s => s.classList.add("teardown-step"));
+const mobileDetails = document.createElement("section");
+mobileDetails.className = "mobile-details";
+mobileDetails.setAttribute("aria-label", "Detalhes das peças");
+mobileDetails.innerHTML = `<h2>Conheça cada detalhe.</h2><p>Explore as peças que você acabou de ver.</p>${teardownSections.filter(s => !["open", "assemble"].includes(s.dataset.key)).map(s => {
+  const card = s.querySelector(".card"), heading = card.querySelector("h2");
+  return `<details data-part="${s.dataset.key}"><summary>${heading.textContent}</summary><div class="detail-copy">${[...card.children].filter(el => !el.matches("h2,.eyebrow")).map(el => el.outerHTML).join("")}</div></details>`;
+}).join("")}`;
+document.getElementById("ficha").before(mobileDetails);
+const purchaseRow = document.createElement("div");
+purchaseRow.className = "purchase-row";
+const buyForm = document.getElementById("buyForm");
+buyForm.querySelector(".price").before(purchaseRow);
+purchaseRow.append(buyForm.querySelector(".price"), buyForm.querySelector('button[type="submit"]'));
+
 let colorIdx = 0, storageIdx = 0;
 const sw = document.getElementById("swatches"), ch = document.getElementById("chips");
 P.colors.forEach((c, i) => {
@@ -96,7 +113,7 @@ function setColor(i, fromUser){
   document.documentElement.style.setProperty("--halo", lum > 200 ? "200,210,230" : `${r},${g},${b}`);
   document.documentElement.style.setProperty("--accent", lum > 225 || lum < 60 ? "255,106,26" : `${r},${g},${b}`);
   if (window.__phoneColor) window.__phoneColor(P.colors[i].body);
-  if (fromUser && changed){ if (window.__burst) window.__burst(sw.children[i], P.colors[i].swatch); if (window.__phoneSpin) window.__phoneSpin(); }
+  if (fromUser && changed && !matchMedia("(max-width:900px), (max-aspect-ratio:1/1)").matches){ if (window.__burst) window.__burst(sw.children[i], P.colors[i].swatch); if (window.__phoneSpin) window.__phoneSpin(); }
 }
 function setStorage(i){
   storageIdx = i;
@@ -366,6 +383,8 @@ parts.forEach(p => {
   const ol = document.createElement("ol"); ol.className = "mlist r";
   ol.innerHTML = p.callouts.map(c => `<li><b>${c.t}</b> · ${c.d}</li>`).join("");
   card.appendChild(ol);
+  const detail = mobileDetails.querySelector(`[data-part="${p.id}"] .detail-copy`);
+  if (detail) detail.appendChild(ol.cloneNode(true));
 });
 
 /* ---------- choreography ---------- */
@@ -374,10 +393,10 @@ KEYS.hero.g = 1;
 parts.forEach((p, j) => { const v = p.view; KEYS[p.id] = { x: 1.5, rx: A3.baseRx + v.rx, ry: (v.side === "B" ? A3.B : A3.F) + v.ry, s: v.s * A3.fit, e: 1, f: j }; });
 const sections = [...document.querySelectorAll("main .sec")];
 let anchors = [], resolved = [], mobile = false, short = false, maxScroll = 1;
-const mobileStageY = () => {
+const mobileStageY = (purchase = false) => {
   const halfH = Math.tan(THREE.MathUtils.degToRad(15)) * camera.position.z;
   const navBottom = document.querySelector(".nav").getBoundingClientRect().bottom;
-  return (1 - (navBottom + innerHeight * .52) / innerHeight) * halfH;
+  return purchase ? (1 - (navBottom + innerHeight * .38) / innerHeight) * halfH : 0;
 };
 const FOCUS = () => mobile ? { x: 0, y: mobileStageY() } : { x: 1.2, y: 0 };
 
@@ -402,7 +421,7 @@ function resolveKey(i){
   const k = Object.assign({ x: 0, y: 0, rx: 0, ry: 0, rz: 0, s: 1, e: 0, f: -1, a: 1, g: 0, tint: 1 }, KEYS[sections[i].dataset.key]);
   if (k.e) k.tint = 0;
   if (mobile){
-    k.x = 0; k.y += mobileStageY(); k.s *= k.f >= 0 ? .62 : .60; if (k.ma != null) k.a = k.ma;
+    k.x = 0; k.y += mobileStageY(sections[i].dataset.key === "buy"); k.s *= k.f >= 0 ? .62 : .60; if (k.ma != null) k.a = k.ma;
     if (P.cat === "iphone" && sections[i].dataset.key === "hero"){
       // Align the visible phone with the dial's centre, including its rotation.
       const halfH = Math.tan(THREE.MathUtils.degToRad(15)) * camera.position.z;
@@ -457,6 +476,7 @@ function layout(){
   camera.updateProjectionMatrix();
   maxScroll = Math.max(1, document.documentElement.scrollHeight - h);
   anchors = sections.map(s => Math.min(maxScroll, Math.max(0, s.offsetTop + s.offsetHeight / 2 - h / 2)));
+  if (mobile) anchors[sections.length - 1] = document.getElementById("comprar").offsetTop;
   resolved = sections.map((_, i) => resolveKey(i));
   const halfW = Math.tan(THREE.MathUtils.degToRad(15)) * camera.position.z * camera.aspect;
   window.__heroPx = w / 2 * (1 + resolved[0].x / halfW);
@@ -466,6 +486,7 @@ function layout(){
 layout();
 let lastW = innerWidth;
 addEventListener("resize", () => { if (!mobile || innerWidth !== lastW){ lastW = innerWidth; layout(); } });
+mobileDetails.addEventListener("toggle", layout, true);
 
 const lerp = (a, b, t) => a + (b - a) * t;
 const clamp01 = v => Math.min(1, Math.max(0, v));
@@ -474,6 +495,9 @@ const ease = v => v < .5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2;
 const hold = v => ease(clamp01((v - .1) / .8));
 const NUM = ["x", "y", "rx", "ry", "rz", "s", "e", "a", "g", "tint"], ARR = ["w", "p"];
 function target(){
+  if (mobile && scrollY >= document.getElementById("comprar").offsetTop - innerHeight * .38){
+    return { ...resolved[resolved.length - 1], near: resolved.length - 1 };
+  }
   const sy = scrollY; let i = 0;
   while (i < anchors.length - 1 && sy >= anchors[i + 1]) i++;
   const a = resolved[i], b = resolved[Math.min(i + 1, resolved.length - 1)];
@@ -517,8 +541,8 @@ function placeCallouts(best, strength){
   const W2 = innerWidth, H2 = innerHeight, list = parts[want].callouts;
   const pts = list.map((c, i) => { c.o.getWorldPosition(v3).project(camera); return { i, x: (v3.x + 1) / 2 * W2, y: (1 - v3.y) / 2 * H2 }; });
   const lw = mobile ? Math.min(132, W2 * .34) : short ? 180 : 220;
-  const top = mobile ? 100 : short ? 64 : 110;
-  const bottom = mobile ? H2 * .49 : short ? 40 : 96;
+  const top = mobile ? 120 : short ? 64 : 110;
+  const bottom = mobile ? 120 : short ? 40 : 96;
   const colX = W2 - (mobile ? 12 : Math.max(20, W2 * .025)) - lw;
   const gap = Math.min(mobile ? 56 : 66, (H2 - top - bottom) / Math.max(1, pts.length - 1));
   const order = [...pts].sort((a, b) => a.y - b.y);
@@ -570,9 +594,9 @@ function frame(now){
     const lead = (1 - Math.abs(j - (N - 1) / 2) / ((N - 1) / 2)) * .35;
     p.g.position.z = lerp(p.z0 * A3.kz, p.zE, smooth(clamp01((state.e - lead) / .65)));
     const focusNow = tg.p[j] > .5;
-    if (focusNow && !p.wasFocus) p.draw = 0;
+    if (focusNow && !p.wasFocus && !mobile) p.draw = 0;
     p.wasFocus = focusNow;
-    p.draw = Math.min(1, p.draw + dt * (reduced ? 9 : mobile ? 1.2 : .6));
+    p.draw = mobile ? 1 : Math.min(1, p.draw + dt * (reduced ? 9 : .6));
     if (p.draw !== p.lastDraw){ const d = ease(clamp01(p.draw)); p.lines.forEach(l => l.geometry.setDrawRange(0, Math.ceil(l.userData.n * d))); p.lastDraw = p.draw; }
     const a = state.a * procVis;
     if (A3.realParts){
@@ -601,15 +625,13 @@ function frame(now){
   const footTop = footerEl.getBoundingClientRect().top;
   if (!mobile && footTop < innerHeight) root.position.y += (innerHeight - footTop) * 2 * Math.tan(THREE.MathUtils.degToRad(15)) * camera.position.z / innerHeight;
 
-  // Text scrolls in the lower reading area; it cannot cover the teardown stage.
-  const readingTop = innerHeight * .54;
-  sections.forEach(section => {
-    const card = section.querySelector(".card");
-    if (mobile && section.dataset.key !== "buy" && section.dataset.key !== "specs"){
-      const top = card.getBoundingClientRect().top;
-      card.style.clipPath = `inset(${Math.max(0, readingTop - top).toFixed(1)}px 0 0 0)`;
-    } else if (card.style.clipPath) card.style.clipPath = "";
-  });
+  const detailsTop = mobileDetails.getBoundingClientRect().top;
+  const buyTop = document.getElementById("comprar").getBoundingClientRect().top;
+  const stageOpacity = !mobile ? 1 : Math.max(clamp01((detailsTop - innerHeight * .55) / (innerHeight * .45)), clamp01((innerHeight * .4 - buyTop) / (innerHeight * .15)));
+  const stageVisible = stageOpacity > .001;
+  canvas.style.opacity = stageOpacity.toFixed(3);
+  if (mobile) canvas.style.clipPath = buyTop < innerHeight * .4 ? "inset(70px 0 62% 0)" : "";
+  else canvas.style.clipPath = "";
   renderer.render(scene, camera);
 
   tmp.copy(root.position).project(camera);
@@ -623,6 +645,11 @@ function frame(now){
   let best = -1, bp = 0;
   state.p.forEach((v, j) => { if (v > bp){ bp = v; best = j; } });
   placeCallouts(best, bp);
+  if (mobile){
+    halo.style.opacity = (Number(halo.style.opacity) * stageOpacity).toFixed(3);
+    leaders.style.opacity = calloutsEl.style.opacity = (Number(leaders.style.opacity) * stageOpacity).toFixed(3);
+  }
+  document.querySelector(".rail").style.visibility = mobile && (!stageVisible || best < 0 || bp < .35) ? "hidden" : "visible";
 
   const deg = v => ((v * 180 / Math.PI) % 360 + 360) % 360;
   const read = `ROT ${deg(state.ry).toFixed(1).padStart(5, "0")}° · INCL ${deg(state.rx).toFixed(1).padStart(4, "0")}° · ZOOM ${state.s.toFixed(2)}× · ABERTURA ${Math.round(state.e * 100)}%`;

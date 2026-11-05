@@ -1,0 +1,608 @@
+- generic [active] [ref=e1]:
+  - generic [aria-hidden]:
+    - generic: iPhone 17
+    - generic:
+      - generic: i
+      - generic: P
+      - generic: H
+      - generic: O
+      - generic: "N"
+      - generic: E
+    - generic:
+      - generic: "1"
+      - generic: "7"
+  - generic [aria-hidden]: ROT 310.4° · INCL 12.1° · ZOOM 1.09× · ABERTURA 0%
+  - navigation "Principal" [ref=e2]:
+    - link "iNova, página inicial" [ref=e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=e4]: iNova
+    - list [ref=e5]:
+      - listitem [ref=e6]:
+        - link "iPhone" [ref=e7] [cursor=pointer]:
+          - /url: index.html#iphone
+      - listitem [ref=e8]:
+        - link "Mac" [ref=e9] [cursor=pointer]:
+          - /url: index.html#mac
+      - listitem [ref=e10]:
+        - link "iPad" [ref=e11] [cursor=pointer]:
+          - /url: index.html#ipad
+      - listitem [ref=e12]:
+        - link "AirPods" [ref=e13] [cursor=pointer]:
+          - /url: index.html#airpods
+      - listitem [ref=e14]:
+        - link "Watch" [ref=e15] [cursor=pointer]:
+          - /url: index.html#watch
+      - listitem [ref=e16]:
+        - link "Vision" [ref=e17] [cursor=pointer]:
+          - /url: index.html#vision
+    - button "Buscar produtos" [ref=e18] [cursor=pointer]:
+      - generic [ref=e22]: Buscar
+    - button "Abrir sacola" [ref=e23] [cursor=pointer]: Sacola
+  - main [ref=e24]:
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - paragraph [ref=e27]: Pronta entrega
+        - heading "iPhone 17" [level=1] [ref=e28]:
+          - generic [aria-hidden] [ref=e29]:
+            - generic [ref=e30]: i
+            - generic [ref=e31]: P
+            - generic [ref=e32]: h
+            - generic [ref=e33]: o
+            - generic [ref=e34]: "n"
+            - generic [ref=e35]: e
+          - generic [aria-hidden] [ref=e36]:
+            - generic [ref=e37]: "1"
+            - generic [ref=e38]: "7"
+        - paragraph [ref=e39]: Tela ProMotion de 120 Hz, chip A19 e duas câmeras de 48 MP. Role a página para ver como ele é por dentro.
+        - paragraph [ref=e40]: A partir deR$ 7.999
+        - generic [ref=e41]:
+          - link "Comprar" [ref=e42] [cursor=pointer]:
+            - /url: "#comprar"
+          - link "Ver por dentro" [ref=e43] [cursor=pointer]:
+            - /url: "#por-dentro"
+      - list "Destaques" [ref=e44]:
+        - listitem [ref=e45]:
+          - text: Chip
+          - generic [ref=e46]: A19
+        - listitem [ref=e47]:
+          - text: Câmeras
+          - generic [ref=e48]: 2 × 48 MP
+        - listitem [ref=e49]:
+          - text: Tela
+          - generic [ref=e50]: 6,3" 120 Hz
+        - listitem [ref=e51]:
+          - text: Bateria
+          - generic [ref=e52]: Até 30 h
+        - listitem [ref=e53]:
+          - text: Cores
+          - generic [ref=e54]: "5"
+      - generic [aria-hidden] [ref=e55]: Role para abrir
+    - generic [ref=e58]:
+      - paragraph [ref=e59]: Design
+      - heading "Alumínio e vidro em cinco cores." [level=2] [ref=e60]:
+        - generic [aria-hidden] [ref=e61]:
+          - generic [ref=e62]: A
+          - generic [ref=e63]: l
+          - generic [ref=e64]: u
+          - generic [ref=e65]: m
+          - generic [ref=e66]: í
+          - generic [ref=e67]: "n"
+          - generic [ref=e68]: i
+          - generic [ref=e69]: o
+        - generic [ref=e71]: e
+        - generic [aria-hidden] [ref=e72]:
+          - generic [ref=e73]: v
+          - generic [ref=e74]: i
+          - generic [ref=e75]: d
+          - generic [ref=e76]: r
+          - generic [ref=e77]: o
+        - generic [aria-hidden] [ref=e78]:
+          - generic [ref=e79]: e
+          - generic [ref=e80]: m
+        - generic [aria-hidden] [ref=e81]:
+          - generic [ref=e82]: c
+          - generic [ref=e83]: i
+          - generic [ref=e84]: "n"
+          - generic [ref=e85]: c
+          - generic [ref=e86]: o
+        - generic [aria-hidden] [ref=e87]:
+          - generic [ref=e88]: c
+          - generic [ref=e89]: o
+          - generic [ref=e90]: r
+          - generic [ref=e91]: e
+          - generic [ref=e92]: s
+          - generic [ref=e93]: .
+      - paragraph [ref=e94]: A estrutura é de alumínio e a traseira é de vidro com a cor na própria massa. No canto, o módulo de câmeras guarda as duas lentes de 48 MP.
+      - generic [ref=e95]:
+        - generic [ref=e96]:
+          - term [ref=e97]: Espessura
+          - definition [ref=e98]: 7,95 mm
+        - generic [ref=e99]:
+          - term [ref=e100]: Peso
+          - definition [ref=e101]: 177 g
+        - generic [ref=e102]:
+          - term [ref=e103]: Proteção
+          - definition [ref=e104]: IP68
+    - generic [ref=e106]:
+      - paragraph [ref=e107]: Por dentro
+      - heading "Agora, vamos abrir." [level=2] [ref=e108]:
+        - generic [aria-hidden] [ref=e109]:
+          - generic [ref=e110]: A
+          - generic [ref=e111]: g
+          - generic [ref=e112]: o
+          - generic [ref=e113]: r
+          - generic [ref=e114]: a
+          - generic [ref=e115]: ","
+        - generic [aria-hidden] [ref=e116]:
+          - generic [ref=e117]: v
+          - generic [ref=e118]: a
+          - generic [ref=e119]: m
+          - generic [ref=e120]: o
+          - generic [ref=e121]: s
+        - generic [aria-hidden] [ref=e122]:
+          - generic [ref=e123]: a
+          - generic [ref=e124]: b
+          - generic [ref=e125]: r
+          - generic [ref=e126]: i
+          - generic [ref=e127]: r
+          - generic [ref=e128]: .
+      - paragraph [ref=e129]: Sete camadas, de fora para dentro. Continue rolando para ver cada uma de perto.
+    - generic [ref=e131]:
+      - paragraph [ref=e132]: 01 / 07 · Vidro frontal
+      - heading "Ceramic Shield 2 na frente." [level=2] [ref=e133]:
+        - generic [aria-hidden] [ref=e134]:
+          - generic [ref=e135]: C
+          - generic [ref=e136]: e
+          - generic [ref=e137]: r
+          - generic [ref=e138]: a
+          - generic [ref=e139]: m
+          - generic [ref=e140]: i
+          - generic [ref=e141]: c
+        - generic [aria-hidden] [ref=e142]:
+          - generic [ref=e143]: S
+          - generic [ref=e144]: h
+          - generic [ref=e145]: i
+          - generic [ref=e146]: e
+          - generic [ref=e147]: l
+          - generic [ref=e148]: d
+        - generic [ref=e150]: "2"
+        - generic [aria-hidden] [ref=e151]:
+          - generic [ref=e152]: "n"
+          - generic [ref=e153]: a
+        - generic [aria-hidden] [ref=e154]:
+          - generic [ref=e155]: f
+          - generic [ref=e156]: r
+          - generic [ref=e157]: e
+          - generic [ref=e158]: "n"
+          - generic [ref=e159]: t
+          - generic [ref=e160]: e
+          - generic [ref=e161]: .
+      - paragraph [ref=e162]: O vidro da frente resiste três vezes mais a riscos que a geração anterior e tem um revestimento que reduz reflexos. A tela fica legível mesmo com luz forte batendo nela.
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - term [ref=e165]: Riscos
+          - definition [ref=e166]: 3× mais
+        - generic [ref=e167]:
+          - term [ref=e168]: Reflexos
+          - definition [ref=e169]: Menos
+        - generic [ref=e170]:
+          - term [ref=e171]: Água
+          - definition [ref=e172]: IP68
+    - generic [ref=e174]:
+      - paragraph [ref=e175]: 02 / 07 · Tela
+      - heading "6,3 polegadas que se leem ao sol." [level=2] [ref=e176]:
+        - generic [aria-hidden] [ref=e177]:
+          - generic [ref=e178]: "6"
+          - generic [ref=e179]: ","
+          - generic [ref=e180]: "3"
+        - generic [aria-hidden] [ref=e181]:
+          - generic [ref=e182]: p
+          - generic [ref=e183]: o
+          - generic [ref=e184]: l
+          - generic [ref=e185]: e
+          - generic [ref=e186]: g
+          - generic [ref=e187]: a
+          - generic [ref=e188]: d
+          - generic [ref=e189]: a
+          - generic [ref=e190]: s
+        - generic [aria-hidden] [ref=e191]:
+          - generic [ref=e192]: q
+          - generic [ref=e193]: u
+          - generic [ref=e194]: e
+        - generic [aria-hidden] [ref=e195]:
+          - generic [ref=e196]: s
+          - generic [ref=e197]: e
+        - generic [aria-hidden] [ref=e198]:
+          - generic [ref=e199]: l
+          - generic [ref=e200]: e
+          - generic [ref=e201]: e
+          - generic [ref=e202]: m
+        - generic [aria-hidden] [ref=e203]:
+          - generic [ref=e204]: a
+          - generic [ref=e205]: o
+        - generic [aria-hidden] [ref=e206]:
+          - generic [ref=e207]: s
+          - generic [ref=e208]: o
+          - generic [ref=e209]: l
+          - generic [ref=e210]: .
+      - paragraph [ref=e211]: Pela primeira vez no iPhone 17 de entrada, a tela ProMotion vai de 1 a 120 Hz, o que permite a tela sempre ativa. O brilho chega a 3.000 nits ao ar livre.
+      - generic [ref=e212]:
+        - generic [ref=e213]:
+          - term [ref=e214]: Tamanho
+          - definition [ref=e215]: 6,3"
+        - generic [ref=e216]:
+          - term [ref=e217]: ProMotion
+          - definition [ref=e218]: 120 Hz
+        - generic [ref=e219]:
+          - term [ref=e220]: Brilho
+          - definition [ref=e221]: 3.000 nits
+    - generic [ref=e223]:
+      - paragraph [ref=e224]: 03 / 07 · Placa lógica
+      - heading "Chip A19 e o novo chip N1." [level=2] [ref=e225]:
+        - generic [aria-hidden] [ref=e226]:
+          - generic [ref=e227]: C
+          - generic [ref=e228]: h
+          - generic [ref=e229]: i
+          - generic [ref=e230]: p
+        - generic [aria-hidden] [ref=e231]:
+          - generic [ref=e232]: A
+          - generic [ref=e233]: "1"
+          - generic [ref=e234]: "9"
+        - generic [ref=e236]: e
+        - generic [ref=e238]: o
+        - generic [aria-hidden] [ref=e239]:
+          - generic [ref=e240]: "n"
+          - generic [ref=e241]: o
+          - generic [ref=e242]: v
+          - generic [ref=e243]: o
+        - generic [aria-hidden] [ref=e244]:
+          - generic [ref=e245]: c
+          - generic [ref=e246]: h
+          - generic [ref=e247]: i
+          - generic [ref=e248]: p
+        - generic [aria-hidden] [ref=e249]:
+          - generic [ref=e250]: "N"
+          - generic [ref=e251]: "1"
+          - generic [ref=e252]: .
+      - paragraph [ref=e253]: O A19 tem CPU de 6 núcleos, GPU de 5 núcleos e Neural Engine de 16 núcleos para a Apple Intelligence. O N1 cuida do Wi‑Fi 7, do Bluetooth 6 e do Thread.
+      - generic [ref=e254]:
+        - generic [ref=e255]:
+          - term [ref=e256]: CPU
+          - definition [ref=e257]: 6 núcleos
+        - generic [ref=e258]:
+          - term [ref=e259]: GPU
+          - definition [ref=e260]: 5 núcleos
+        - generic [ref=e261]:
+          - term [ref=e262]: Neural Engine
+          - definition [ref=e263]: 16 núcleos
+    - generic [ref=e265]:
+      - paragraph [ref=e266]: 04 / 07 · Bateria
+      - heading "Bateria para o dia inteiro." [level=2] [ref=e267]:
+        - generic [aria-hidden] [ref=e268]:
+          - generic [ref=e269]: B
+          - generic [ref=e270]: a
+          - generic [ref=e271]: t
+          - generic [ref=e272]: e
+          - generic [ref=e273]: r
+          - generic [ref=e274]: i
+          - generic [ref=e275]: a
+        - generic [aria-hidden] [ref=e276]:
+          - generic [ref=e277]: p
+          - generic [ref=e278]: a
+          - generic [ref=e279]: r
+          - generic [ref=e280]: a
+        - generic [ref=e282]: o
+        - generic [aria-hidden] [ref=e283]:
+          - generic [ref=e284]: d
+          - generic [ref=e285]: i
+          - generic [ref=e286]: a
+        - generic [aria-hidden] [ref=e287]:
+          - generic [ref=e288]: i
+          - generic [ref=e289]: "n"
+          - generic [ref=e290]: t
+          - generic [ref=e291]: e
+          - generic [ref=e292]: i
+          - generic [ref=e293]: r
+          - generic [ref=e294]: o
+          - generic [ref=e295]: .
+      - paragraph [ref=e296]: São até 30 horas de vídeo, e com um adaptador de 40 W ela chega a 50% em cerca de 20 minutos.
+      - generic [ref=e297]:
+        - generic [ref=e298]:
+          - term [ref=e299]: Vídeo
+          - definition [ref=e300]: Até 30 h
+        - generic [ref=e301]:
+          - term [ref=e302]: Carga rápida
+          - definition [ref=e303]: 50% / 20 min
+        - generic [ref=e304]:
+          - term [ref=e305]: Sem fio
+          - definition [ref=e306]: 25 W
+    - generic [ref=e308]:
+      - paragraph [ref=e309]: 05 / 07 · Câmeras
+      - heading "Duas câmeras Fusion de 48 MP." [level=2] [ref=e310]:
+        - generic [aria-hidden] [ref=e311]:
+          - generic [ref=e312]: D
+          - generic [ref=e313]: u
+          - generic [ref=e314]: a
+          - generic [ref=e315]: s
+        - generic [aria-hidden] [ref=e316]:
+          - generic [ref=e317]: c
+          - generic [ref=e318]: â
+          - generic [ref=e319]: m
+          - generic [ref=e320]: e
+          - generic [ref=e321]: r
+          - generic [ref=e322]: a
+          - generic [ref=e323]: s
+        - generic [aria-hidden] [ref=e324]:
+          - generic [ref=e325]: F
+          - generic [ref=e326]: u
+          - generic [ref=e327]: s
+          - generic [ref=e328]: i
+          - generic [ref=e329]: o
+          - generic [ref=e330]: "n"
+        - generic [aria-hidden] [ref=e331]:
+          - generic [ref=e332]: d
+          - generic [ref=e333]: e
+        - generic [aria-hidden] [ref=e334]:
+          - generic [ref=e335]: "4"
+          - generic [ref=e336]: "8"
+        - generic [aria-hidden] [ref=e337]:
+          - generic [ref=e338]: M
+          - generic [ref=e339]: P
+          - generic [ref=e340]: .
+      - paragraph [ref=e341]: A principal e a ultra-angular têm 48 MP. A principal faz zoom de 2× com qualidade óptica usando o centro do sensor, e a ultra-angular também faz fotos macro.
+      - generic [ref=e342]:
+        - generic [ref=e343]:
+          - term [ref=e344]: Câmeras
+          - definition [ref=e345]: 2 × 48 MP
+        - generic [ref=e346]:
+          - term [ref=e347]: Zoom
+          - definition [ref=e348]: 2×
+        - generic [ref=e349]:
+          - term [ref=e350]: Frontal
+          - definition [ref=e351]: 18 MP
+    - generic [ref=e353]:
+      - paragraph [ref=e354]: 06 / 07 · Estrutura
+      - heading "Moldura de alumínio aeroespacial." [level=2] [ref=e355]:
+        - generic [aria-hidden] [ref=e356]:
+          - generic [ref=e357]: M
+          - generic [ref=e358]: o
+          - generic [ref=e359]: l
+          - generic [ref=e360]: d
+          - generic [ref=e361]: u
+          - generic [ref=e362]: r
+          - generic [ref=e363]: a
+        - generic [aria-hidden] [ref=e364]:
+          - generic [ref=e365]: d
+          - generic [ref=e366]: e
+        - generic [aria-hidden] [ref=e367]:
+          - generic [ref=e368]: a
+          - generic [ref=e369]: l
+          - generic [ref=e370]: u
+          - generic [ref=e371]: m
+          - generic [ref=e372]: í
+          - generic [ref=e373]: "n"
+          - generic [ref=e374]: i
+          - generic [ref=e375]: o
+        - generic [aria-hidden] [ref=e376]:
+          - generic [ref=e377]: a
+          - generic [ref=e378]: e
+          - generic [ref=e379]: r
+          - generic [ref=e380]: o
+          - generic [ref=e381]: e
+          - generic [ref=e382]: s
+          - generic [ref=e383]: p
+          - generic [ref=e384]: a
+          - generic [ref=e385]: c
+          - generic [ref=e386]: i
+          - generic [ref=e387]: a
+          - generic [ref=e388]: l
+          - generic [ref=e389]: .
+      - paragraph [ref=e390]: A moldura de alumínio segura a tela e a traseira. Na lateral direita fica o Controle da Câmera, e na esquerda, o Botão de Ação.
+      - generic [ref=e391]:
+        - generic [ref=e392]:
+          - term [ref=e393]: Altura
+          - definition [ref=e394]: 149,6 mm
+        - generic [ref=e395]:
+          - term [ref=e396]: Largura
+          - definition [ref=e397]: 71,5 mm
+        - generic [ref=e398]:
+          - term [ref=e399]: Espessura
+          - definition [ref=e400]: 7,95 mm
+    - generic [ref=e402]:
+      - paragraph [ref=e403]: 07 / 07 · Traseira
+      - heading "Vidro colorido e MagSafe." [level=2] [ref=e404]:
+        - generic [aria-hidden] [ref=e405]:
+          - generic [ref=e406]: V
+          - generic [ref=e407]: i
+          - generic [ref=e408]: d
+          - generic [ref=e409]: r
+          - generic [ref=e410]: o
+        - generic [aria-hidden] [ref=e411]:
+          - generic [ref=e412]: c
+          - generic [ref=e413]: o
+          - generic [ref=e414]: l
+          - generic [ref=e415]: o
+          - generic [ref=e416]: r
+          - generic [ref=e417]: i
+          - generic [ref=e418]: d
+          - generic [ref=e419]: o
+        - generic [ref=e421]: e
+        - generic [aria-hidden] [ref=e422]:
+          - generic [ref=e423]: M
+          - generic [ref=e424]: a
+          - generic [ref=e425]: g
+          - generic [ref=e426]: S
+          - generic [ref=e427]: a
+          - generic [ref=e428]: f
+          - generic [ref=e429]: e
+          - generic [ref=e430]: .
+      - paragraph [ref=e431]: A traseira é de vidro com a cor na própria massa e acabamento fosco. Por trás dela, a bobina MagSafe carrega sem fio até 25 W.
+      - generic [ref=e432]:
+        - generic [ref=e433]:
+          - term [ref=e434]: MagSafe
+          - definition [ref=e435]: 25 W
+        - generic [ref=e436]:
+          - term [ref=e437]: Acabamento
+          - definition [ref=e438]: Fosco
+        - generic [ref=e439]:
+          - term [ref=e440]: Cores
+          - definition [ref=e441]: "5"
+    - generic [ref=e443]:
+      - paragraph [ref=e444]: Montado
+      - heading "Tudo de volta em 7,95 mm." [level=2] [ref=e445]:
+        - generic [aria-hidden] [ref=e446]:
+          - generic [ref=e447]: T
+          - generic [ref=e448]: u
+          - generic [ref=e449]: d
+          - generic [ref=e450]: o
+        - generic [aria-hidden] [ref=e451]:
+          - generic [ref=e452]: d
+          - generic [ref=e453]: e
+        - generic [aria-hidden] [ref=e454]:
+          - generic [ref=e455]: v
+          - generic [ref=e456]: o
+          - generic [ref=e457]: l
+          - generic [ref=e458]: t
+          - generic [ref=e459]: a
+        - generic [aria-hidden] [ref=e460]:
+          - generic [ref=e461]: e
+          - generic [ref=e462]: m
+        - generic [aria-hidden] [ref=e463]:
+          - generic [ref=e464]: "7"
+          - generic [ref=e465]: ","
+          - generic [ref=e466]: "9"
+          - generic [ref=e467]: "5"
+        - generic [aria-hidden] [ref=e468]:
+          - generic [ref=e469]: m
+          - generic [ref=e470]: m
+          - generic [ref=e471]: .
+      - paragraph [ref=e472]: Vidro frontal, tela, placa lógica, bateria, câmeras, estrutura, traseira. Lacrado de novo e pronto para entrega.
+    - generic [ref=e474]:
+      - paragraph [ref=e475]: Ficha técnica
+      - heading "iPhone 17 em números." [level=2] [ref=e476]:
+        - generic [aria-hidden] [ref=e477]:
+          - generic [ref=e478]: i
+          - generic [ref=e479]: P
+          - generic [ref=e480]: h
+          - generic [ref=e481]: o
+          - generic [ref=e482]: "n"
+          - generic [ref=e483]: e
+        - generic [aria-hidden] [ref=e484]:
+          - generic [ref=e485]: "1"
+          - generic [ref=e486]: "7"
+        - generic [aria-hidden] [ref=e487]:
+          - generic [ref=e488]: e
+          - generic [ref=e489]: m
+        - generic [aria-hidden] [ref=e490]:
+          - generic [ref=e491]: "n"
+          - generic [ref=e492]: ú
+          - generic [ref=e493]: m
+          - generic [ref=e494]: e
+          - generic [ref=e495]: r
+          - generic [ref=e496]: o
+          - generic [ref=e497]: s
+          - generic [ref=e498]: .
+      - generic [ref=e499]:
+        - generic [ref=e500]:
+          - term [ref=e501]: Tela
+          - definition [ref=e502]:
+            - text: 6,3" Super Retina XDR
+            - generic [ref=e503]: ProMotion até 120 Hz, até 3.000 nits
+        - generic [ref=e504]:
+          - term [ref=e505]: Chip
+          - definition [ref=e506]:
+            - text: A19
+            - generic [ref=e507]: CPU de 6 núcleos, GPU de 5 núcleos
+        - generic [ref=e508]:
+          - term [ref=e509]: Câmeras traseiras
+          - definition [ref=e510]:
+            - text: 2 × 48 MP Fusion
+            - generic [ref=e511]: Principal e ultra-angular, zoom 2×
+        - generic [ref=e512]:
+          - term [ref=e513]: Câmera frontal
+          - definition [ref=e514]:
+            - text: 18 MP Center Stage
+            - generic [ref=e515]: Enquadra o grupo automaticamente
+        - generic [ref=e516]:
+          - term [ref=e517]: Bateria
+          - definition [ref=e518]:
+            - text: Até 30 h de vídeo
+            - generic [ref=e519]: MagSafe até 25 W, 50% em ~20 min com 40 W
+        - generic [ref=e520]:
+          - term [ref=e521]: Armazenamento
+          - definition [ref=e522]: 256 GB ou 512 GB
+        - generic [ref=e523]:
+          - term [ref=e524]: Conexões
+          - definition [ref=e525]:
+            - text: 5G, Wi‑Fi 7, Bluetooth 6
+            - generic [ref=e526]: Chip N1, USB‑C
+        - generic [ref=e527]:
+          - term [ref=e528]: Corpo
+          - definition [ref=e529]:
+            - text: 149,6 × 71,5 × 7,95 mm · 177 g
+            - generic [ref=e530]: Alumínio e vidro, IP68
+    - generic [ref=e532]:
+      - paragraph [ref=e533]: Comprar
+      - heading "Escolha o seu iPhone 17." [level=2] [ref=e534]:
+        - generic [aria-hidden] [ref=e535]:
+          - generic [ref=e536]: E
+          - generic [ref=e537]: s
+          - generic [ref=e538]: c
+          - generic [ref=e539]: o
+          - generic [ref=e540]: l
+          - generic [ref=e541]: h
+          - generic [ref=e542]: a
+        - generic [ref=e544]: o
+        - generic [aria-hidden] [ref=e545]:
+          - generic [ref=e546]: s
+          - generic [ref=e547]: e
+          - generic [ref=e548]: u
+        - generic [aria-hidden] [ref=e549]:
+          - generic [ref=e550]: i
+          - generic [ref=e551]: P
+          - generic [ref=e552]: h
+          - generic [ref=e553]: o
+          - generic [ref=e554]: "n"
+          - generic [ref=e555]: e
+        - generic [aria-hidden] [ref=e556]:
+          - generic [ref=e557]: "1"
+          - generic [ref=e558]: "7"
+          - generic [ref=e559]: .
+      - generic [ref=e560]:
+        - text: Cor
+        - generic [ref=e561]: Lavanda
+      - generic [ref=e562]:
+        - button "Lavanda" [pressed] [ref=e563] [cursor=pointer]
+        - button "Sálvia" [ref=e564] [cursor=pointer]
+        - button "Azul-névoa" [ref=e565] [cursor=pointer]
+        - button "Branco" [ref=e566] [cursor=pointer]
+        - button "Preto" [ref=e567] [cursor=pointer]
+      - generic [ref=e568]: Armazenamento
+      - generic [ref=e569]:
+        - button "256 GB R$ 7.999" [pressed] [ref=e570] [cursor=pointer]:
+          - text: 256 GB
+          - generic [ref=e571]: R$ 7.999
+        - button "512 GB R$ 9.499" [ref=e572] [cursor=pointer]:
+          - text: 512 GB
+          - generic [ref=e573]: R$ 9.499
+      - generic [ref=e574]:
+        - generic [ref=e575]:
+          - strong [ref=e576]: R$ 7.999
+          - generic [ref=e577]: ou 12× de R$ 666,58 sem juros
+        - button "Adicionar à sacola" [ref=e578] [cursor=pointer]
+      - list [ref=e579]:
+        - listitem [ref=e580]: Novo e lacrado
+        - listitem [ref=e581]: Nota fiscal
+        - listitem [ref=e582]: Garantia de 1 ano
+      - paragraph [ref=e583]:
+        - text: "Outros modelos:"
+        - link "iPhone Air" [ref=e584] [cursor=pointer]:
+          - /url: iphone-air.html
+        - link "iPhone 17 Pro" [ref=e585] [cursor=pointer]:
+          - /url: iphone-17-pro.html
+        - link "iPhone 17 Pro Max" [ref=e586] [cursor=pointer]:
+          - /url: iphone-17-pro-max.html
+  - contentinfo [ref=e587]:
+    - generic [ref=e588]: Revenda independente. Apple, iPhone, MagSafe e Ceramic Shield são marcas da Apple Inc.
+    - generic [ref=e589]: Ilustração 3D. Confira preços e disponibilidade antes da compra.
+  - status

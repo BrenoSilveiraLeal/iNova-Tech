@@ -1,0 +1,506 @@
+- generic [active] [ref=f3e1]:
+  - generic [aria-hidden]:
+    - generic: AirPods Pro 3
+    - generic:
+      - generic: A
+      - generic: I
+      - generic: R
+      - generic: P
+      - generic: O
+      - generic: D
+      - generic: S
+    - generic:
+      - generic: P
+      - generic: R
+      - generic: O
+  - generic [aria-hidden]: ROT 310.6° · INCL 301.5° · ZOOM 1.30× · ABERTURA 0%
+  - navigation "Principal" [ref=f3e2]:
+    - link "iNova, página inicial" [ref=f3e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f3e4]: iNova
+    - list [ref=f3e5]:
+      - listitem [ref=f3e6]:
+        - link "iPhone" [ref=f3e7] [cursor=pointer]:
+          - /url: index.html#iphone
+      - listitem [ref=f3e8]:
+        - link "Mac" [ref=f3e9] [cursor=pointer]:
+          - /url: index.html#mac
+      - listitem [ref=f3e10]:
+        - link "iPad" [ref=f3e11] [cursor=pointer]:
+          - /url: index.html#ipad
+      - listitem [ref=f3e12]:
+        - link "AirPods" [ref=f3e13] [cursor=pointer]:
+          - /url: index.html#airpods
+      - listitem [ref=f3e14]:
+        - link "Watch" [ref=f3e15] [cursor=pointer]:
+          - /url: index.html#watch
+      - listitem [ref=f3e16]:
+        - link "Vision" [ref=f3e17] [cursor=pointer]:
+          - /url: index.html#vision
+    - button "Buscar produtos" [ref=f3e18] [cursor=pointer]:
+      - generic [ref=f3e22]: Buscar
+    - button "Abrir sacola" [ref=f3e23] [cursor=pointer]: Sacola
+  - main [ref=f3e24]:
+    - generic [ref=f3e25]:
+      - generic [ref=f3e26]:
+        - paragraph [ref=f3e27]: Lançamento · Pronta entrega
+        - heading "AirPods Pro 3" [level=1] [ref=f3e28]:
+          - generic [aria-hidden] [ref=f3e29]:
+            - generic [ref=f3e30]: A
+            - generic [ref=f3e31]: i
+            - generic [ref=f3e32]: r
+            - generic [ref=f3e33]: P
+            - generic [ref=f3e34]: o
+            - generic [ref=f3e35]: d
+            - generic [ref=f3e36]: s
+          - generic [aria-hidden] [ref=f3e37]:
+            - generic [ref=f3e38]: P
+            - generic [ref=f3e39]: r
+            - generic [ref=f3e40]: o
+          - generic [ref=f3e42]: "3"
+        - paragraph [ref=f3e43]: Cancelamento de ruído ainda maior, sensor de batimentos e tradução ao vivo. Role a página para ver o que tem dentro.
+        - paragraph [ref=f3e44]: A partir deR$ 2.370
+        - generic [ref=f3e45]:
+          - link "Comprar" [ref=f3e46] [cursor=pointer]:
+            - /url: "#comprar"
+          - link "Ver por dentro" [ref=f3e47] [cursor=pointer]:
+            - /url: "#por-dentro"
+      - list "Destaques" [ref=f3e48]:
+        - listitem [ref=f3e49]:
+          - text: Ruído
+          - generic [ref=f3e50]: Cancelamento ativo
+        - listitem [ref=f3e51]:
+          - text: Saúde
+          - generic [ref=f3e52]: Sensor cardíaco
+        - listitem [ref=f3e53]:
+          - text: Recurso
+          - generic [ref=f3e54]: Tradução ao vivo
+        - listitem [ref=f3e55]:
+          - text: Resistência
+          - generic [ref=f3e56]: IP57
+      - generic [aria-hidden] [ref=f3e57]: Role para abrir
+    - generic [ref=f3e60]:
+      - paragraph [ref=f3e61]: Design
+      - heading "Pequenos por fora, cheios de peças por dentro." [level=2] [ref=f3e62]:
+        - generic [aria-hidden] [ref=f3e63]:
+          - generic [ref=f3e64]: P
+          - generic [ref=f3e65]: e
+          - generic [ref=f3e66]: q
+          - generic [ref=f3e67]: u
+          - generic [ref=f3e68]: e
+          - generic [ref=f3e69]: "n"
+          - generic [ref=f3e70]: o
+          - generic [ref=f3e71]: s
+        - generic [aria-hidden] [ref=f3e72]:
+          - generic [ref=f3e73]: p
+          - generic [ref=f3e74]: o
+          - generic [ref=f3e75]: r
+        - generic [aria-hidden] [ref=f3e76]:
+          - generic [ref=f3e77]: f
+          - generic [ref=f3e78]: o
+          - generic [ref=f3e79]: r
+          - generic [ref=f3e80]: a
+          - generic [ref=f3e81]: ","
+        - generic [aria-hidden] [ref=f3e82]:
+          - generic [ref=f3e83]: c
+          - generic [ref=f3e84]: h
+          - generic [ref=f3e85]: e
+          - generic [ref=f3e86]: i
+          - generic [ref=f3e87]: o
+          - generic [ref=f3e88]: s
+        - generic [aria-hidden] [ref=f3e89]:
+          - generic [ref=f3e90]: d
+          - generic [ref=f3e91]: e
+        - generic [aria-hidden] [ref=f3e92]:
+          - generic [ref=f3e93]: p
+          - generic [ref=f3e94]: e
+          - generic [ref=f3e95]: ç
+          - generic [ref=f3e96]: a
+          - generic [ref=f3e97]: s
+        - generic [aria-hidden] [ref=f3e98]:
+          - generic [ref=f3e99]: p
+          - generic [ref=f3e100]: o
+          - generic [ref=f3e101]: r
+        - generic [aria-hidden] [ref=f3e102]:
+          - generic [ref=f3e103]: d
+          - generic [ref=f3e104]: e
+          - generic [ref=f3e105]: "n"
+          - generic [ref=f3e106]: t
+          - generic [ref=f3e107]: r
+          - generic [ref=f3e108]: o
+          - generic [ref=f3e109]: .
+      - paragraph [ref=f3e110]: Cada fone tem chip, alto-falante, microfones e bateria. O estojo tem a própria bateria e carrega os dois.
+      - generic [ref=f3e111]:
+        - generic [ref=f3e112]:
+          - term [ref=f3e113]: Ruído
+          - definition [ref=f3e114]: Cancelamento ativo
+        - generic [ref=f3e115]:
+          - term [ref=f3e116]: Saúde
+          - definition [ref=f3e117]: Sensor cardíaco
+        - generic [ref=f3e118]:
+          - term [ref=f3e119]: Recurso
+          - definition [ref=f3e120]: Tradução ao vivo
+    - generic [ref=f3e122]:
+      - paragraph [ref=f3e123]: Por dentro
+      - heading "Agora, vamos abrir." [level=2] [ref=f3e124]:
+        - generic [aria-hidden] [ref=f3e125]:
+          - generic [ref=f3e126]: A
+          - generic [ref=f3e127]: g
+          - generic [ref=f3e128]: o
+          - generic [ref=f3e129]: r
+          - generic [ref=f3e130]: a
+          - generic [ref=f3e131]: ","
+        - generic [aria-hidden] [ref=f3e132]:
+          - generic [ref=f3e133]: v
+          - generic [ref=f3e134]: a
+          - generic [ref=f3e135]: m
+          - generic [ref=f3e136]: o
+          - generic [ref=f3e137]: s
+        - generic [aria-hidden] [ref=f3e138]:
+          - generic [ref=f3e139]: a
+          - generic [ref=f3e140]: b
+          - generic [ref=f3e141]: r
+          - generic [ref=f3e142]: i
+          - generic [ref=f3e143]: r
+          - generic [ref=f3e144]: .
+      - paragraph [ref=f3e145]: Cinco camadas, de fora para dentro. Continue rolando para ver cada uma de perto.
+    - generic [ref=f3e147]:
+      - paragraph [ref=f3e148]: 01 / 05 · Tampa
+      - heading "Uma tampa que fecha com ímãs." [level=2] [ref=f3e149]:
+        - generic [aria-hidden] [ref=f3e150]:
+          - generic [ref=f3e151]: U
+          - generic [ref=f3e152]: m
+          - generic [ref=f3e153]: a
+        - generic [aria-hidden] [ref=f3e154]:
+          - generic [ref=f3e155]: t
+          - generic [ref=f3e156]: a
+          - generic [ref=f3e157]: m
+          - generic [ref=f3e158]: p
+          - generic [ref=f3e159]: a
+        - generic [aria-hidden] [ref=f3e160]:
+          - generic [ref=f3e161]: q
+          - generic [ref=f3e162]: u
+          - generic [ref=f3e163]: e
+        - generic [aria-hidden] [ref=f3e164]:
+          - generic [ref=f3e165]: f
+          - generic [ref=f3e166]: e
+          - generic [ref=f3e167]: c
+          - generic [ref=f3e168]: h
+          - generic [ref=f3e169]: a
+        - generic [aria-hidden] [ref=f3e170]:
+          - generic [ref=f3e171]: c
+          - generic [ref=f3e172]: o
+          - generic [ref=f3e173]: m
+        - generic [aria-hidden] [ref=f3e174]:
+          - generic [ref=f3e175]: í
+          - generic [ref=f3e176]: m
+          - generic [ref=f3e177]: ã
+          - generic [ref=f3e178]: s
+          - generic [ref=f3e179]: .
+      - paragraph [ref=f3e180]: A tampa abre com um dedo e fecha sozinha com ímãs. A dobradiça é de metal para durar anos de uso.
+      - generic [ref=f3e181]:
+        - generic [ref=f3e182]:
+          - term [ref=f3e183]: Fecho
+          - definition [ref=f3e184]: Magnético
+        - generic [ref=f3e185]:
+          - term [ref=f3e186]: Dobradiça
+          - definition [ref=f3e187]: Metal
+        - generic [ref=f3e188]:
+          - term [ref=f3e189]: Abertura
+          - definition [ref=f3e190]: 1 dedo
+    - generic [ref=f3e192]:
+      - paragraph [ref=f3e193]: 02 / 05 · Fones
+      - heading "Chip H2 em cada fone." [level=2] [ref=f3e194]:
+        - generic [aria-hidden] [ref=f3e195]:
+          - generic [ref=f3e196]: C
+          - generic [ref=f3e197]: h
+          - generic [ref=f3e198]: i
+          - generic [ref=f3e199]: p
+        - generic [aria-hidden] [ref=f3e200]:
+          - generic [ref=f3e201]: H
+          - generic [ref=f3e202]: "2"
+        - generic [aria-hidden] [ref=f3e203]:
+          - generic [ref=f3e204]: e
+          - generic [ref=f3e205]: m
+        - generic [aria-hidden] [ref=f3e206]:
+          - generic [ref=f3e207]: c
+          - generic [ref=f3e208]: a
+          - generic [ref=f3e209]: d
+          - generic [ref=f3e210]: a
+        - generic [aria-hidden] [ref=f3e211]:
+          - generic [ref=f3e212]: f
+          - generic [ref=f3e213]: o
+          - generic [ref=f3e214]: "n"
+          - generic [ref=f3e215]: e
+          - generic [ref=f3e216]: .
+      - paragraph [ref=f3e217]: Cada fone tem chip H2, alto-falante, microfones para o cancelamento de ruído e um sensor de batimentos.
+      - generic [ref=f3e218]:
+        - generic [ref=f3e219]:
+          - term [ref=f3e220]: Chip
+          - definition [ref=f3e221]: H2
+        - generic [ref=f3e222]:
+          - term [ref=f3e223]: Ruído
+          - definition [ref=f3e224]: Cancela
+        - generic [ref=f3e225]:
+          - term [ref=f3e226]: Saúde
+          - definition [ref=f3e227]: Batimentos
+    - generic [ref=f3e229]:
+      - paragraph [ref=f3e230]: 03 / 05 · Berço
+      - heading "Cada fone volta ao lugar sozinho." [level=2] [ref=f3e231]:
+        - generic [aria-hidden] [ref=f3e232]:
+          - generic [ref=f3e233]: C
+          - generic [ref=f3e234]: a
+          - generic [ref=f3e235]: d
+          - generic [ref=f3e236]: a
+        - generic [aria-hidden] [ref=f3e237]:
+          - generic [ref=f3e238]: f
+          - generic [ref=f3e239]: o
+          - generic [ref=f3e240]: "n"
+          - generic [ref=f3e241]: e
+        - generic [aria-hidden] [ref=f3e242]:
+          - generic [ref=f3e243]: v
+          - generic [ref=f3e244]: o
+          - generic [ref=f3e245]: l
+          - generic [ref=f3e246]: t
+          - generic [ref=f3e247]: a
+        - generic [aria-hidden] [ref=f3e248]:
+          - generic [ref=f3e249]: a
+          - generic [ref=f3e250]: o
+        - generic [aria-hidden] [ref=f3e251]:
+          - generic [ref=f3e252]: l
+          - generic [ref=f3e253]: u
+          - generic [ref=f3e254]: g
+          - generic [ref=f3e255]: a
+          - generic [ref=f3e256]: r
+        - generic [aria-hidden] [ref=f3e257]:
+          - generic [ref=f3e258]: s
+          - generic [ref=f3e259]: o
+          - generic [ref=f3e260]: z
+          - generic [ref=f3e261]: i
+          - generic [ref=f3e262]: "n"
+          - generic [ref=f3e263]: h
+          - generic [ref=f3e264]: o
+          - generic [ref=f3e265]: .
+      - paragraph [ref=f3e266]: Ímãs puxam os fones para os encaixes, onde contatos de metal começam a carga.
+      - generic [ref=f3e267]:
+        - generic [ref=f3e268]:
+          - term [ref=f3e269]: Encaixe
+          - definition [ref=f3e270]: Magnético
+        - generic [ref=f3e271]:
+          - term [ref=f3e272]: Contatos
+          - definition [ref=f3e273]: Metal
+        - generic [ref=f3e274]:
+          - term [ref=f3e275]: Carga
+          - definition [ref=f3e276]: Automática
+    - generic [ref=f3e278]:
+      - paragraph [ref=f3e279]: 04 / 05 · Bateria do estojo
+      - heading "Mais cargas guardadas no estojo." [level=2] [ref=f3e280]:
+        - generic [aria-hidden] [ref=f3e281]:
+          - generic [ref=f3e282]: M
+          - generic [ref=f3e283]: a
+          - generic [ref=f3e284]: i
+          - generic [ref=f3e285]: s
+        - generic [aria-hidden] [ref=f3e286]:
+          - generic [ref=f3e287]: c
+          - generic [ref=f3e288]: a
+          - generic [ref=f3e289]: r
+          - generic [ref=f3e290]: g
+          - generic [ref=f3e291]: a
+          - generic [ref=f3e292]: s
+        - generic [aria-hidden] [ref=f3e293]:
+          - generic [ref=f3e294]: g
+          - generic [ref=f3e295]: u
+          - generic [ref=f3e296]: a
+          - generic [ref=f3e297]: r
+          - generic [ref=f3e298]: d
+          - generic [ref=f3e299]: a
+          - generic [ref=f3e300]: d
+          - generic [ref=f3e301]: a
+          - generic [ref=f3e302]: s
+        - generic [aria-hidden] [ref=f3e303]:
+          - generic [ref=f3e304]: "n"
+          - generic [ref=f3e305]: o
+        - generic [aria-hidden] [ref=f3e306]:
+          - generic [ref=f3e307]: e
+          - generic [ref=f3e308]: s
+          - generic [ref=f3e309]: t
+          - generic [ref=f3e310]: o
+          - generic [ref=f3e311]: j
+          - generic [ref=f3e312]: o
+          - generic [ref=f3e313]: .
+      - paragraph [ref=f3e314]: A bateria do estojo recarrega os fones várias vezes. Um alto-falante embutido toca para você achar o estojo pelo app Buscar.
+      - generic [ref=f3e315]:
+        - generic [ref=f3e316]:
+          - term [ref=f3e317]: Bateria
+          - definition [ref=f3e318]: Interna
+        - generic [ref=f3e319]:
+          - term [ref=f3e320]: Total
+          - definition [ref=f3e321]: Várias cargas
+        - generic [ref=f3e322]:
+          - term [ref=f3e323]: Buscar
+          - definition [ref=f3e324]: Com som
+    - generic [ref=f3e326]:
+      - paragraph [ref=f3e327]: 05 / 05 · Estojo
+      - heading "USB‑C e MagSafe." [level=2] [ref=f3e328]:
+        - generic [aria-hidden] [ref=f3e329]:
+          - generic [ref=f3e330]: U
+          - generic [ref=f3e331]: S
+          - generic [ref=f3e332]: B
+          - generic [ref=f3e333]: ‑
+          - generic [ref=f3e334]: C
+        - generic [ref=f3e336]: e
+        - generic [aria-hidden] [ref=f3e337]:
+          - generic [ref=f3e338]: M
+          - generic [ref=f3e339]: a
+          - generic [ref=f3e340]: g
+          - generic [ref=f3e341]: S
+          - generic [ref=f3e342]: a
+          - generic [ref=f3e343]: f
+          - generic [ref=f3e344]: e
+          - generic [ref=f3e345]: .
+      - paragraph [ref=f3e346]: Carregue com o mesmo cabo do iPhone ou encoste num carregador MagSafe.
+      - generic [ref=f3e347]:
+        - generic [ref=f3e348]:
+          - term [ref=f3e349]: Cabo
+          - definition [ref=f3e350]: USB‑C
+        - generic [ref=f3e351]:
+          - term [ref=f3e352]: Sem fio
+          - definition [ref=f3e353]: MagSafe
+        - generic [ref=f3e354]:
+          - term [ref=f3e355]: Proteção
+          - definition [ref=f3e356]: IP57
+    - generic [ref=f3e358]:
+      - paragraph [ref=f3e359]: Montado
+      - heading "Tudo de volta no lugar." [level=2] [ref=f3e360]:
+        - generic [aria-hidden] [ref=f3e361]:
+          - generic [ref=f3e362]: T
+          - generic [ref=f3e363]: u
+          - generic [ref=f3e364]: d
+          - generic [ref=f3e365]: o
+        - generic [aria-hidden] [ref=f3e366]:
+          - generic [ref=f3e367]: d
+          - generic [ref=f3e368]: e
+        - generic [aria-hidden] [ref=f3e369]:
+          - generic [ref=f3e370]: v
+          - generic [ref=f3e371]: o
+          - generic [ref=f3e372]: l
+          - generic [ref=f3e373]: t
+          - generic [ref=f3e374]: a
+        - generic [aria-hidden] [ref=f3e375]:
+          - generic [ref=f3e376]: "n"
+          - generic [ref=f3e377]: o
+        - generic [aria-hidden] [ref=f3e378]:
+          - generic [ref=f3e379]: l
+          - generic [ref=f3e380]: u
+          - generic [ref=f3e381]: g
+          - generic [ref=f3e382]: a
+          - generic [ref=f3e383]: r
+          - generic [ref=f3e384]: .
+      - paragraph [ref=f3e385]: Tampa, fones, berço, bateria do estojo, estojo. Lacrado de novo e pronto para entrega.
+    - generic [ref=f3e387]:
+      - paragraph [ref=f3e388]: Ficha técnica
+      - heading "AirPods Pro 3 em números." [level=2] [ref=f3e389]:
+        - generic [aria-hidden] [ref=f3e390]:
+          - generic [ref=f3e391]: A
+          - generic [ref=f3e392]: i
+          - generic [ref=f3e393]: r
+          - generic [ref=f3e394]: P
+          - generic [ref=f3e395]: o
+          - generic [ref=f3e396]: d
+          - generic [ref=f3e397]: s
+        - generic [aria-hidden] [ref=f3e398]:
+          - generic [ref=f3e399]: P
+          - generic [ref=f3e400]: r
+          - generic [ref=f3e401]: o
+        - generic [ref=f3e403]: "3"
+        - generic [aria-hidden] [ref=f3e404]:
+          - generic [ref=f3e405]: e
+          - generic [ref=f3e406]: m
+        - generic [aria-hidden] [ref=f3e407]:
+          - generic [ref=f3e408]: "n"
+          - generic [ref=f3e409]: ú
+          - generic [ref=f3e410]: m
+          - generic [ref=f3e411]: e
+          - generic [ref=f3e412]: r
+          - generic [ref=f3e413]: o
+          - generic [ref=f3e414]: s
+          - generic [ref=f3e415]: .
+      - generic [ref=f3e416]:
+        - generic [ref=f3e417]:
+          - term [ref=f3e418]: Cancelamento de ruído
+          - definition [ref=f3e419]:
+            - text: Ativo
+            - generic [ref=f3e420]: Com modo Ambiente
+        - generic [ref=f3e421]:
+          - term [ref=f3e422]: Saúde
+          - definition [ref=f3e423]:
+            - text: Sensor de frequência cardíaca
+            - generic [ref=f3e424]: Para treinos
+        - generic [ref=f3e425]:
+          - term [ref=f3e426]: Recursos
+          - definition [ref=f3e427]:
+            - text: Tradução ao vivo
+            - generic [ref=f3e428]: Com iPhone compatível
+        - generic [ref=f3e429]:
+          - term [ref=f3e430]: Resistência
+          - definition [ref=f3e431]:
+            - text: IP57
+            - generic [ref=f3e432]: Poeira, suor e água
+    - generic [ref=f3e434]:
+      - paragraph [ref=f3e435]: Comprar
+      - heading "Escolha o seu AirPods Pro 3." [level=2] [ref=f3e436]:
+        - generic [aria-hidden] [ref=f3e437]:
+          - generic [ref=f3e438]: E
+          - generic [ref=f3e439]: s
+          - generic [ref=f3e440]: c
+          - generic [ref=f3e441]: o
+          - generic [ref=f3e442]: l
+          - generic [ref=f3e443]: h
+          - generic [ref=f3e444]: a
+        - generic [ref=f3e446]: o
+        - generic [aria-hidden] [ref=f3e447]:
+          - generic [ref=f3e448]: s
+          - generic [ref=f3e449]: e
+          - generic [ref=f3e450]: u
+        - generic [aria-hidden] [ref=f3e451]:
+          - generic [ref=f3e452]: A
+          - generic [ref=f3e453]: i
+          - generic [ref=f3e454]: r
+          - generic [ref=f3e455]: P
+          - generic [ref=f3e456]: o
+          - generic [ref=f3e457]: d
+          - generic [ref=f3e458]: s
+        - generic [aria-hidden] [ref=f3e459]:
+          - generic [ref=f3e460]: P
+          - generic [ref=f3e461]: r
+          - generic [ref=f3e462]: o
+        - generic [aria-hidden] [ref=f3e463]:
+          - generic [ref=f3e464]: "3"
+          - generic [ref=f3e465]: .
+      - generic [ref=f3e466]:
+        - text: Cor
+        - generic [ref=f3e467]: Branco
+      - button "Branco" [pressed] [ref=f3e469] [cursor=pointer]
+      - generic [ref=f3e470]: Armazenamento
+      - button "Estojo MagSafe USB‑C R$ 2.699" [pressed] [ref=f3e472] [cursor=pointer]:
+        - text: Estojo MagSafe USB‑C
+        - generic [ref=f3e473]: R$ 2.699
+      - generic [ref=f3e474]:
+        - generic [ref=f3e475]:
+          - strong [ref=f3e476]: R$ 2.699
+          - generic [ref=f3e477]: ou 12× de R$ 224,92 sem juros
+        - button "Adicionar à sacola" [ref=f3e478] [cursor=pointer]
+      - list [ref=f3e479]:
+        - listitem [ref=f3e480]: Novo e lacrado
+        - listitem [ref=f3e481]: Nota fiscal
+        - listitem [ref=f3e482]: Garantia de 1 ano
+      - paragraph [ref=f3e483]:
+        - text: "Outros modelos:"
+        - link "AirPods 4" [ref=f3e484] [cursor=pointer]:
+          - /url: produto.html?id=airpods-4
+        - link "AirPods Max" [ref=f3e485] [cursor=pointer]:
+          - /url: produto.html?id=airpods-max
+  - contentinfo [ref=f3e486]:
+    - generic [ref=f3e487]: Revenda independente. Apple, iPhone, Mac, iPad, AirPods e Apple Watch são marcas da Apple Inc.
+    - generic [ref=f3e488]: "Ilustração 3D. Preço de referência: confira antes da compra."
+  - status

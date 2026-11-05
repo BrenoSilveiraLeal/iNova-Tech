@@ -190,6 +190,8 @@ h2{font-size:clamp(1.8rem,3.1vw,2.8rem);line-height:1.06}
 .others{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px}
 .others a{color:var(--fg-soft);text-decoration:none}
 .others a:hover{color:var(--fg)}
+.mobile-details{display:none}
+.purchase-row{display:flex;flex-direction:column;gap:16px}
 
 footer{position:relative;z-index:4;max-width:1360px;margin:0 auto;padding:36px 3vw 64px;border-top:1px solid var(--hair);
   display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;color:var(--fg-soft);font-size:13px}
@@ -349,7 +351,7 @@ html.lock,html.lock body{overflow:hidden}
   .sec.wide{padding-block:14vh}
   .spec-grid{grid-template-columns:minmax(0,1fr)}
   .chips,.chips.n3{grid-template-columns:repeat(2,minmax(0,1fr))}
-  #leaders,.callouts{display:block;clip-path:inset(76px 0 48% 0)}
+  #leaders,.callouts{display:block;clip-path:inset(76px 0 70px 0)}
   .clabel{display:block;width:min(132px,34vw);background:var(--bg);padding:5px 7px;border-radius:6px;translate:0 0}
   .clabel b{font-size:10px;letter-spacing:0;line-height:1.3}
   .clabel span{display:none}
@@ -361,9 +363,39 @@ html.lock,html.lock body{overflow:hidden}
   .mlist li::before{content:counter(m);display:inline-block;width:18px;height:18px;margin-right:8px;border-radius:50%;background:var(--orange);color:#fff;text-align:center;font:500 10px/18px var(--mono)}
   .mlist b{color:var(--fg);font-weight:600}
   .rail{right:16px;bottom:auto;top:calc(64px + env(safe-area-inset-top,0px))}
-  #comprar.sec{min-height:100svh;padding-block:52svh 0;align-items:flex-start}
-  #comprar .card{max-height:48svh;overflow-y:auto;overscroll-behavior-y:contain;scroll-padding-block:16px;padding-bottom:max(20px,env(safe-area-inset-bottom,0px));clip-path:none}
+  #comprar.sec{min-height:100svh;padding-block:38svh 0;align-items:flex-start}
+  #comprar .card{max-height:62svh;overflow-y:auto;overscroll-behavior-y:contain;scroll-padding-block:16px;padding-bottom:max(20px,env(safe-area-inset-bottom,0px));clip-path:none}
   #comprar .btn[type="submit"]{flex-shrink:0}
+}
+
+/* Mobile: animation first, explanations second, then a compact configurator. */
+@media (max-width:900px) and (min-height:561px), (max-aspect-ratio:1/1){
+  #story .teardown-step{min-height:90svh;padding:0;pointer-events:none}
+  .teardown-step > .card{display:none}
+  .mobile-details{display:block;position:relative;background:var(--bg);padding:88px 20px 40px;max-width:640px;margin:auto;scroll-margin-top:76px}
+  .mobile-details > p{color:var(--fg-soft);margin:12px 0 28px}
+  .mobile-details details{border-top:1px solid var(--hair);padding:18px 0}
+  .mobile-details summary{font:500 19px/1.3 var(--display);cursor:pointer;padding-right:16px}
+  .detail-copy{padding-top:16px;display:grid;gap:16px;color:var(--fg-soft)}
+  #ficha.sec{background:var(--bg);padding:24px 16px 48px;min-height:0}
+  #ficha .card{border:0;padding:0}
+  #comprar .card{gap:12px;padding:18px 20px;border-radius:20px 20px 0 0;background:var(--bg-lift)}
+  #comprar .eyebrow{display:none}
+  #comprar h2{font-size:clamp(20px,5.5vw,26px)}
+  #comprar .swatches{gap:12px}
+  #comprar .swatch{width:34px;height:34px}
+  #comprar .chips{gap:8px}
+  #comprar .chips button{padding:9px 12px}
+  #comprar .purchase-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;border-top:1px solid var(--hair);padding-top:16px;margin-top:4px}
+  #comprar .price{min-width:0;gap:4px;border-top:0;padding-top:0}
+  #comprar .price strong{font-size:clamp(21px,6vw,28px)}
+  #comprar .price span{font-size:11px;line-height:1.4}
+  #comprar .purchase-row .btn{align-self:center;min-height:46px;padding:12px 14px;font-size:12px;white-space:nowrap}
+  #comprar .perks{font-size:11px;gap:8px 14px;border-top:1px solid var(--hair);padding-top:14px}
+  #comprar .others{font-size:12px;gap:8px 12px;margin-top:4px}
+  .rail{top:auto;bottom:22px;right:20px;left:20px;align-items:center;background:var(--bg);padding:10px;border-radius:8px}
+  .rail > span:first-child{white-space:normal;text-align:center}
+  .card.pre .split .c,.card.pre .r{opacity:1;transform:none}
 }
 
 /* Stable viewport sizing on phones with expanding browser chrome. */
