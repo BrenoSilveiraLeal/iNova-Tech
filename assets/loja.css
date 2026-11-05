@@ -380,8 +380,9 @@ html.lock,html.lock body{overflow:hidden}
   .mobile-details summary::-webkit-details-marker{display:none}
   .mobile-details summary::marker{content:""}
   .mobile-details summary:focus-visible{outline:2px solid var(--orange);outline-offset:4px}
-  .detail-toggle{width:24px;height:24px;flex-shrink:0;color:var(--fg-soft)}
-  details[open] > summary .detail-toggle-vertical{display:none}
+  .detail-toggle{width:24px;height:24px;flex-shrink:0;color:var(--fg-soft);transition:transform 280ms cubic-bezier(.22,1,.36,1);transform:rotate(0deg)}
+  details[open]:not([data-closing]) > summary .detail-toggle{transform:rotate(180deg)}
+  @media (prefers-reduced-motion:reduce){.detail-toggle{transition:none}}
   .mobile-details details[open] > summary{color:var(--orange)}
   .detail-copy{padding:0 0 24px;display:grid;gap:16px;color:var(--fg-soft)}
   #ficha.sec{background:var(--bg);padding:24px 16px 48px;min-height:0}

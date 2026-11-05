@@ -81,9 +81,36 @@ mobileDetails.className = "mobile-details";
 mobileDetails.setAttribute("aria-label", "Detalhes das peças");
 mobileDetails.innerHTML = `<h2>Conheça cada detalhe.</h2><p>Explore as peças que você acabou de ver.</p>${teardownSections.filter(s => !["open", "assemble"].includes(s.dataset.key)).map(s => {
   const card = s.querySelector(".card"), heading = card.querySelector("h2");
-  return `<details data-part="${s.dataset.key}"><summary><span>${heading.textContent}</span><svg class="detail-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14"/><path class="detail-toggle-vertical" d="M12 5v14"/></svg></summary><div class="detail-copy">${[...card.children].filter(el => !el.matches("h2,.eyebrow")).map(el => el.outerHTML).join("")}</div></details>`;
+  return `<details data-part="${s.dataset.key}"><summary><span>${heading.textContent}</span><svg class="detail-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail-copy">${[...card.children].filter(el => !el.matches("h2,.eyebrow")).map(el => el.outerHTML).join("")}</div></details>`;
 }).join("")}`;
 document.getElementById("ficha").before(mobileDetails);
+// Keep native disclosure semantics, and animate both directions before hiding content.
+mobileDetails.querySelectorAll("details").forEach(detail => {
+  const summary = detail.querySelector("summary");
+  let animation = null, expanded = detail.open;
+  summary.addEventListener("click", event => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    event.preventDefault();
+    const startHeight = detail.getBoundingClientRect().height;
+    expanded = animation ? !expanded : !detail.open;
+    if (animation) animation.cancel();
+    detail.open = true;
+    detail.toggleAttribute("data-closing", !expanded);
+    const endHeight = expanded ? detail.getBoundingClientRect().height : summary.getBoundingClientRect().height + 1;
+    detail.style.overflow = "hidden";
+    animation = detail.animate({ height: [startHeight + "px", endHeight + "px"] }, {
+      duration: 280, easing: "cubic-bezier(.22, 1, .36, 1)"
+    });
+    animation.onfinish = () => {
+      detail.open = expanded;
+      detail.removeAttribute("data-closing");
+      detail.style.overflow = "";
+      animation = null;
+      detail.dispatchEvent(new Event("toggle"));
+    };
+  });
+});
+
 const purchaseRow = document.createElement("div");
 purchaseRow.className = "purchase-row";
 const buyForm = document.getElementById("buyForm");
