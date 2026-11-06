@@ -492,6 +492,11 @@ function moveSel(d){
   if (sugSel >= 0){ qIn.setAttribute("aria-activedescendant", "sg-" + sugSel); $("sg-" + sugSel).scrollIntoView({ block: "nearest" }); } else qIn.removeAttribute("aria-activedescendant");
 }
 const goShop = () => document.getElementById("loja").scrollIntoView({ behavior: motion ? "smooth" : "auto" });
+document.querySelector('.bigsearch a[href="#loja"]').addEventListener("click", e => {
+  e.preventDefault();
+  hideSuggest();
+  goShop();
+});
 let qt;
 qIn.addEventListener("input", e => { showSuggest(); clearTimeout(qt); qt = setTimeout(() => { st.q = e.target.value.trim(); render(); }, 160); });
 qIn.addEventListener("focus", () => { if (qIn.value.trim()) showSuggest(); });
