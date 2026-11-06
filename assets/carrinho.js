@@ -6,7 +6,7 @@ const currentCat = (S.get(current) || {}).cat || document.body.dataset.cat || ""
 const KEY = "sualoja.sacola";
 
 /* ---------- store name in the tab title (the name comes from STORE.name in catalogo.js) ---------- */
-document.title = document.title.replace(/Sua Loja|iNova/, S.name);
+document.title = document.title.replace(/Sua Loja|iNova(?: Tech)?/, S.name);
 
 /* ---------- menu, search, toast, drawer markup ---------- */
 const nav = document.createElement("nav");
@@ -103,6 +103,7 @@ function updateCount(){
   if (n && window.anime) anime({ targets: countEl, scale: [1.6, 1], duration: 700, easing: "easeOutElastic(1, .5)" });
 }
 updateCount();
+const bagKey = i => `${i.pid}:${i.color}:${i.storage}`;
 const itemInfo = i => { const p = S.get(i.pid), c = p.colors.find(x => x.id === i.color) || p.colors[0], st = p.storage[i.storage] || p.storage[0]; return { p, c, label: st[0], price: st[1] }; };
 
 /* ---------- checkout ---------- */
@@ -176,7 +177,7 @@ const VIEWS = [
   () => {
     if (!bag.length) return `<div class="empty"><p>Sua sacola está vazia.</p><a class="btn ghost small" href="index.html">Ver os modelos</a></div>`;
     return `${NOTE}<div class="items">${bag.map((i, k) => { const f = itemInfo(i); return `
-      <div class="item">
+      <div class="item" data-bag-key="${bagKey(i)}">
         <div class="thumb" style="--c:${f.c.swatch}" data-id="${f.p.id}" data-ci="${Math.max(0, f.p.colors.indexOf(f.c))}"><i></i></div>
         <div><b>${f.p.name}</b><small>${f.c.name} · ${f.label} · ${brl(f.price)}</small><button type="button" class="rm" data-rm="${k}">Remover</button></div>
         <div class="qty" aria-label="Quantidade"><button type="button" data-dec="${k}" aria-label="Diminuir">−</button><span>${i.qty}</span><button type="button" data-inc="${k}" aria-label="Aumentar">+</button></div>
@@ -230,7 +231,7 @@ function render(dir = 1){
     ck.pay === "pix" ? "Já fiz o Pix" : ck.pay === "boleto" ? "Gerar boleto" : `Pagar ${brl(t.total)}`, "Continuar comprando"][ck.step];
   ckPrev.hidden = ck.step === 0 || ck.step === 3;
   wire();
-  if (window.anime) anime({ targets: ckBody.children, translateX: [28 * dir, 0], opacity: [0, 1], duration: 650, delay: anime.stagger(55), easing: "easeOutExpo" });
+  if (window.anime && dir && !matchMedia("(prefers-reduced-motion:reduce)").matches) anime({ targets: ckBody.children, translateX: [28 * dir, 0], opacity: [0, 1], duration: 650, delay: anime.stagger(55), easing: "easeOutExpo" });
   if (ck.step === 3 && window.anime){
     const c = ckBody.querySelector(".check");
     anime.timeline({ easing: "easeOutExpo" })
@@ -239,6 +240,28 @@ function render(dir = 1){
       .add({ targets: c, scale: [.85, 1], duration: 900, easing: "easeOutElastic(1, .5)" }, "-=600");
   }
 }
+// Delegate controls so rerenders and rapid taps always target the current bag item.
+ckBody.addEventListener("click", event => {
+  const button = event.target.closest("[data-inc],[data-dec],[data-rm]");
+  if (!button || !ckBody.contains(button)) return;
+  const key = button.closest("[data-bag-key]")?.dataset.bagKey;
+  const index = bag.findIndex(item => bagKey(item) === key);
+  if (index < 0) return;
+  const item = bag[index];
+  const remove = button.hasAttribute("data-rm") || (button.hasAttribute("data-dec") && item.qty === 1);
+  if (remove){
+    bag.splice(index, 1);
+    say(`${S.get(item.pid).name} removido da sacola.`);
+  } else if (button.hasAttribute("data-inc")){
+    if (item.qty >= 3) return say("Limite de 3 unidades por modelo.");
+    item.qty++;
+  } else item.qty--;
+  save(); render(0);
+  const selector = button.hasAttribute("data-inc") ? "[data-inc]" : "[data-dec]";
+  const remaining = [...ckBody.querySelectorAll("[data-bag-key]")].find(row => row.dataset.bagKey === key);
+  (remaining?.querySelector(selector) || ckBody.querySelector("[data-rm]") || el("ckClose")).focus({ preventScroll: true });
+});
+
 const masks = {
   cep: v => v.replace(/\D/g, "").slice(0, 8).replace(/(\d{5})(\d)/, "$1-$2"),
   cartao: v => v.replace(/\D/g, "").slice(0, 19).replace(/(\d{4})(?=\d)/g, "$1 "),
@@ -251,9 +274,6 @@ function wire(){
     if (masks[inp.name]) inp.value = masks[inp.name](inp.value);
     ck.data[inp.name] = inp.value; inp.closest(".field").classList.remove("bad");
   }));
-  ckBody.querySelectorAll("[data-inc]").forEach(b => b.onclick = () => { const i = bag[+b.dataset.inc]; if (i.qty >= 3) return say("Limite de 3 unidades por modelo."); i.qty++; save(); render(0); });
-  ckBody.querySelectorAll("[data-dec]").forEach(b => b.onclick = () => { const i = bag[+b.dataset.dec]; if (i.qty > 1){ i.qty--; save(); render(0); } });
-  ckBody.querySelectorAll("[data-rm]").forEach(b => b.onclick = () => { bag.splice(+b.dataset.rm, 1); save(); render(0); });
   ckBody.querySelectorAll("[data-pay]").forEach(b => b.onclick = () => { ck.pay = b.dataset.pay; render(0); });
   ckBody.querySelectorAll("[data-ship]").forEach(b => b.onclick = () => { ck.ship = b.dataset.ship; render(0); });
   const fieldErr = (k, msg) => { const f = ckBody.querySelector(`[data-f="${k}"]`); f.classList.add("bad"); f.querySelector(".err").textContent = msg; if (window.anime) anime({ targets: f, translateX: [0, -8, 8, -5, 5, 0], duration: 420, easing: "easeInOutSine" }); };
@@ -388,6 +408,8 @@ async function photo(p, ci){
   return "";
 }
 async function pic(p, ci = 0){
+  const preview = S.image(p, ci);
+  if (preview) return { url: preview, photo: !preview.startsWith("assets/thumbs/") };
   const u = await photo(p, ci);
   if (u) return { url: u, photo: true };
   if (window.Aparelhos3D) return { url: await Aparelhos3D.thumb(p, ci), photo: false };

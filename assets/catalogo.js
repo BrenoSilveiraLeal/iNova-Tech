@@ -357,8 +357,11 @@ PRODUCTS.forEach(p => {
 });
 
 const ALL = [...PRODUCTS, ...OTHERS];
+// Pre-rendered previews: browser rendering is only a fallback for new catalogue entries.
+const PREVIEWS = new Set(["airpods-4-branco", "airpods-max-azul", "airpods-max-estelar", "airpods-max-laranja", "airpods-max-meianoite", "airpods-max-roxo", "airpods-pro-3-branco", "ipad-air-11-azul", "ipad-air-11-cinza", "ipad-air-11-estelar", "ipad-air-11-roxo", "ipad-amarelo", "ipad-azul", "ipad-prata", "ipad-pro-11-prata", "ipad-pro-11-preto", "ipad-rosa", "iphone-17-branco", "iphone-17-lavanda", "iphone-17-nevoa", "iphone-17-preto", "iphone-17-pro-azul", "iphone-17-pro-laranja", "iphone-17-pro-max-azul", "iphone-17-pro-max-laranja", "iphone-17-pro-max-prata", "iphone-17-pro-prata", "iphone-17-salvia", "iphone-air-azul", "iphone-air-branco", "iphone-air-dourado", "iphone-air-preto", "macbook-air-13-ceu", "macbook-air-13-estelar", "macbook-air-13-meianoite", "macbook-air-13-prata", "macbook-air-15-ceu", "macbook-air-15-estelar", "macbook-air-15-meianoite", "macbook-air-15-prata", "macbook-pro-14-prata", "macbook-pro-14-preto", "vision-pro-prata", "watch-se-3-estelar", "watch-se-3-meianoite", "watch-series-11-cinza", "watch-series-11-prata", "watch-series-11-preto", "watch-series-11-rosa", "watch-ultra-3-natural", "watch-ultra-3-preto"]);
+
 window.STORE = {
-  name: "iNova",
+  name: "iNova Tech",
   phones: PRODUCTS,
   products: ALL,
   categories: [
@@ -370,6 +373,11 @@ window.STORE = {
     { id: "watch", name: "Watch", kw: "relogio relógio smartwatch apple watch" },
     { id: "vision", name: "Vision", kw: "oculos óculos realidade virtual aumentada mista vr ar headset camera câmera" }
   ],
+  image(p, ci = 0){
+    if (p.images?.[ci]) return p.images[ci];
+    const key = `${p.id}-${(p.colors[ci] || p.colors[0]).id}`;
+    return PREVIEWS.has(key) ? `assets/thumbs/${key}.webp` : "";
+  },
   get: id => ALL.find(p => p.id === id),
   brl: v => "R$ " + v.toLocaleString("pt-BR", { minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 })
 };

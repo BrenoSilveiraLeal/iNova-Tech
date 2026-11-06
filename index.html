@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>iNova</title>
+<title>iNova Tech</title>
 <meta name="description" content="iPhone, Mac, iPad, AirPods e Apple Watch novos e lacrados, com nota fiscal, garantia e 12× sem juros.">
 <meta name="theme-color" content="#0c0c0d">
 <link rel="stylesheet" href="assets/loading.css">
@@ -64,7 +64,6 @@
 .fam button:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
 .clear{align-self:stretch;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:11px 16px;cursor:pointer;
   background:rgba(255,106,26,.1);color:var(--fg);font:600 13.5px var(--body);box-shadow:inset 0 0 0 1px rgba(255,106,26,.55);transition:background .2s,box-shadow .2s,opacity .2s,transform .2s}
-.clear svg{width:16px;height:16px;fill:none;stroke:var(--orange);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .clear b{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--orange);color:#0c0c0d;font:600 11px/20px var(--mono)}
 .clear b:empty{display:none}
 .clear:hover:not(:disabled){background:rgba(255,106,26,.18);box-shadow:inset 0 0 0 1.5px var(--orange)}
@@ -219,7 +218,6 @@
         <label class="opt"><input type="checkbox" id="fNew"> Só lançamentos</label>
       </fieldset>
       <button type="button" class="clear" id="fClear" disabled>
-        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10a6 6 0 1 0 1.8-4.3M4 3.5v3.2h3.2"/></svg>
         <span>Limpar filtros</span><b id="fClearN"></b>
       </button>
     </aside>
@@ -418,10 +416,17 @@ function results(){
   const order = { rel: () => 0, new: (a, b) => b.isNew - a.isNew, asc: (a, b) => a.from - b.from, desc: (a, b) => b.from - a.from, az: (a, b) => a.name.localeCompare(b.name, "pt-BR") };
   return list.sort(order[st.sort]);
 }
-const thumbObs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ thumbObs.unobserve(e.target); loadThumb(e.target); } }), { rootMargin: "200px" });
+const thumbObs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ thumbObs.unobserve(e.target); loadThumb(e.target); } }), { rootMargin: "600px" });
 function loadThumb(card, ci = 0){
   const p = S.get(card.dataset.id), img = card.querySelector("img");
-  Loja.pic(p, ci).then(r => { if (!r.url) return; img.classList.remove("on"); img.classList.toggle("real", r.photo); img.onload = () => img.classList.add("on"); img.src = r.url; });
+  const request = Symbol(); img.imageRequest = request;
+  Loja.pic(p, ci).then(r => {
+    if (!r.url || img.imageRequest !== request) return;
+    img.classList.toggle("real", r.photo);
+    img.onload = () => img.classList.add("on");
+    img.src = r.url;
+    if (img.complete && img.naturalWidth) img.classList.add("on");
+  });
 }
 function render(animate = true){
   syncControls();
@@ -436,9 +441,9 @@ function render(animate = true){
     grid.innerHTML = `<div class="empty-g"><p>Nenhum produto com esses filtros.</p><button type="button" class="btn ghost small" id="emptyClear">Limpar filtros</button></div>`;
     $("emptyClear").onclick = clearAll; return;
   }
-  grid.innerHTML = list.map(p => `
+  grid.innerHTML = list.map((p, index) => `
     <article class="card-p" data-id="${p.id}" style="--glow:${rgbOf(p.colors[0].swatch).join(",")}">
-      <div class="pic">${p.isNew ? '<span class="badge">Novo</span>' : ""}<img alt="${p.name}" decoding="async"></div>
+      <div class="pic">${p.isNew ? '<span class="badge">Novo</span>' : ""}<img alt="${p.name}" ${S.image(p, 0) ? `src="${S.image(p, 0)}"` : ""} loading="${index < 4 ? "eager" : "lazy"}" decoding="async"></div>
       <span class="cat-l">${catName(p.cat)}</span>
       <h3><a href="${p.url}">${p.name}</a></h3>
       <p>${p.tagline}</p>
@@ -450,7 +455,6 @@ function render(animate = true){
 }
 function clearAll(){
   st.q = ""; st.cats.clear(); st.price = ""; st.fams.clear(); st.onlyNew = false; history.replaceState(null, "", location.pathname); render();
-  if (A && motion) A({ targets: "#fClear svg", rotate: [0, -360], duration: 700, easing: "easeOutExpo" });
 }
 
 /* wiring */

@@ -274,12 +274,12 @@ html.lock,html.lock body{overflow:hidden}
 .items{display:grid;gap:14px}
 .item{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:14px;align-items:center}
 .item small{display:block;color:var(--fg-soft);font-size:13px}
-.item .rm{border:0;background:none;color:var(--fg-soft);font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;padding:4px 0}
+.item .rm{border:0;background:none;color:var(--fg-soft);font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;min-height:44px;padding:10px 8px 10px 0}
 .item .rm:hover{color:var(--fg)}
 .thumb{width:56px;height:56px;border-radius:12px;background:var(--bg);display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--hair)}
 .thumb i{width:20px;height:36px;border-radius:6px;background:var(--c)}
 .qty{display:inline-flex;align-items:center;border-radius:999px;box-shadow:inset 0 0 0 1px var(--hair)}
-.qty button{width:34px;height:34px;border:0;background:none;color:var(--fg);font-size:17px;cursor:pointer;border-radius:50%}
+.qty button{width:44px;height:44px;border:0;background:none;color:var(--fg);font-size:17px;cursor:pointer;border-radius:50%}
 .qty button:focus-visible{outline:2px solid var(--orange)}
 .qty span{min-width:20px;text-align:center;font-variant-numeric:tabular-nums}
 .empty{display:flex;flex-direction:column;gap:14px;align-items:flex-start;padding:10px 0}

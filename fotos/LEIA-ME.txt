@@ -2,15 +2,18 @@ FOTOS DOS PRODUTOS
 ==================
 
 Coloque nesta pasta fotos reais dos produtos: as suas, as do seu fornecedor ou imagens
-que você tem permissão de usar. O site troca o desenho 3D pela foto automaticamente,
-na vitrine, na busca, na sacola e na página do produto.
+que você tem permissão de usar. As miniaturas prontas em assets/thumbs carregam direto,
+sem gerar modelos 3D no navegador. Para substituir por fotos reais, defina no produto
+em assets/catalogo.js o campo images com os caminhos na ordem das cores.
+Exemplo: images: ["fotos/iphone-17-lavanda.png", "fotos/iphone-17-salvia.png", ...].
+A troca vale para a vitrine, a busca e a sacola.
 
 DICAS
 - PNG com fundo transparente fica melhor no fundo escuro do site. JPG também funciona
   (troque .png por .jpg no nome).
 - Imagem quadrada, entre 1000×1000 e 1600×1600 pixels, com o produto centralizado.
 - Uma foto sem a cor no nome (ex.: airpods-pro-3.png) vale para todas as cores do produto.
-- Depois de colocar fotos novas, feche e abra o navegador para o site enxergar.
+- Depois de configurar images, recarregue a pagina para ver as fotos novas.
 - Nas páginas "por dentro" dos iPhones, a animação continua em 3D. Para ela ficar
   realista, use um modelo .glb (veja o LEIA-ME principal).
 

@@ -1,4 +1,4 @@
-iNova — revenda Apple
+iNova Tech — revenda Apple
 ===========================
 
 PÁGINAS
@@ -21,7 +21,7 @@ FOTOS REAIS (recomendado)
 - Use fotos suas, do seu fornecedor ou que você tenha permissão de usar.
 
 O QUE EDITAR — quase tudo fica em assets/catalogo.js
-- Nome da loja: procure por  name: "iNova"  se quiser trocar.
+- Nome da loja: procure por  name: "iNova Tech"  se quiser trocar.
   O menu e o checkout usam esse nome. A logo e o ícone da aba ficam em assets/favicon.svg.
   Não use "Apple Store" nem a maçã: são marcas da Apple.
 - Produtos, preços, cores e textos: listas PRODUCTS (iPhones) e OTHERS (demais produtos).
