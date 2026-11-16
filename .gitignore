@@ -1,0 +1,26 @@
+# Segredos e configurações locais
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+credentials.json
+secrets/
+
+# Dependências e saídas de ferramentas
+node_modules/
+dist/
+build/
+coverage/
+playwright-report/
+test-results/
+.playwright-cli/
+
+# Arquivos locais do sistema e editores
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
