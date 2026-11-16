@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<script src="assets/escala.js"></script>
+<script src="assets/scroll-restoration.js"></script>
 <title>iNova Tech</title>
 <meta name="description" content="iPhone, Mac, iPad, AirPods e Apple Watch novos e lacrados, com nota fiscal, garantia e 12× sem juros.">
 <meta name="theme-color" content="#0c0c0d">
@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="assets/loja.css">
 <style>
 /* storefront: hero with a lit 3D family shot, category rail, then the shop (filters left, grid right) */
-.shop{position:relative;z-index:4;max-width:85rem;margin:0 auto;padding-inline:3vw}
+.shop{position:relative;z-index:4;width:100%;max-width:none;margin:0 auto;padding-inline:3vw}
 .hero-home{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:1.5rem;align-items:center;min-height:min(92vh,55rem);
   padding-top:calc(5.625rem + env(safe-area-inset-top,0px))}
 .hero-home h1{font-size:clamp(2.6rem,6vw,5.6rem);line-height:.95;font-stretch:118%;letter-spacing:-.045em}
@@ -593,8 +593,25 @@ $("grid").addEventListener("click", e => {
   }
 });
 const fl = $("filters");
-$("filtOpen").addEventListener("click", () => { fl.classList.add("open"); $("filtClose").focus(); });
-$("filtClose").addEventListener("click", () => { fl.classList.remove("open"); $("filtOpen").focus(); });
+let filterHome = null;
+$("filtOpen").addEventListener("click", () => {
+  if (matchMedia("(max-width: 1000px)").matches && fl.parentElement !== document.body) {
+    filterHome = { parent: fl.parentElement, next: fl.nextSibling };
+    document.body.append(fl);
+  }
+  fl.classList.add("open"); $("filtClose").focus();
+});
+$("filtClose").addEventListener("click", () => {
+  fl.classList.remove("open"); $("filtOpen").focus();
+  if (filterHome) {
+    const home = filterHome; filterHome = null;
+    fl.addEventListener("transitionend", function restoreFilters(e) {
+      if (e.propertyName !== "transform") return;
+      fl.removeEventListener("transitionend", restoreFilters);
+      home.parent.insertBefore(fl, home.next?.parentNode === home.parent ? home.next : null);
+    });
+  }
+});
 addEventListener("hashchange", () => { if (fromHash()){ render(); document.getElementById("loja").scrollIntoView({ behavior: motion ? "smooth" : "auto" }); } });
 document.querySelectorAll(".cat").forEach(a => a.addEventListener("click", e => {
   e.preventDefault(); const c = a.dataset.c;

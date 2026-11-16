@@ -38,7 +38,7 @@ Vitrine de e-commerce para uma revenda independente de produtos Apple. O projeto
     ├── fone3d.js                 # Cenas 3D de áudio
     ├── produto.js                # Experiência das páginas de produto
     ├── loading.js                # Estado de carregamento da página
-    ├── escala.js                 # Escala responsiva e posição de rolagem ao atualizar
+    ├── scroll-restoration.js     # Volta ao topo ao atualizar a página
     ├── loja.css                  # Estilos compartilhados
     ├── loading.css               # Estilos do carregamento
     ├── favicon.svg               # Ícone da loja
