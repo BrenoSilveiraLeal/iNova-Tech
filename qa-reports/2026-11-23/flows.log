@@ -1,0 +1,7 @@
+PASS home não menciona Apple Watch SE 3
+PASS catálogo sem SE 3 (16 produtos)
+PASS produto.html?id=watch-se-3 mostra estado de produto inexistente
+PASS vitrine na grade: cards Watch = ['Apple Watch Series 11', 'Apple Watch Ultra 3']
+PASS busca 'AirPods Pro' mostra AirPods Pro 3
+PASS sem erros de console nos fluxos (erros: [])
+PASS fonte raiz proporcional à tela de referência: {(1366, 720): 1.0, (1920, 1012): 1.0, (2560, 1350): 1.0}

@@ -253,11 +253,6 @@ const OTHERS = [
     tagline: "Fone sobre a orelha com cancelamento de ruído e áudio espacial.",
     highlights: [["Ruído", "Cancelamento ativo"], ["Áudio", "Espacial"], ["Bateria", "Até 20 h"], ["Conector", "USB‑C"]],
     specs: [["Cancelamento de ruído", "Ativo", "Com modo Ambiente"], ["Alto-falante", "Dinâmico de 40 mm", "Feito pela Apple"], ["Bateria", "Até 20 h", "Com cancelamento ligado"], ["Controles", "Digital Crown e botão", "Volume, faixas e Siri"]] },
-  { id: "watch-se-3", cat: "watch", type: "watch", geo: { mm: 44, ultra: false }, name: "Apple Watch SE 3", isNew: false,
-    colors: [C2("meianoite", "Meia-noite", "#2e3440"), C2("estelar", "Estelar", "#e3d9c6")], storage: [["40 mm · GPS", 3299], ["44 mm · GPS", 3699]],
-    tagline: "O essencial do Apple Watch, agora com tela sempre ativa.",
-    highlights: [["Tela", "Sempre ativa"], ["Tamanhos", "40 e 44 mm"], ["Caixa", "Alumínio"], ["Saúde", "Sono e treinos"]],
-    specs: [["Tela", "Retina sempre ativa", ""], ["Tamanhos", "40 mm e 44 mm", ""], ["Caixa", "Alumínio", ""], ["Saúde", "Sono, frequência cardíaca e treinos", ""]] },
   { id: "watch-series-11", cat: "watch", type: "watch", geo: { mm: 46, ultra: false }, name: "Apple Watch Series 11", isNew: false,
     colors: [C2("preto", "Preto-azeviche", "#1f2024"), C2("prata", "Prateado", "#d4d5d7"), C2("rosa", "Ouro-rosa", "#e6c4b8"), C2("cinza", "Cinza-espacial", "#5d6066")],
     storage: [["Alumínio · GPS", 5499]],
@@ -280,11 +275,11 @@ const GIANT = {
   "macbook-air-13": ["MACBOOK", "AIR"], "macbook-air-15": ["MACBOOK", "AIR"], "macbook-pro-14": ["MACBOOK", "PRO"],
   "ipad": ["iPAD", "A16"], "ipad-air-11": ["iPAD", "AIR"], "ipad-pro-11": ["iPAD", "PRO"],
   "airpods-4": ["AIRPODS", "4"], "airpods-pro-3": ["AIRPODS", "PRO"],
-  "watch-se-3": ["WATCH", "SE"], "watch-series-11": ["WATCH", "11"], "watch-ultra-3": ["WATCH", "ULTRA"],
+  "watch-series-11": ["WATCH", "11"], "watch-ultra-3": ["WATCH", "ULTRA"],
   "airpods-max": ["AIRPODS", "MAX"], "vision-pro": ["VISION", "PRO"]
 };
 const CHIP = { "macbook-air-13": "M5", "macbook-air-15": "M5", "macbook-pro-14": "M5", "ipad": "A16", "ipad-air-11": "M4", "ipad-pro-11": "M5",
-  "airpods-4": "H2", "airpods-pro-3": "H2", "watch-se-3": "S10", "watch-series-11": "S10", "watch-ultra-3": "S10", "airpods-max": "H1", "vision-pro": "M5" };
+  "airpods-4": "H2", "airpods-pro-3": "H2", "watch-series-11": "S10", "watch-ultra-3": "S10", "airpods-max": "H1", "vision-pro": "M5" };
 const DESIGN = {
   mac: { h: "Alumínio inteiro, do teclado ao fundo.", p: "O corpo é usinado em alumínio e guarda tela, teclado, bateria e placa em poucos milímetros." },
   ipad: { h: "Uma tela inteira na palma da mão.", p: "Corpo de alumínio com laterais retas e uma tela que vai quase de ponta a ponta." },
@@ -358,7 +353,7 @@ PRODUCTS.forEach(p => {
 
 const ALL = [...PRODUCTS, ...OTHERS];
 // Pre-rendered previews: browser rendering is only a fallback for new catalogue entries.
-const PREVIEWS = new Set(["airpods-4-branco", "airpods-max-azul", "airpods-max-estelar", "airpods-max-laranja", "airpods-max-meianoite", "airpods-max-roxo", "airpods-pro-3-branco", "ipad-air-11-azul", "ipad-air-11-cinza", "ipad-air-11-estelar", "ipad-air-11-roxo", "ipad-amarelo", "ipad-azul", "ipad-prata", "ipad-pro-11-prata", "ipad-pro-11-preto", "ipad-rosa", "iphone-17-branco", "iphone-17-lavanda", "iphone-17-nevoa", "iphone-17-preto", "iphone-17-pro-azul", "iphone-17-pro-laranja", "iphone-17-pro-max-azul", "iphone-17-pro-max-laranja", "iphone-17-pro-max-prata", "iphone-17-pro-prata", "iphone-17-salvia", "iphone-air-azul", "iphone-air-branco", "iphone-air-dourado", "iphone-air-preto", "macbook-air-13-ceu", "macbook-air-13-estelar", "macbook-air-13-meianoite", "macbook-air-13-prata", "macbook-air-15-ceu", "macbook-air-15-estelar", "macbook-air-15-meianoite", "macbook-air-15-prata", "macbook-pro-14-prata", "macbook-pro-14-preto", "vision-pro-prata", "watch-se-3-estelar", "watch-se-3-meianoite", "watch-series-11-cinza", "watch-series-11-prata", "watch-series-11-preto", "watch-series-11-rosa", "watch-ultra-3-natural", "watch-ultra-3-preto"]);
+const PREVIEWS = new Set(["airpods-4-branco", "airpods-max-azul", "airpods-max-estelar", "airpods-max-laranja", "airpods-max-meianoite", "airpods-max-roxo", "airpods-pro-3-branco", "ipad-air-11-azul", "ipad-air-11-cinza", "ipad-air-11-estelar", "ipad-air-11-roxo", "ipad-amarelo", "ipad-azul", "ipad-prata", "ipad-pro-11-prata", "ipad-pro-11-preto", "ipad-rosa", "iphone-17-branco", "iphone-17-lavanda", "iphone-17-nevoa", "iphone-17-preto", "iphone-17-pro-azul", "iphone-17-pro-laranja", "iphone-17-pro-max-azul", "iphone-17-pro-max-laranja", "iphone-17-pro-max-prata", "iphone-17-pro-prata", "iphone-17-salvia", "iphone-air-azul", "iphone-air-branco", "iphone-air-dourado", "iphone-air-preto", "macbook-air-13-ceu", "macbook-air-13-estelar", "macbook-air-13-meianoite", "macbook-air-13-prata", "macbook-air-15-ceu", "macbook-air-15-estelar", "macbook-air-15-meianoite", "macbook-air-15-prata", "macbook-pro-14-prata", "macbook-pro-14-preto", "vision-pro-prata", "watch-series-11-cinza", "watch-series-11-prata", "watch-series-11-preto", "watch-series-11-rosa", "watch-ultra-3-natural", "watch-ultra-3-preto"]);
 
 window.STORE = {
   name: "iNova Tech",
@@ -376,7 +371,7 @@ window.STORE = {
   image(p, ci = 0){
     if (p.images?.[ci]) return p.images[ci];
     const key = `${p.id}-${(p.colors[ci] || p.colors[0]).id}`;
-    return PREVIEWS.has(key) ? `assets/thumbs/${key}.webp` : "";
+    return PREVIEWS.has(key) ? `assets/img/thumbs/${key}.webp` : "";
   },
   get: id => ALL.find(p => p.id === id),
   brl: v => "R$ " + v.toLocaleString("pt-BR", { minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 })

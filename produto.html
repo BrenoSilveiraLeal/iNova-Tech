@@ -3,22 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<script src="assets/scroll-restoration.js"></script>
+<script src="assets/js/escala.js"></script>
+<script src="assets/js/scroll-restoration.js"></script>
 <title>Produto · iNova Tech</title>
 <meta name="description" content="Veja o produto por dentro, peça por peça. Revenda independente.">
 <meta name="theme-color" content="#0c0c0d">
-<link rel="stylesheet" href="assets/loading.css">
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/css/loading.css">
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/loja.css">
+<link rel="stylesheet" href="assets/css/loja.css">
 <style>
 .missing{position:relative;z-index:4;min-height:80vh;display:flex;flex-direction:column;gap:1rem;align-items:flex-start;justify-content:center;width:100%;max-width:none;margin:0 auto;padding:0 3vw}
 </style>
 </head>
 <body>
-<script src="assets/loading.js"></script>
+<script src="assets/js/loading.js"></script>
 <script>document.body.dataset.product = new URLSearchParams(location.search).get("id") || "";</script>
 <main id="story" style="min-height:100vh;min-height:100svh"></main>
 <footer>
@@ -26,17 +27,16 @@
   <span>Ilustração 3D. Preço de referência: confira antes da compra.</span>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
-<script src="assets/catalogo.js"></script>
-<script src="assets/carrinho.js"></script>
-<script src="assets/fone3d.js"></script>
-<script src="assets/aparelhos3d.js"></script>
+<script src="assets/js/catalogo.js"></script>
+<script src="assets/js/carrinho.js"></script>
+<script src="assets/js/fone3d.js"></script>
+<script src="assets/js/aparelhos3d.js"></script>
 <script>
 if (!STORE.get(document.body.dataset.product)){
   document.getElementById("story").outerHTML = `<div class="missing"><p class="eyebrow">Produto não encontrado</p><h1>Esse produto não está no catálogo.</h1><a class="btn" href="index.html">Ver todos os produtos</a></div>`;
 }
 </script>
-<script src="assets/produto.js"></script>
+<script src="assets/js/produto.js"></script>
 </body>
 </html>

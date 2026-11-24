@@ -1,0 +1,621 @@
+[
+ {
+  "route": "home",
+  "viewport": "375x812",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "home",
+  "viewport": "430x932",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "home",
+  "viewport": "768x1024",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "home",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "home",
+  "viewport": "1536x864",
+  "status": 200,
+  "fontSize": "17.991px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "home",
+  "viewport": "1920x1080",
+  "status": 200,
+  "fontSize": "22.489px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "home",
+  "viewport": "3840x2160",
+  "status": 200,
+  "fontSize": "40px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "iphone-17",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "iphone-air",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "iphone-17-pro",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "iphone-17-pro-max",
+  "viewport": "375x812",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "iphone-17-pro-max",
+  "viewport": "430x932",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "iphone-17-pro-max",
+  "viewport": "768x1024",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "iphone-17-pro-max",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "iphone-17-pro-max",
+  "viewport": "1536x864",
+  "status": 200,
+  "fontSize": "17.991px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "iphone-17-pro-max",
+  "viewport": "1920x1080",
+  "status": 200,
+  "fontSize": "22.489px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "iphone-17-pro-max",
+  "viewport": "3840x2160",
+  "status": 200,
+  "fontSize": "40px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "macbook-air-13",
+  "viewport": "375x812",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "macbook-air-13",
+  "viewport": "430x932",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "macbook-air-13",
+  "viewport": "768x1024",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "macbook-air-13",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "macbook-air-13",
+  "viewport": "1536x864",
+  "status": 200,
+  "fontSize": "17.991px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "macbook-air-13",
+  "viewport": "1920x1080",
+  "status": 200,
+  "fontSize": "22.489px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "macbook-air-13",
+  "viewport": "3840x2160",
+  "status": 200,
+  "fontSize": "40px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "macbook-air-15",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "macbook-pro-14",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "ipad",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "ipad-air-11",
+  "viewport": "375x812",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "ipad-air-11",
+  "viewport": "430x932",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "ipad-air-11",
+  "viewport": "768x1024",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "ipad-air-11",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "ipad-air-11",
+  "viewport": "1536x864",
+  "status": 200,
+  "fontSize": "17.991px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "ipad-air-11",
+  "viewport": "1920x1080",
+  "status": 200,
+  "fontSize": "22.489px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "ipad-air-11",
+  "viewport": "3840x2160",
+  "status": 200,
+  "fontSize": "40px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "ipad-pro-11",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "airpods-4",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "airpods-pro-3",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "airpods-max",
+  "viewport": "375x812",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "airpods-max",
+  "viewport": "430x932",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "airpods-max",
+  "viewport": "768x1024",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "airpods-max",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "airpods-max",
+  "viewport": "1536x864",
+  "status": 200,
+  "fontSize": "17.991px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "airpods-max",
+  "viewport": "1920x1080",
+  "status": 200,
+  "fontSize": "22.489px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "airpods-max",
+  "viewport": "3840x2160",
+  "status": 200,
+  "fontSize": "40px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "watch-series-11",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "watch-ultra-3",
+  "viewport": "375x812",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "watch-ultra-3",
+  "viewport": "430x932",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "watch-ultra-3",
+  "viewport": "768x1024",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "watch-ultra-3",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "watch-ultra-3",
+  "viewport": "1536x864",
+  "status": 200,
+  "fontSize": "17.991px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "watch-ultra-3",
+  "viewport": "1920x1080",
+  "status": 200,
+  "fontSize": "22.489px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "watch-ultra-3",
+  "viewport": "3840x2160",
+  "status": 200,
+  "fontSize": "40px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "vision-pro",
+  "viewport": "375x812",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [
+   "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+   "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+  ],
+  "failed": [
+   "http://127.0.0.1:8000/assets/js/aparelhos3d.js",
+   "http://127.0.0.1:8000/assets/js/produto.js"
+  ]
+ },
+ {
+  "route": "vision-pro",
+  "viewport": "430x932",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "vision-pro",
+  "viewport": "768x1024",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "vision-pro",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "vision-pro",
+  "viewport": "1536x864",
+  "status": 200,
+  "fontSize": "17.991px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "vision-pro",
+  "viewport": "1920x1080",
+  "status": 200,
+  "fontSize": "22.489px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "vision-pro",
+  "viewport": "3840x2160",
+  "status": 200,
+  "fontSize": "40px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "watch-se-3-removido",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "route": "id-invalido",
+  "viewport": "1366x768",
+  "status": 200,
+  "fontSize": "16px",
+  "overflowX": 0,
+  "brokenImages": [],
+  "console": [],
+  "failed": []
+ },
+ {
+  "browser": "158.0.4370.33"
+ }
+]

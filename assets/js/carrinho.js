@@ -13,7 +13,7 @@ const nav = document.createElement("nav");
 nav.className = "nav"; nav.setAttribute("aria-label", "Principal");
 // logo: the store name, first word bold
 const [w1, ...wRest] = S.name.split(/\s+/);
-nav.innerHTML = `<a class="store" href="index.html" aria-label="${S.name}, página inicial"><img class="mark" src="assets/favicon.svg" alt="" width="32" height="32"><span class="word"><b>${w1}</b>${wRest.length ? `<i>${wRest.join(" ")}</i>` : ""}</span></a>
+nav.innerHTML = `<a class="store" href="index.html" aria-label="${S.name}, página inicial"><img class="mark" src="assets/img/favicon.svg" alt="" width="32" height="32"><span class="word"><b>${w1}</b>${wRest.length ? `<i>${wRest.join(" ")}</i>` : ""}</span></a>
   <ul>${S.categories.map(c => `<li><a href="index.html#${c.id}"${c.id === currentCat ? ' aria-current="page"' : ""}>${c.name}</a></li>`).join("")}</ul>
   <button type="button" class="bag find" id="findBtn" aria-label="Buscar produtos"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Buscar</span></button>
   <button type="button" class="bag" id="bagBtn" aria-label="Abrir sacola">Sacola <b id="bagCount" data-n="0"></b></button>`;
@@ -409,7 +409,7 @@ async function photo(p, ci){
 }
 async function pic(p, ci = 0){
   const preview = S.image(p, ci);
-  if (preview) return { url: preview, photo: !preview.startsWith("assets/thumbs/") };
+  if (preview) return { url: preview, photo: !preview.startsWith("assets/img/thumbs/") };
   const u = await photo(p, ci);
   if (u) return { url: u, photo: true };
   if (window.Aparelhos3D) return { url: await Aparelhos3D.thumb(p, ci), photo: false };

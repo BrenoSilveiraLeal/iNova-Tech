@@ -6,7 +6,7 @@
   loader.setAttribute("role", "status");
   loader.setAttribute("aria-live", "polite");
   loader.setAttribute("aria-label", "Carregando");
-  loader.innerHTML = `<div class="loader-content"><div class="loader-emblem" aria-hidden="true"><svg class="loader-orbit" viewBox="0 0 168 168" fill="none"><circle class="loader-ring" cx="84" cy="84" r="82" pathLength="100" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><img class="loader-mark" src="assets/favicon.svg" alt="" width="64" height="64"></div></div>`;
+  loader.innerHTML = `<div class="loader-content"><div class="loader-emblem" aria-hidden="true"><svg class="loader-orbit" viewBox="0 0 168 168" fill="none"><circle class="loader-ring" cx="84" cy="84" r="82" pathLength="100" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><img class="loader-mark" src="assets/img/favicon.svg" alt="" width="64" height="64"></div></div>`;
   root.classList.add("is-loading");
   document.body.prepend(loader);
   let pageReady = document.readyState !== "loading";

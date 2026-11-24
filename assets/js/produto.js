@@ -279,8 +279,6 @@ function scramble(el, text, delay){
 
 /* ---------------- 3D ---------------- */
 if (!window.THREE || !window.Fone3D) return;
-const MODEL_URL = P.id + ".glb";        // optional real model next to the page, e.g. iphone-air.glb
-const MODEL_ROT = [0, 0, 0];
 const canvas = document.getElementById("gl");
 let renderer;
 try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); } catch (e) { return; }
@@ -378,7 +376,7 @@ partDefs.forEach(def => {
   parts.push({ ...def, g, center, lineMat, fills, lines, callouts, draw: -.2 - Math.abs(parts.length - (N - 1) / 2) * .1, lastDraw: -9, wasFocus: false });
 });
 
-/* realistic closed phone (or a .glb if present) */
+/* realistic closed phone */
 const bodyColor = C(P.colors[0].body);
 window.__phoneColor = hex => bodyColor.copy(C(hex));
 window.__phoneColor(P.colors[colorIdx].body);
@@ -387,17 +385,6 @@ if (P.cat === "iphone") Fone3D.batch(built.group);
 let real = built.group, realMats = built.mats, realTinted = built.tinted, realOpaque = true;
 real.rotation.set(...A3.realRot);
 phone.add(real);
-if (P.cat === "iphone" && THREE.GLTFLoader && location.protocol !== "file:"){
-  new THREE.GLTFLoader().load(MODEL_URL, gltf => {
-    const m = gltf.scene, wrap = new THREE.Group(); m.rotation.set(...MODEL_ROT); wrap.add(m);
-    const bb = new THREE.Box3().setFromObject(wrap), size = bb.getSize(new THREE.Vector3()), mid = bb.getCenter(new THREE.Vector3());
-    m.position.sub(mid); wrap.scale.setScalar(A3.H / Math.max(size.x, size.y, size.z));
-    phone.remove(real); real = wrap; realTinted = []; realOpaque = true; realMats = [];
-    wrap.traverse(x => { if (x.isMesh) (Array.isArray(x.material) ? x.material : [x.material]).forEach(mt => { mt.userData.base = mt.opacity; realMats.push(mt); }); });
-    phone.add(wrap);
-  }, undefined, () => {});
-}
-
 /* mobile callout lists */
 parts.forEach(p => {
   const card = document.querySelector(`.sec[data-key="${p.id}"] .card`); if (!card) return;
