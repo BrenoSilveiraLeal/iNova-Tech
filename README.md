@@ -53,7 +53,7 @@ Não existe servidor, mas as responsabilidades já estão separadas para facilit
 
 ## Escala proporcional
 
-O layout foi desenhado para uma tela de referência de 1366 × 720. `assets/js/escala.js` ajusta o tamanho da fonte raiz conforme a janela (fator entre 0,6 e 2,5), e como quase todo o CSS usa `rem`, a interface cresce ou encolhe por inteiro, mantendo a mesma composição. Abaixo de 900 px de largura vale o layout responsivo normal.
+A tela de referência é a TV de ~1360 px de largura, onde o site aparece exatamente como foi desenhado (fonte raiz 16 px). `assets/js/escala.js` ajusta a fonte raiz proporcionalmente à largura da janela (fator entre 0,66 e 2,5; a altura não entra na conta), e como quase todo o CSS usa `rem`, a interface cresce ou encolhe por inteiro, mantendo a mesma composição. Abaixo de 900 px de largura vale o layout responsivo normal.
 
 ## Executar localmente
 
